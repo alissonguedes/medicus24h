@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Main;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -69,7 +69,7 @@ class ApiController extends Controller
 	public function get_version()
 	{
 
-		$config = new \App\Models\Admin\ConfigModel();
+		$config = new \App\Models\Admin\ConfigModel ();
 
 		$versao = $config->select('config', 'value AS versao')
 			->from('tb_sys_config')
