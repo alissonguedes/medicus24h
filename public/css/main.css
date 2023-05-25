@@ -471,13 +471,15 @@ nav a.sidenav-trigger {
 .sidenav li>a>i,
 .sidenav li>a>i.material-icons,
 .sidenav li>a>span.material-icons,
-.sidenav li>a>span.material-icons-outlined {
+.sidenav li>a>span.material-icons-outlined ,
+.sidenav li>a>span.material-symbols-outlined {
 	line-height: 48px;
 	float: left;
 	width: 24px;
 	height: 48px;
 	margin: 0 32px 0 0;
 	color: rgba(0, 0, 0, .54);
+	display: block !important;
 }
 
 .sidenav .menu-description h6 {

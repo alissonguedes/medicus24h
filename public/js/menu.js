@@ -18,7 +18,7 @@ var Menu = {
 
 			var o = [];
 
-			$('#slide-out').find('li a').each(function() {
+			$('#slide-out').find('li a').each(function () {
 
 				var h = $(this).attr('href').split(BASE_URL).splice(1).toString();
 
@@ -108,7 +108,7 @@ var Menu = {
 				.addClass('close')
 				.removeClass('open');
 
-			setTimeout(function() {
+			setTimeout(function () {
 				if (1 < n) {
 					var e = $('.sidenav-main .collapsible');
 					M.Collapsible.getInstance(e).close(
@@ -138,7 +138,7 @@ var Menu = {
 			accordion: true,
 			onOpenStart: () => {
 				$('.collapsible > li.open').removeClass('open');
-				setTimeout(function() {
+				setTimeout(function () {
 					$('#slide-out > li.active > a')
 						.parent()
 						.addClass('open');
@@ -146,7 +146,7 @@ var Menu = {
 			}
 		});
 
-		$(".sidenav-main.nav-collapsible, .navbar .brand-sidebar").mouseleave(function() {
+		$(".sidenav-main.nav-collapsible, .navbar .brand-sidebar").mouseleave(function () {
 			Menu.navigationCollapse()
 		})
 
@@ -163,18 +163,33 @@ var Menu = {
 
 			1 < $('#slide-out > li.active').children().length && $('#slide-out > li.active').parent().addClass('open');
 
+			$(".sidenav-main.nav-collapsible, .navbar .brand-sidebar").mouseenter(function () {
+				$(".sidenav-main.nav-collapsible").hasClass("nav-lock") ||
+					($(".sidenav-main.nav-collapsible, .navbar .nav-collapsible")
+						.addClass("nav-expanded").removeClass("nav-collapsed"),
+						$("#slide-out > li.close > a").parent()
+							.addClass("open").removeClass("close"),
+						setTimeout(function () {
+							if (1 < $(".collapsible .open").children().length) {
+								var e = $(".sidenav-main .collapsible");
+								M.Collapsible.getInstance(e).open($(".collapsible .open").index())
+							}
+						}, 100)
+					)
+			});
+
 			if (
 				0 < i.find('a.active').length && (i.find('a.active').closest('div.collapsible-body').show(), i.find('a.active').closest('div.collapsible-body').closest('li').addClass('active')),
 				t = 0 < $('.sidenav-main li a.active').parent('li.active')
-				.parent('ul.collapsible-sub').length ?
-				$('.sidenav-main li a.active').parent('li.active').parent('ul.collapsible-sub').position() :
-				$('.sidenav-main li a.active').parent('li.active').position(),
-				setTimeout(function() {
+					.parent('ul.collapsible-sub').length ?
+					$('.sidenav-main li a.active').parent('li.active').parent('ul.collapsible-sub').position() :
+					$('.sidenav-main li a.active').parent('li.active').position(),
+				setTimeout(function () {
 					void 0 !== t && $('.sidenav-main ul').stop().animate({
 						scrollTop: t.top - 300
 					}, 300)
 				}, 300),
-				$(".nav-collapsible .navbar-toggler").click(function() {
+				$(".nav-collapsible .navbar-toggler").click(function () {
 					var value;
 					Menu.toggleMenuCollapse();
 

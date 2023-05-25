@@ -212,16 +212,16 @@ class ConfigModel extends Authenticatable
 		}
 
 		if ($return) {
-			$data['status']  = 'success';
-			$data['message'] = 'Suas preferências foram salvas.';
-			$data['data']    = null;
-			$statusCode      = 200;
+			$data['status'] = 'success';
+			$data['data']   = null;
+			$statusCode     = 200;
+			// $data['message'] = 'Suas preferências foram salvas.';
 		} else {
-			$data['status']  = 'error';
-			$data['message'] = 'Erro ao salvar preferências.';
-			$data['data']    = null;
-			$data['errors']  = [];
-			$statusCode      = 200;
+			$data['status'] = 'error';
+			$data['data']   = null;
+			$statusCode     = 200;
+			$data['errors'] = [];
+			// $data['message'] = 'Erro ao salvar preferências.';
 		}
 
 		return response($data, $statusCode);
