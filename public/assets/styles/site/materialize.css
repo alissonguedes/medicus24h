@@ -2032,7 +2032,9 @@ nav.display-none.search-sm .nav-wrapper form .input-field i {
 
 .sidenav li a {
 	margin-right: 1.5rem;
-	color: rgba(0, 0, 0, .87)
+	color: rgba(0, 0, 0, .87);
+	line-height: 48px;
+	height: 48px;
 }
 
 .sidenav li a i {
@@ -2108,8 +2110,6 @@ nav.display-none.search-sm .nav-wrapper form .input-field i {
 .sidenav li a.collapsible-header,
 .sidenav li>a {
 	font-weight: 400;
-	line-height: 44px;
-	height: 44px;
 	padding: 0 16px !important
 }
 

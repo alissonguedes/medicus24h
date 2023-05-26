@@ -1189,6 +1189,10 @@ textarea.materialize-textarea[readonly="readonly"]+label,
 	padding-right: 30px !important;
 }
 
+.input-field {
+	display: flex;
+}
+
 .input-field.files.input {
 	background: pink;
 	overflow: hidden;
@@ -1224,6 +1228,33 @@ input.no-border,
 .no-border {
 	background-image: none !important;
 	border: none !important;
+}
+
+.input-field .prefix {
+	position: relative;
+	font-size: 24px;
+	min-width: 3rem;
+	width: auto;
+	-webkit-transition: color .2s;
+	transition: color .2s;
+	margin: 0;
+	line-height: inherit;
+	top: 0;
+	z-index: 1;
+	left: 0;
+	line-height: 3rem;
+}
+
+.input-field .prefix.label {
+	border-radius: 5px 0 0px 5px;
+	margin-top: 10px;
+	width: auto;
+	font-size: 16px;
+	padding: 0 10px;
+}
+
+.input-field .prefix.label input {
+	flex: 1 1;
 }
 
 .input-field .prefix.active {
@@ -1334,6 +1365,20 @@ input.no-border,
 .outlined .prefix~input {
 	padding-left: 50px;
 	z-index: 1;
+
+}
+
+.input-field .prefix~input,
+.input-field .prefix~textarea,
+.input-field .prefix~label,
+.input-field .prefix~.validate~label,
+.input-field .prefix~.helper-text,
+.input-field .prefix~.autocomplete-content {
+	margin-left: 0;
+	width: 92%;
+	width: 100vh;
+	padding-left: 10px;
+	flex: 1;
 }
 
 .outlined input[type=search]:focus:not(.browser-default),
@@ -1809,19 +1854,6 @@ footer.page-footer {
 	margin-right: 12px;
 	height: 50px;
 	line-height: 50px;
-}
-
-.input-field .prefix {
-	font-size: 24px;
-	width: 3rem;
-	-webkit-transition: color .2s;
-	transition: color .2s;
-	margin: 0;
-	line-height: inherit;
-	top: 0;
-	z-index: 1;
-	left: 0;
-	line-height: 3rem;
 }
 
 .panel-header .toolbar .input-field input {

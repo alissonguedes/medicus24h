@@ -254,6 +254,11 @@ namespace App\Models{
 				$input['status'] = '1';
 			}
 
+			$namespace = limpa_string($input['namespace'], '\\', false);
+
+			$input['namespace'] = 'App\Http\Controllers\\' . $namespace;
+			$input['path']      = '/' . limpa_string($input['path']);
+
 			return $this->fields($input);
 
 		}

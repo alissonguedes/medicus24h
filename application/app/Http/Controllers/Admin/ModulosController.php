@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ModuloRequest;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Artisan;
 use \App\Models\ModuloModel;
 
 class ModulosController extends Controller
@@ -53,6 +54,7 @@ class ModulosController extends Controller
 	{
 
 		$id = $modulo->create($request->all());
+		$this->criar_estrutura($request, $modulo);
 
 		return response()->json([
 			'status'      => 'success',
@@ -101,6 +103,62 @@ class ModulosController extends Controller
 			// 'type'=>'redirect',
 			// 'url'         => url()->route('admin.modulos.edit', $id),
 		]);
+
+	}
+
+	public function criar_estrutura(Request $request, ModuloModel $modulo)
+	{
+
+		// Artisan::call('app:create-controller teste');
+
+		$id_controller     = null;
+		$create_controller = null;
+		$create_view       = null;
+		$controller        = limpa_string($request->namespace, '/', false) . '/HomeController';
+		$view              = limpa_string($request->path, '/') . '/home/index';
+		$f_controller      = app_path(str_replace('App/', '', $controller) . '.php');
+		$f_view            = resource_path('views/' . $view . '.blade.php');
+
+		if (!file_exists($f_controller)) {
+			$create_controller = shell_exec('php ../application/artisan make:controller ' . $controller . ' --resource');
+		}
+
+		if (!file_exists($f_view)) {
+			$create_view = shell_exec('php ../application/artisan make:view ' . $view . ' --extends=app --section="title:OS Tickets" --section=body');
+		}
+
+		$routes = [
+			['name' => 'index', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'any', 'route' => $request->diretorio, 'action' => 'index', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'index', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'any', 'route' => '/', 'action' => 'index', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'add', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'any', 'route' => '/cadastro', 'action' => 'form', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'show', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'get', 'route' => '/{id}', 'action' => 'show', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'autocomplete', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'get', 'route' => '/json/autocomplete', 'action' => 'autocomplete', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'post', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'post', 'route' => '/', 'action' => 'store', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'post', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'put', 'route' => '/', 'action' => 'update', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'edit', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'get', 'route' => '/id/{id}', 'action' => 'form', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'patch', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'patch', 'route' => '/id/{id}', 'action' => 'patch', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+			['name' => 'delete', 'id_controller' => $id_controller, 'id_parent' => null, 'type' => 'delete', 'route' => '/id/{id}', 'action' => 'destroy', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+		];
+
+		foreach ($routes as $ind => $val) {
+
+		}
+
+		$message = null;
+		$message .= !is_null($create_controller) ? 'Controller ' . $controller . ' criado com sucesso!' : null;
+		$message .= !is_null($create_view) ? 'View ' . $view . ' criado com sucesso!' : null;
+
+		if (is_null($create_controller) && is_null($create_view)) {
+			$message = 'Nenhuma ação foi realizada';
+		}
+
+		return response()->json([
+			'status'      => 'success',
+			'message'     => $message,
+			'clean_form'  => true,
+			'close_modal' => false,
+		]);
+
 	}
 
 }
