@@ -240,7 +240,7 @@
 													<div class="col s12">
 														<p>
 															<span class="material-symbols-outlined profile-card-i">clinical_notes</span>
-															<span class="bold">Queixa principal:</span>
+															<span class="bold">Queixa Clínica:</span>
 														</p>
 													</div>
 													<div class="col s12 descricao-medica">
@@ -305,7 +305,7 @@
 													<div class="col s12">
 														<p>
 															<span class="material-symbols-outlined profile-card-i">clinical_notes</span>
-															<span class="bold">Plano de tratamento:</span>
+															<span class="bold">Plano de Tratamento:</span>
 														</p>
 													</div>
 													<div class="col s12 descricao-medica">
@@ -322,7 +322,24 @@
 													<div class="col s12">
 														<p>
 															<span class="material-symbols-outlined profile-card-i">clinical_notes</span>
-															<span class="bold">Outros procedimentos:</span>
+															<span class="bold">Outros Procedimentos:</span>
+														</p>
+													</div>
+													<div class="col s12 descricao-medica">
+														<p>
+															Paciente alega dores na barriga, sobre a região estômago
+															Paciente alega dores na barriga, sobre a região estômago
+															Paciente alega dores na barriga, sobre a região estômago
+															Paciente alega dores na barriga, sobre a região estômago
+														</p>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col s12">
+														<p>
+															<span class="material-symbols-outlined profile-card-i">clinical_notes</span>
+															<span class="bold">Desfecho Médico:</span>
 														</p>
 													</div>
 													<div class="col s12 descricao-medica">
