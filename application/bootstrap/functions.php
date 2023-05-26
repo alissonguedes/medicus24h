@@ -709,7 +709,8 @@ if (!function_exists('getMenus')) {
 
 							}
 
-							$ul .= '<li>';
+							$tooltip = null; // data-tooltip="' . $item->titulo . '" data-position="right"
+							$ul .= '<li ' . $tooltip . '>';
 
 							$ul .= '<a ' . $a . ' ' . $target . '>';
 							$ul .= $item->icon ? (preg_match('[^fa\-]', $item->icon) ? '<span class="fa-icon fa-solid ' . $item->icon . '"></span>' : '<span class="material-symbols-outlined">' . $item->icon . '</span>') : '<span class="material-symbols-outlined">radio_button_unchecked</span>';

@@ -16,7 +16,7 @@
 		@if (isset($row))
 			<li>
 				{{-- <button type="button" class="btn grey lighten-3 z-depth-1 waves-effect waves-light" data-href="{{ go('admin.modulos.estrutura', $row->id) }}">Redefinir senha</button> --}}
-				<form @if (isset($row)) action="{{ go('admin.modulos.estrutura', $row->id) }}" @endif>
+				<form @if (isset($row)) action="{{ go('admin.modulos.estrutura') }}" @endif>
 					<button type="submit" {{ $disabled ?? null }} class="btn grey lighten-3 z-depth-1 waves-effect waves-light">Gerar Estrutura</button>
 					<input type="hidden" name="path" value="{{ $row->path }}">
 					<input type="hidden" name="modulo" value="{{ $row->modulo }}">
@@ -97,7 +97,7 @@
 											<div class="col s12 mb-1">
 												<div class="input-field">
 													<label class="grey-text" for="namespace"> Namespace </label>
-													<span class="prefix left grey lighten-2 center-align label">App\Http\Controllers\</span>
+													<span class="prefix label">App\Http\Controllers\</span>
 													<input type="text" name="namespace" id="namespace" value="{{ isset($row) ? str_replace('App\Http\Controllers\\', '', $row->namespace) : null }}" placeholder="Namespace">
 												</div>
 											</div>
@@ -109,7 +109,7 @@
 											<div class="col s12 mb-1">
 												<div class="input-field">
 													<label class="grey-text active" for="path"> Path </label>
-													<span class="prefix left grey lighten-2 center-align" style="border-radius: 5px 0 0px 5px; margin-top: 10px;">/</span>
+													<span class="prefix grey lighten-2 label">/</span>
 													<input type="text" name="path" value="{{ isset($row) ? limpa_string($row->path) : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
 												</div>
 											</div>
