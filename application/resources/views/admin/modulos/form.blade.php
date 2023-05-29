@@ -1,4 +1,4 @@
-@extends('clinica.layouts.forms')
+@extends('_layouts.admin.forms')
 
 @section('prev-url', go('admin.modulos.index'))
 
@@ -16,7 +16,7 @@
 		@if (isset($row))
 			<li>
 				{{-- <button type="button" class="btn grey lighten-3 z-depth-1 waves-effect waves-light" data-href="{{ go('admin.modulos.estrutura', $row->id) }}">Redefinir senha</button> --}}
-				<form @if (isset($row)) action="{{ go('admin.modulos.estrutura') }}" @endif>
+				<form @if (isset($row)) action="{{ go('admin.modulos.estrutura', $row->id) }}" @endif>
 					<button type="submit" {{ $disabled ?? null }} class="btn grey lighten-3 z-depth-1 waves-effect waves-light">Gerar Estrutura</button>
 					<input type="hidden" name="path" value="{{ $row->path }}">
 					<input type="hidden" name="modulo" value="{{ $row->modulo }}">
@@ -75,73 +75,160 @@
 								Informações do módulo
 							</div>
 
+							<div id="tabs">
+								<ul class="tabs">
+									<li class="tab col"><a href="#modulo">Módulo</a></li>
+									<li class="tab col"><a href="#controllers">Controllers</a></li>
+									<li class="tab col"><a href="#views">Views</a></li>
+									<li class="tab col"><a href="#menus">Menus</a></li>
+									<li class="tab col"><a href="#rotas">Rotas</a></li>
+								</ul>
+							</div>
+
 							<div class="card-body fixed-height border-top scroller pt-3 pb-4" data-hide-x="true" style="height: calc(100vh - 31z0px);">
 
 								<div class="row">
 
 									<div class="col s12 m10 l10 offset-m2 offset-l1">
 
-										<!-- BEGIN Input[Nome] -->
-										<div class="row">
-											<div class="col s12 mb-1">
-												<div class="input-field">
-													<input type="text" name="modulo" id="modulo" value="{{ isset($row) ? $row->modulo : null }}" autofocus="autofocus">
-													<label class="grey-text" for="modulo"> Nome do módulo </label>
+										<div id="modulo">
+
+											<div class="row">
+												<div class="col s12 mb-3">
+													<h6>Módulo</h6>
 												</div>
 											</div>
-										</div>
-										<!-- END Input[Nome] -->
 
-										<!-- BEGIN Input[Login] -->
-										<div class="row">
-											<div class="col s12 mb-1">
-												<div class="input-field">
-													<label class="grey-text" for="namespace"> Namespace </label>
-													<span class="prefix label">App\Http\Controllers\</span>
-													<input type="text" name="namespace" id="namespace" value="{{ isset($row) ? str_replace('App\Http\Controllers\\', '', $row->namespace) : null }}" placeholder="Namespace">
+											<!-- BEGIN Input[Nome] -->
+											<div class="row">
+												<div class="col s12 mb-1">
+													<div class="input-field">
+														<input type="text" name="modulo" id="modulo" value="{{ isset($row) ? $row->modulo : null }}" autofocus="autofocus">
+														<label class="grey-text" for="modulo"> Nome do módulo </label>
+													</div>
 												</div>
 											</div>
-										</div>
-										<!-- END Input[Login] -->
+											<!-- END Input[Nome] -->
 
-										<!-- BEGIN Input[Email] -->
-										<div class="row">
-											<div class="col s12 mb-1">
-												<div class="input-field">
-													<label class="grey-text active" for="path"> Path </label>
-													<span class="prefix grey lighten-2 label">/</span>
-													<input type="text" name="path" value="{{ isset($row) ? limpa_string($row->path) : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
+											<!-- BEGIN Input[Login] -->
+											<div class="row">
+												<div class="col s12 mb-1">
+													<div class="input-field">
+														<label class="grey-text" for="namespace"> Namespace </label>
+														<span class="prefix label">App\Http\Controllers\</span>
+														<input type="text" name="namespace" id="namespace" value="{{ isset($row) ? str_replace('App\Http\Controllers\\', '', $row->namespace) : null }}" placeholder="Namespace">
+													</div>
 												</div>
 											</div>
-										</div>
-										<!-- END Input[Email] -->
+											<!-- END Input[Login] -->
 
-										<!-- BEGIN Input[Senha] -->
-										<div class="row">
-											<div class="col s12 mb-1">
-												<div class="input-field">
-													<label class="grey-text" for="restrict"> Restrito? </label>
-													<select name="restrict">
-														<option value="" disabled="disabled" {{ !isset($row) ? 'selected="selected"' : null }}> Selecione um tipo </option>
-														<option value="yes" {{ isset($row) && $row->restrict == 'yes' ? 'selected="selected"' : null }} data-icon=""> Sim </option>
-														<option value="no" {{ isset($row) && $row->restrict == 'no' ? 'selected="selected"' : null }} data-icon=""> Não </option>
-													</select>
+											<!-- BEGIN Input[Email] -->
+											<div class="row">
+												<div class="col s12 mb-1">
+													<div class="input-field">
+														<label class="grey-text active" for="path"> Path </label>
+														<span class="prefix grey lighten-2 label">/</span>
+														<input type="text" name="path" value="{{ isset($row) ? limpa_string($row->path) : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
+													</div>
 												</div>
 											</div>
-										</div>
-										<!-- END Input[Senha] -->
+											<!-- END Input[Email] -->
 
-										<!-- BEGIN Input[Status] -->
-										<div class="row">
-											<div class="col s12 mb-1">
-												<label class="left" style="cursor: pointer; display: flex; align-items: center;">
-													<input type="checkbox" name="status" value="0" {{ isset($row) && $row->status === '0' ? 'checked="checked"' : null }}>
-													<i class="material-icons" style="width: auto !important;">lock</i>
-													<span style="font-size: 1rem; margin-left: 20px; color: #000">Bloquear módulo</span>
-												</label>
+											<!-- BEGIN Input[Senha] -->
+											<div class="row">
+												<div class="col s12 mb-1">
+													<div class="input-field">
+														<label class="grey-text" for="restrict"> Restrito? </label>
+														<select name="restrict">
+															<option value="" disabled="disabled" {{ !isset($row) ? 'selected="selected"' : null }}> Selecione um tipo </option>
+															<option value="yes" {{ isset($row) && $row->restrict == 'yes' ? 'selected="selected"' : null }} data-icon=""> Sim </option>
+															<option value="no" {{ isset($row) && $row->restrict == 'no' ? 'selected="selected"' : null }} data-icon=""> Não </option>
+														</select>
+													</div>
+												</div>
 											</div>
+											<!-- END Input[Senha] -->
+
+											<!-- BEGIN Input[Status] -->
+											<div class="row">
+												<div class="col s12 mb-1">
+													<label class="left" style="cursor: pointer; display: flex; align-items: center;">
+														<input type="checkbox" name="status" value="0" {{ isset($row) && $row->status === '0' ? 'checked="checked"' : null }}>
+														<i class="material-icons" style="width: auto !important;">lock</i>
+														<span style="font-size: 1rem; margin-left: 20px; color: #000">Bloquear módulo</span>
+													</label>
+												</div>
+											</div>
+											<!-- END Input[Status] -->
+
 										</div>
-										<!-- END Input[Status] -->
+
+										<!-- BEGIN Controllers -->
+										<div id="controllers">
+
+											<div class="row">
+												<div class="col s12 mb-3">
+													<h6>Controllers</h6>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col s12 mb-1">
+													{{-- <label class="left" style="cursor: pointer; display: flex; align-items: center;">
+														<input type="checkbox" name="status" value="0" {{ isset($row) && $row->status === '0' ? 'checked="checked"' : null }}>
+														<i class="material-icons" style="width: auto !important;">lock</i>
+														<span style="font-size: 1rem; margin-left: 20px; color: #000">Bloquear módulo</span>
+													</label> --}}
+													<button type="button" class="btn green waves-effect">
+														Novo Controller
+													</button>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col s12">
+													@include('admin.controllers.table')
+												</div>
+											</div>
+
+										</div>
+										<!-- END Controllers -->
+
+										<!-- BEGIN Views -->
+										<div id="views">
+
+											<div class="row">
+												<div class="col s12 mt-3 mb-3">
+													<h6>Views</h6>
+												</div>
+											</div>
+
+										</div>
+										<!-- END Views -->
+
+										<!-- BEGIN Menus -->
+										<div id="menus">
+
+											<div class="row">
+												<div class="col s12 mt-3 mb-3">
+													<h6>Menus</h6>
+												</div>
+											</div>
+
+										</div>
+										<!-- END Menus -->
+
+										<!-- BEGIN Rotas -->
+										<div id="rotas">
+
+											<div class="row">
+												<div class="col s12 mt-3 mb-3">
+													<h6>Rotas</h6>
+												</div>
+											</div>
+
+										</div>
+										<!-- END Rotas -->
 
 									</div>
 

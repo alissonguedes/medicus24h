@@ -1037,6 +1037,12 @@ select:not(.browser-default),
 	box-sizing: border-box;
 	height: 3rem;
 	margin-bottom: 0;
+	flex: 1;
+}
+
+.select-wrapper {
+	position: relative;
+	flex: 1;
 }
 
 input:not([type]),

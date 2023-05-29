@@ -272,8 +272,11 @@ var Datatable = {
 			$(this).find('.grid-head').find('.grid-col').each(function() {
 
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
+				var isOrderable = (typeof $(this).data('orderable') !== 'undefined' && $(this).data('orderable') != '' && $(this).data('orderable') === true) || typeof $(this).data('orderable') === 'undefined';
 
-				if (!isDisabled) {
+				console.log(isOrderable);
+
+				if (!isDisabled && isOrderable) {
 
 					var direction = `<div class="sort"></div>`;
 
@@ -284,8 +287,11 @@ var Datatable = {
 			}).on('click', function(e) {
 
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
+				var isOrderable = (typeof $(this).data('orderable') !== 'undefined' && $(this).data('orderable') != '' && $(this).data('orderable') === true) || typeof $(this).data('orderable') === 'undefined';
 
-				if (isDisabled) {
+				console.log(isOrderable, $(this).data('orderable'));
+
+				if (isDisabled || !isOrderable) {
 					return;
 				}
 

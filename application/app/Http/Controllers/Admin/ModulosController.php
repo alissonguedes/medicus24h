@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ModuloRequest;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Artisan;
+use \App\Models\ControllerModel;
 use \App\Models\ModuloModel;
 
 class ModulosController extends Controller
@@ -29,10 +30,11 @@ class ModulosController extends Controller
 
 	}
 
-	public function form(Request $request, ModuloModel $modulo)
+	public function form(Request $request, ModuloModel $modulo, ControllerModel $controller)
 	{
 
-		$dados = [];
+		$dados             = [];
+		$dados['paginate'] = $controller->getControllers(null, $request->id);
 
 		if ($request->id) {
 			$id           = $request->id;

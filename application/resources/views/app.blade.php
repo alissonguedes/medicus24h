@@ -96,7 +96,6 @@
 		@include('scripts')
 	@show
 
-
 </body>
 
 </html>

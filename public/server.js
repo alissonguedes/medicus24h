@@ -2,12 +2,13 @@ const express = require('express')
 const app = express()
 
 const fs = require('fs');
-const https_options = {
-	key: fs.readFileSync('/etc/letsencrypt/live/cliniccloud.com.br/privkey.pem'),
-	cert: fs.readFileSync('/etc/letsencrypt/live/cliniccloud.com.br/fullchain.pem'),
-}
+// const https_options = {
+// key: fs.readFileSync('/etc/letsencrypt/live/cliniccloud.com.br/privkey.pem'),
+// cert: fs.readFileSync('/etc/letsencrypt/live/cliniccloud.com.br/fullchain.pem'),
+// }
 
-const server = require('https').Server(https_options, app)
+// const server = require('https').Server(https_options, app)
+const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const {
 	v4: uuidV4

@@ -471,7 +471,7 @@ nav a.sidenav-trigger {
 .sidenav li>a>i,
 .sidenav li>a>i.material-icons,
 .sidenav li>a>span.material-icons,
-.sidenav li>a>span.material-icons-outlined ,
+.sidenav li>a>span.material-icons-outlined,
 .sidenav li>a>span.material-symbols-outlined {
 	line-height: 48px;
 	float: left;
@@ -491,15 +491,24 @@ nav a.sidenav-trigger {
 	font-weight: bold;
 }
 
-.sidenav li>a>span.material-symbols-outlined {
+.sidenav li>a>span.material-symbols-outlined,
+.sidenav li>a>span.fa-icon {
 	color: rgba(0, 0, 0, .54);
 }
 
 
+.nav-collapsed .sidenav li>a>span.material-symbols-outlined,
+.nav-collapsed .sidenav li>a>span.fa-icon,
+.nav-collapsed .sidenav .collapsible-body span.fa-icon {
+	display: block;
+}
+
 .sidenav-active-rounded .sidenav li:not(.open)>a.active,
 .sidenav-active-rounded .sidenav li:not(.open)>a.active>span.material-icons,
-.sidenav-active-rounded .sidenav li>a.active>span.material-symbols-outlined {
+.sidenav-active-rounded .sidenav li>a.active>span.material-symbols-outlined,
+.sidenav-active-rounded .sidenav li>a.active>span.fa-icon {
 	color: #fff;
+	display: block;
 }
 
 .sidenav li a span:not(.menu-title) {
@@ -801,22 +810,25 @@ label>input[type="checkbox"].indeterminate.filled-in+span:after {
 	/* grid-column-gap: 15px; */
 }
 
-.grid .grid-head .grid-col:not([data-orderable=false]) {
-	cursor: pointer;
-}
-
 .grid .grid-head .grid-col {
 	text-align: center;
 	font-weight: bold;
 	color: #000;
 	display: flex;
 	align-items: center;
+	cursor: pointer;
 }
 
 .grid .grid-head .grid-col {
 	-webkit-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+.grid .grid-head .grid-col[data-disabled="true"],
+.grid .grid-head .grid-col[data-orderable=""],
+.grid .grid-head .grid-col[data-orderable="false"] {
+	cursor: text !important;
 }
 
 .grid .grid-row .grid-col {
