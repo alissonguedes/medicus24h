@@ -75,15 +75,17 @@
 								Informações do módulo
 							</div>
 
-							<div id="tabs">
-								<ul class="tabs">
-									<li class="tab col"><a href="#modulo">Módulo</a></li>
-									<li class="tab col"><a href="#controllers">Controllers</a></li>
-									<li class="tab col"><a href="#views">Views</a></li>
-									<li class="tab col"><a href="#menus">Menus</a></li>
-									<li class="tab col"><a href="#rotas">Rotas</a></li>
-								</ul>
-							</div>
+							@if (isset($row))
+								<div id="tabs">
+									<ul class="tabs">
+										<li class="tab col"><a href="#modulo">Módulo</a></li>
+										<li class="tab col"><a href="#controllers">Controllers</a></li>
+										<li class="tab col"><a href="#views">Views</a></li>
+										<li class="tab col"><a href="#menus">Menus</a></li>
+										<li class="tab col"><a href="#rotas">Rotas</a></li>
+									</ul>
+								</div>
+							@endif
 
 							<div class="card-body fixed-height border-top scroller pt-3 pb-4" data-hide-x="true" style="height: calc(100vh - 31z0px);">
 
@@ -114,9 +116,11 @@
 											<div class="row">
 												<div class="col s12 mb-1">
 													<div class="input-field">
-														<label class="grey-text" for="namespace"> Namespace </label>
-														<span class="prefix label">App\Http\Controllers\</span>
-														<input type="text" name="namespace" id="namespace" value="{{ isset($row) ? str_replace('App\Http\Controllers\\', '', $row->namespace) : null }}" placeholder="Namespace">
+														<label class="grey-text active" for="namespace"> Namespace </label>
+														<div class="input-group">
+															<span class="input-group-item first">App\Http\Controllers\</span>
+															<input type="text" name="namespace" id="namespace" value="{{ isset($row) ? str_replace('App\Http\Controllers\\', '', $row->namespace) : null }}" placeholder="Namespace">
+														</div>
 													</div>
 												</div>
 											</div>
@@ -127,8 +131,10 @@
 												<div class="col s12 mb-1">
 													<div class="input-field">
 														<label class="grey-text active" for="path"> Path </label>
-														<span class="prefix grey lighten-2 label">/</span>
-														<input type="text" name="path" value="{{ isset($row) ? limpa_string($row->path) : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
+														<div class="input-group">
+															<span class="input-group-item first">/</span>
+															<input type="text" name="path" value="{{ isset($row) ? limpa_string($row->path) : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
+														</div>
 													</div>
 												</div>
 											</div>
@@ -174,14 +180,11 @@
 
 											<div class="row">
 												<div class="col s12 mb-1">
-													{{-- <label class="left" style="cursor: pointer; display: flex; align-items: center;">
-														<input type="checkbox" name="status" value="0" {{ isset($row) && $row->status === '0' ? 'checked="checked"' : null }}>
-														<i class="material-icons" style="width: auto !important;">lock</i>
-														<span style="font-size: 1rem; margin-left: 20px; color: #000">Bloquear módulo</span>
-													</label> --}}
-													<button type="button" class="btn green waves-effect">
+
+													<button type="button" class="btn green waves-effect" data-trigger="modal" data-target="modal_controller" data-href="{{ route('admin.modulos.add.controller') }}">
 														Novo Controller
 													</button>
+
 												</div>
 											</div>
 
@@ -262,7 +265,18 @@
 
 			</div>
 
-			{{-- @include('admin.modulos.form-usergroup') --}}
+			@if (isset($row))
+				<div id="modal_controller" class="modal modal-fixed-footer" data-dismissible="true">
+					<div class="modal-content">
+						@include('admin.controllers.form.fields')
+					</div>
+					<div class="modal-footer">
+						<button class="btn green waves-effect" data-tooltip="Adicionar Controller">
+							<span>Adicionar</span>
+						</button>
+					</div>
+				</div>
+			@endif
 
 		</div>
 

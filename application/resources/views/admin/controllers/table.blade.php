@@ -1,4 +1,4 @@
-<div class="table grid bordered">
+<div id="table_controllers" class="table grid bordered">
 	<div class="grid-head">
 		<div class="grid grid-row">
 			<div class="grid-col" data-disabled="true" data-width="20fr">

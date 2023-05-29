@@ -45,6 +45,11 @@ class ModulosController extends Controller
 
 	}
 
+	public function form_controller(Request $request, ModuloModel $modulo, ControllerModel $controller)
+	{
+
+	}
+
 	public function create(ModuloRequest $request, ModuloModel $modulo)
 	{
 
@@ -117,9 +122,9 @@ class ModulosController extends Controller
 		$create_controller = null;
 		$create_view       = null;
 		$controller        = limpa_string($request->namespace, '/', false) . '/HomeController';
-		$view              = limpa_string($request->path, '/') . '/home/index';
+		$view              = limpa_string($request->path, '.') . '.home.index';
 		$f_controller      = app_path(str_replace('App/', '', $controller) . '.php');
-		$f_view            = resource_path('views/' . $view . '.blade.php');
+		$f_view            = resource_path('views/' . str_replace('.', '/', $view) . '.blade.php');
 
 		if (!file_exists($f_controller)) {
 			$create_controller = shell_exec('php ../application/artisan make:controller ' . $controller . ' --resource');

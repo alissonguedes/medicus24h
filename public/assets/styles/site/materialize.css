@@ -2880,7 +2880,7 @@ screen and (-ms-high-contrast:none) and (min-width:993px) {
 	-webkit-transform: translateY(0);
 	-ms-transform: translateY(0);
 	transform: translateY(0);
-	color: #ff4081
+	color: #ff4081;
 }
 
 .input-field label.active {

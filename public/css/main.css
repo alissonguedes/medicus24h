@@ -852,8 +852,8 @@ label>input[type="checkbox"].indeterminate.filled-in+span:after {
 .grid.bordered .grid-row {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	border-bottom-color: var(--grey-accent-2);
-	margin: -2px 0px -1px;
+	border-bottom-color: var(--grey-accent-3);
+	/* margin: -2px 0px -1px; */
 }
 
 /* .grid.bordered .grid-row,
@@ -1381,6 +1381,20 @@ input.no-border,
 	line-height: 3rem;
 }
 
+span.sufix.label {
+	background: var(--grey-lighten-2);
+	bottom: -10px;
+	right: 0;
+	position: relative;
+	height: 3rem;
+	line-height: 3rem;
+	padding: 0 10px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
 .sufix.help {
 	color: rgba(0, 0, 0, 0.6) !important
 }
@@ -1405,7 +1419,7 @@ input.no-border,
 	clear: both;
 }
 
-.input-field .prefix~.error {
+.input-field .prefix:not(.label)~.error {
 	width: calc(100% - 3rem);
 	left: 3rem;
 }

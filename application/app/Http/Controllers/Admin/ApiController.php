@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Main\ApiController as MainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class ApiController extends Controller
+class ApiController extends MainController
 {
 
 	public function __construct()

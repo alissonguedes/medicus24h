@@ -1196,7 +1196,7 @@ textarea.materialize-textarea[readonly="readonly"]+label,
 }
 
 .input-field {
-	display: flex;
+	/* display: flex; */
 }
 
 .input-field.files.input {
@@ -1237,7 +1237,7 @@ input.no-border,
 }
 
 .input-field .prefix {
-	position: relative;
+	/* position: relative; */
 	font-size: 24px;
 	min-width: 3rem;
 	width: auto;
@@ -1251,29 +1251,53 @@ input.no-border,
 	line-height: 3rem;
 }
 
-.input-field .prefix.label {
-	border-radius: 5px 0 0px 5px;
+.input-group {
+	position: relative;
+	display: flex;
+	border-collapse: separate;
+}
+
+/* .input-group .input-group-item,
+.input-group .input-group-item.first,
+.input-group .input-group-item.last {
+	border-color: var(--grey);
+	border-width: 1px;
+	border-style: solid;
+} */
+
+.input-group .input-group-item {
 	margin-top: 10px;
 	width: auto;
 	font-size: 16px;
 	padding: 0 10px;
 	background-color: var(--grey-lighten-2);
 	text-align: center;
+	line-height: 3rem;
+	position: relative;
+	min-width: 3rem;
 }
 
-.input-field .prefix~label {
-	display: inherit;
+.input-group .input-group-item.first {
+	border-radius: 5px 0 0px 5px;
+	/* border-right: 0; */
 }
 
-.input-field .prefix~input,
-.input-field .prefix~textarea,
-.input-field .prefix~.validate~label,
-.input-field .prefix~.helper-text,
-.input-field .prefix~.autocomplete-content,
-.input-field .prefix~.select-wrapper {
+.input-group .input-group-item.last {
+	border-radius: 0 5px 5px 0;
+}
+
+.input-group .input-group-item~input,
+.input-group .input-group-item~textarea,
+.input-group .input-group-item~.validate~label,
+.input-group .input-group-item~.helper-text,
+.input-group .input-group-item~.autocomplete-content,
+.input-group .input-group-item~.select-wrapper {
 	margin-left: 0;
 	width: calc(100% - 3rem);
+	padding: 0 10px;
+	border-top: 1px solid !important
 }
+
 
 .input-field .prefix.label~input,
 .input-field .prefix.label~textarea,

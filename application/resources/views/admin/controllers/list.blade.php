@@ -22,47 +22,10 @@
 		</div>
 	@endforeach
 @else
-	<div id="pagination">
-
-		<ul>
-
-			<li>
-				<button class="btn btn-flat btn-floating waves-effect" data-href="{{ !$paginate->onFirstPage() ? $paginate->previousPageUrl() : '#' }}" data-tooltip="Anterior" {{ $paginate->onFirstPage() ? 'disabled' : null }}>
-					<i class="material-icons">keyboard_arrow_left</i>
-				</button>
-			</li>
-
-			{{-- @for ($i = 1; $i <= $paginate->lastPage(); $i++)
-			{? $class = ($i === $paginate -> currentPage() ) ? 'active' : null ?}
-				<li>
-					<button data-href="{{ $paginate->currentPage() !== $i ? $paginate->url($i) : '#' }}"
-			class="btn btn-small btn-floating waves-effect {{ $class }}">{{ $i }}</button>
-			</li>
-@endfor --}}
-
-			<li>
-				<button class="btn btn-flat btn-floating waves-effect" data-href="{{ $paginate->currentPage() < $paginate->lastPage() ? $paginate->nextPageUrl() : '#' }}" data-tooltip="Próxima" {{ $paginate->currentPage() === $paginate->lastPage() ? 'disabled' : null }}>
-					<i class="material-icons">keyboard_arrow_right</i>
-				</button>
-			</li>
-
-		</ul>
-
+	<div class="grid-row no-results">
+		<div class="grid-col">
+			Nenhum registro encontrado.
+		</div>
 	</div>
-
-	<div id="info">
-		<button data-href="#" class="btn btn-flat waves-effect">
-			{{ $paginate->firstItem() }} - {{ $paginate->lastItem() }} de {{ $paginate->total() }}
-			{{-- {{ $paginate -> perPage() }} --}}
-		</button>
-	</div>
-
-	<div class="no-results white-text center-align">
-		Nenhum registro encontrado.
-	</div>
-
-	<div id="pagination"></div>
-
-	<div id="info"></div>
 
 @endif
