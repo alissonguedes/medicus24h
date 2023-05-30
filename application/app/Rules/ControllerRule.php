@@ -27,15 +27,19 @@ class ControllerRule implements ValidationRule, InvokableRule
 
 		$controllerModel = new ControllerModel();
 
-		$id         = $_POST['id'];
+		$id         = isset($_POST['id']) ? $_POST['id'] : null;
 		$controller = $_POST['controller'];
 		$modulo     = $_POST['modulo'];
 
 		$exists = $controllerModel->from('tb_acl_modulo_controller')
 			->where('id_modulo', $modulo)
-			->where('controller', $controller)
-			->where('id', '<>', $id)
-			->exists();
+			->where('controller', $controller);
+
+		if (!is_null($id)) {
+			$exists->where('id', '<>', $id);
+		}
+
+		$exists = $exists->exists();
 
 		if ($exists) {
 			$fail('Nome de Controller já está em uso.');
