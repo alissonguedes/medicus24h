@@ -169,69 +169,71 @@
 
 										</div>
 
-										<!-- BEGIN Controllers -->
-										<div id="controllers">
+										@isset($row)
+											<!-- BEGIN Controllers -->
+											<div id="controllers">
 
-											<div class="row">
-												<div class="col s12 mb-3">
-													<h6>Controllers</h6>
+												<div class="row">
+													<div class="col s12 mb-3">
+														<h6>Controllers</h6>
+													</div>
 												</div>
-											</div>
 
-											<div class="row">
-												<div class="col s12 mb-1">
+												<div class="row">
+													<div class="col s12 mb-1">
 
-													<button type="button" class="btn green waves-effect" data-trigger="modal" data-target="modal_controller" data-href="{{ route('admin.modulos.add.controller') }}">
-														Novo Controller
-													</button>
+														<button type="button" class="btn green waves-effect" data-trigger="modal" data-target="modal_controller" data-href="{{ route('admin.modulos.{id}.add.controller', $row->id) }}" data-disabled="true">
+															Novo Controller
+														</button>
 
+													</div>
 												</div>
-											</div>
 
-											<div class="row">
-												<div class="col s12">
-													@include('admin.controllers.table')
+												<div class="row">
+													<div class="col s12">
+														@include('admin.controllers.table')
+													</div>
 												</div>
+
 											</div>
+											<!-- END Controllers -->
 
-										</div>
-										<!-- END Controllers -->
+											<!-- BEGIN Views -->
+											<div id="views">
 
-										<!-- BEGIN Views -->
-										<div id="views">
-
-											<div class="row">
-												<div class="col s12 mt-3 mb-3">
-													<h6>Views</h6>
+												<div class="row">
+													<div class="col s12 mt-3 mb-3">
+														<h6>Views</h6>
+													</div>
 												</div>
+
 											</div>
+											<!-- END Views -->
 
-										</div>
-										<!-- END Views -->
+											<!-- BEGIN Menus -->
+											<div id="menus">
 
-										<!-- BEGIN Menus -->
-										<div id="menus">
-
-											<div class="row">
-												<div class="col s12 mt-3 mb-3">
-													<h6>Menus</h6>
+												<div class="row">
+													<div class="col s12 mt-3 mb-3">
+														<h6>Menus</h6>
+													</div>
 												</div>
+
 											</div>
+											<!-- END Menus -->
 
-										</div>
-										<!-- END Menus -->
+											<!-- BEGIN Rotas -->
+											<div id="rotas">
 
-										<!-- BEGIN Rotas -->
-										<div id="rotas">
-
-											<div class="row">
-												<div class="col s12 mt-3 mb-3">
-													<h6>Rotas</h6>
+												<div class="row">
+													<div class="col s12 mt-3 mb-3">
+														<h6>Rotas</h6>
+													</div>
 												</div>
-											</div>
 
-										</div>
-										<!-- END Rotas -->
+											</div>
+											<!-- END Rotas -->
+										@endisset
 
 									</div>
 
@@ -265,18 +267,7 @@
 
 			</div>
 
-			@if (isset($row))
-				<div id="modal_controller" class="modal modal-fixed-footer" data-dismissible="true">
-					<div class="modal-content">
-						@include('admin.controllers.form.fields')
-					</div>
-					<div class="modal-footer">
-						<button class="btn green waves-effect" data-tooltip="Adicionar Controller">
-							<span>Adicionar</span>
-						</button>
-					</div>
-				</div>
-			@endif
+			@include('admin.modulos.form.controllers')
 
 		</div>
 

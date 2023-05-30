@@ -124,16 +124,16 @@
 															</tr>
 														</thead>
 														<tbody>
-															@if(isset($row))
+															{{-- @if(isset($row)) --}}
 																@php
 																	$departamento_model = new App\Models\DepartamentoModel();
 																@endphp
-															@endif
+															{{-- @endif --}}
 
 															@foreach($departamentos as $departamento)
-																@if(isset($row))
+																{{-- @if(isset($row)) --}}
 																	@php
-																		$depto = $departamento_model->getDepartamentoEmpresa($row->id, $departamento->id);
+																		$depto = isset($row) ? $departamento_model->getDepartamentoEmpresa($row->id, $departamento->id) : null;
 																		$checked = isset($depto) && $departamento->id === $depto->id ? 'checked=checked' : null;
 																	@endphp
 																	<tr>
@@ -146,7 +146,7 @@
 																		<td>{{ $departamento->titulo }}</td>
 																		<td>{{ $departamento->descricao }}</td>
 																	</tr>
-																@endif
+																{{-- @endif --}}
 															@endforeach
 
 														</tbody>

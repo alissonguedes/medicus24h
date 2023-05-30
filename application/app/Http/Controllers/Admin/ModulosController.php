@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ControllerRequest;
 use App\Http\Requests\Admin\ModuloRequest;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Artisan;
@@ -35,6 +36,7 @@ class ModulosController extends Controller
 
 		$dados             = [];
 		$dados['paginate'] = $controller->getControllers(null, $request->id);
+		$dados['modulos']  = $modulo->getModulos();
 
 		if ($request->id) {
 			$id           = $request->id;
@@ -47,6 +49,32 @@ class ModulosController extends Controller
 
 	public function form_controller(Request $request, ModuloModel $modulo, ControllerModel $controller)
 	{
+
+		$dados['row']         = $modulo->getModuloById($request->id);
+		$dados['controllers'] = $controller->getControllers();
+
+		return response(view('admin.modulos.form.controllers', $dados), 200);
+
+	}
+
+	public function get_controller()
+	{
+
+	}
+
+	public function add_controller(ControllerRequest $request, ControllerModel $controller)
+	{
+
+		$controller->create($request->all());
+
+		return response()->json([
+			'status'      => 'success',
+			'message'     => 'Controller adicionado com sucesso!',
+			'clean_form'  => true,
+			'close_modal' => true,
+			// 'type'        => 'redirect',
+			// 'url'         => url()->route('admin.modulos.edit', $id),
+		]);
 
 	}
 
@@ -131,6 +159,8 @@ class ModulosController extends Controller
 		}
 
 		if (!file_exists($f_view)) {
+			// $create_view = shell_exec('php ../application/artisan make:view ' . $view . ' --extends=app --section="title:OS Tickets" --section=body');
+			// $create_view = shell_exec('php ../application/artisan make:view ' . $view . ' --extends=app --section="title:OS Tickets" --section=body');
 			$create_view = shell_exec('php ../application/artisan make:view ' . $view . ' --extends=app --section="title:OS Tickets" --section=body');
 		}
 

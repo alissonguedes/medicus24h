@@ -338,14 +338,13 @@ class EmpresaModel extends AppModel
 				}
 
 				// $this->removeDepartamento($data);
-
-				return $this->cadastraDepartamento($data);
+				$this->cadastraDepartamento($data);
 
 			}
 
 		}
 
-		return $id;
+		return $id_empresa;
 
 	}
 
@@ -478,6 +477,7 @@ class EmpresaModel extends AppModel
 				}
 
 				if (!$this->removeDepartamento($p)) {
+					dd($p);
 					return false;
 				}
 
@@ -558,8 +558,8 @@ class EmpresaModel extends AppModel
 			}
 
 			if ($departamento_removido > 0) {
-				$message       = $departamento_removido . ' departamento' . ($departamento_removido > 1 ? 's' : null) . ' removido' . ($departamento_removido > 1 ? 's' : null);
-				$this->error[] = $message;
+				$message         = $departamento_removido . ' departamento' . ($departamento_removido > 1 ? 's' : null) . ' removido' . ($departamento_removido > 1 ? 's' : null);
+				$this->message[] = $message;
 			}
 
 			if ($this->error) {

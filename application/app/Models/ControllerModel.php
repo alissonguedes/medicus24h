@@ -12,7 +12,8 @@ namespace App\Models{
 		use HasFactory;
 		private $order = [];
 
-		protected $table = 'tb_acl_modulo_controller';
+		protected $table   = 'tb_acl_modulo_controller';
+		protected $datamap = ['modulo' => 'id_modulo'];
 
 		// protected $connection = 'mysql2';
 
@@ -109,10 +110,9 @@ namespace App\Models{
 				$input['status'] = '1';
 			}
 
-			$namespace = limpa_string($input['namespace'], '\\', false);
-
-			$input['namespace'] = 'App\Http\Controllers\\' . $namespace;
-			$input['path']      = '/' . limpa_string($input['path']);
+			if (!isset($input['permissao'])) {
+				$input['permissao'] = 1111;
+			}
 
 			return $this->fields($input);
 

@@ -3,7 +3,7 @@
 @if ($paginate->total() > 0)
 
 	@foreach ($paginate as $row)
-		<div class="grid-row" data-href="{{ go('admin.modulos.edit', $row->id) }}" data-disabled="true">
+		<div class="grid-row" data-trigger="modal" data-target="modal_controller" data-href="{{ route('admin.modulos.{id}.add.controller', $row->id) }}" data-disabled="true">
 			<div class="grid-col">
 				<label>
 					<input type="checkbox" name="id[]" class="filled-in" value="{{ $row->id }}" data-status="{{ $row->status }}">

@@ -15,33 +15,22 @@
 		<div class="input-field">
 			<label class="grey-text active" for="filename"> Arquivo Original </label>
 			<div class="input-group">
-				<span class="input-group-item first">{{ $row->namespace }}</span>
-				<input type="text" name="file" class="controller_name" value="{{ isset($controller) ? limpa_string($controller->modulo, null, false) : null }}" placeholder="">
+				<span class="input-group-item first">{{ isset($row) ? $row->namespace : null }}</span>
+				<input type="text" class="controller_name" value="{{ isset($controller) ? limpa_string($controller->controller, null, false) : null }}" placeholder="">
 				<span class="input-group-item last">Controller.php</span>
-				<input type="hidden" name="controller" class="" value="{{ isset($controller) ? $controller->namespace : null }}">
-				<input type="hidden" name="filename" value="{{ isset($controller) ? limpa_string($controller->modulo, null, false) : null }}">
+				<input type="hidden" name="controller" value="{{ isset($controller) ? limpa_string($controller->controller, null, false) : null }}">
+				<input type="hidden" name="filename" value="{{ isset($controller) ? $controller->filename : null }}">
 			</div>
 		</div>
 		<small class="left-align">
 			<small class="left" style="padding: 3px 0 3px; margin-right: 5px;">Arquivo:</small>
-			<small class="badge grey lighten-2 left black-text border-radius" style="padding: 3px; border-radius: 3px;">
+			<small id="filename" class="badge grey lighten-2 left black-text border-radius" style="padding: 3px; border-radius: 3px;">
 				{{ isset($row) ? $row->namespace : null }}<span class="controller_name">{{ isset($controller) ? limpa_string($controller->modulo, null, false) . 'Controller.php' : null }}</span>
 			</small>
 		</small>
 	</div>
 </div>
 <!-- END Input[Login] -->
-
-<!-- BEGIN Input[Email] -->
-<div class="row">
-	<div class="col s12 mb-1">
-		<div class="input-field">
-			<label class="grey-text" for="path"> Módulo </label>
-			<input type="text" name="modulo" value="{{ isset($controller) ? $controller->modulo : null }}" id="modulo">
-		</div>
-	</div>
-</div>
-<!-- END Input[Email] -->
 
 <!-- BEGIN Input[Email] -->
 <div class="row">
@@ -54,11 +43,34 @@
 </div>
 <!-- END Input[Email] -->
 
+<!-- BEGIN Input[Email] -->
+<div class="row">
+	<div class="col s12 mb-1">
+		<div class="input-field">
+			<label class="grey-text active" for="path"> Módulo </label>
+			@isset($row)
+				<input type="text" readonly="readonly" value="{{ $row->modulo }}">
+				<input type="hidden" name="modulo" readonly="readonly" value="{{ $row->id }}" id="modulo">
+			@else
+				<select name="modulo">
+					<option value="" disabled="disabled" {{ !isset($row) ? 'selected="selected"' : null }}> Selecione um grupo</option>
+					@if (isset($modulos))
+						@foreach ($modulos as $m)
+							<option value="{{ $m->id }}" {{ isset($row) && $m->id == $row->id ? 'selected="selected"' : null }} data-icon=""> {{ $m->modulo }} </option>
+						@endforeach
+					@endif
+				</select>
+			@endisset
+		</div>
+	</div>
+</div>
+<!-- END Input[Email] -->
+
 <!-- BEGIN Input[Senha] -->
 <div class="row">
 	<div class="col s12 mb-1">
 		<div class="input-field">
-			<label class="grey-text" for="restrict"> Restrito? </label>
+			<label class="grey-text active" for="restrict"> Restrito? </label>
 			<select name="restrict">
 				<option value="inherit" {{ !isset($controller) || (isset($controller) && $controller->restrict == 'inherit') ? 'selected="selected"' : null }} data-icon=""> Herdado </option>
 				<option value="yes" {{ isset($controller) && $controller->restrict == 'yes' ? 'selected="selected"' : null }} data-icon=""> Sim </option>
