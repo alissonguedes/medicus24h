@@ -21,15 +21,18 @@ function edit_controller() {
 $('[data-target="modal_controller"]').bind('click', function() {
 
 	var url = $(this).data('href');
+	var id = typeof $(this).data('id') !== 'undefined' ? $(this).data('id') : null;
 	var target = $('#' + $(this).data('target'));
+	var data = {
+		'datatype': 'html',
+		'data': {
+			'id': id,
+			'modulo': $('input[name="id"]').val()
+		}
+	};
 
 	var modal = target.modal({
 		onOpenStart: () => {
-
-			var data = {
-				datatype: 'html',
-				'data': {}
-			}
 
 			var load = `<div class="preloader-wrapper small active" style="margin-right: 20px;">
 							<div class="spinner-layer spinner-green-only">
@@ -87,13 +90,12 @@ $('[data-target="modal_controller"]').bind('click', function() {
 
 			Http.get(url, data, (response) => {
 
-				console.log(response);
+				$('#table_controllers').find('.grid-body').html(response);
 
-				$('#table_controllers').html($(response).find('#table_controllers').html())
-
-				edit_controller();
+				load_scripts();
 
 			});
+
 
 			target.find('.modal-content').remove();
 

@@ -4,8 +4,8 @@
 			@include('admin.controllers.form.fields')
 		</div>
 		<div class="modal-footer">
-			<button type="reset" class="btn white waves-effect modal-close" data-tooltip="Adicionar Controller">
-				<span>Adicionar</span>
+			<button type="reset" class="btn white black-text mr-3 waves-effect modal-close" data-tooltip="Adicionar Controller">
+				<span>Cancelar</span>
 			</button>
 			<button class="btn green waves-effect" data-tooltip="Adicionar Controller">
 				<span>Adicionar</span>

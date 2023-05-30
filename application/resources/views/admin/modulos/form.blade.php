@@ -182,7 +182,7 @@
 												<div class="row">
 													<div class="col s12 mb-1">
 
-														<button type="button" class="btn green waves-effect" data-trigger="modal" data-target="modal_controller" data-href="{{ route('admin.modulos.{id}.add.controller', $row->id) }}" data-disabled="true">
+														<button type="button" class="btn green waves-effect" data-trigger="modal" data-target="modal_controller" data-href="{{ route('admin.controllers.modulos.add', $row->id) }}" data-disabled="true">
 															Novo Controller
 														</button>
 

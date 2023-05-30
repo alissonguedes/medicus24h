@@ -18,9 +18,9 @@ class ControllersController extends Controller
 
 		$dados['paginate'] = $controller->getControllers(null, $request->modulo);
 
-		// if ($request->ajax()) {
-		// 	return response(view('admin.controllers.list', $dados), 200);
-		// }
+		if ($request->ajax()) {
+			return response(view('admin.controllers.list', $dados), 200);
+		}
 
 		return response(view('admin.controllers.index', $dados), 200);
 
@@ -31,11 +31,6 @@ class ControllersController extends Controller
 	 */
 	public function create(ControllerRequest $request, ControllerModel $controller, ModuloModel $modulo)
 	{
-
-		// $dados['row']         = $modulo->getModuloById($request->id);
-		// $dados['controllers'] = $controller->getControllers();
-
-		// return response(view('admin.modulos.form.controllers', $dados), 200);
 
 		$controller->create($request->all());
 
@@ -67,6 +62,20 @@ class ControllersController extends Controller
 	}
 
 	/**
+	 * Display the specified resource.
+	 */
+	public function form(Request $request, ModuloModel $modulo, ControllerModel $controller)
+	{
+
+		$dados['modulo']     = $modulo->getModuloById($request->modulo);
+		$dados['controller'] = $controller->getControllerById($request->id);
+
+		// return response(view('admin.modulos.form.controllers', $dados), 200);
+		return response(view('admin.modulos.form.controllers', $dados), 200);
+
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 */
 	public function edit(string $id)
@@ -77,9 +86,18 @@ class ControllersController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 */
-	public function update(Request $request, string $id)
+	public function update(ControllerRequest $request, ControllerModel $controller)
 	{
-		//
+
+		$controller->edit($request->all());
+
+		return response()->json([
+			'status'      => 'success',
+			'message'     => 'Controller editado com sucesso!',
+			'clean_form'  => true,
+			'close_modal' => true,
+		]);
+
 	}
 
 	/**

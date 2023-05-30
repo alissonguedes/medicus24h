@@ -28,6 +28,7 @@ namespace App\Models{
 			$get = $this->select(
 				'C.id',
 				'C.id_modulo',
+				'C.nome',
 				'C.descricao',
 				'C.controller',
 				'C.use_as',
@@ -76,15 +77,14 @@ namespace App\Models{
 				$get->orderBy($this->order[2], 'asc');
 			}
 
-			return $get->paginate($_GET['length'] ?? null);
+			return $get->paginate($_GET['length'] ?? 100);
 
 		}
 
-		public function getModuloById($id)
+		public function getControllerById($id)
 		{
-			return $this->from('tb_acl_modulo')
+			return $this->from('tb_acl_modulo_controller')
 				->where('id', $id)
-				->orWhere('path', $id)
 				->get()
 				->first();
 		}

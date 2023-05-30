@@ -26,15 +26,10 @@ class ControllerRequest extends FormRequest
 	public function rules()
 	{
 
-		$ru = new ControllerRule();
-		$ru->rules();
-
 		$rules = [
 			'controller' => [
 				'required',
-				'unique:mysql2.tb_acl_modulo_controller,controller,NULL,id_modulo,modulo,1',
-				Rule::unique('mysql2.tb_acl_modulo_controller', ['controller', 'modulo', '1'])->ignore($this->id, 'id'),
-				// Rule::unique('mysql2.tb_acl_modulo_controller', 'controller')->ignore([$this->id => 'id', $this->modulo => 'id_modulo']),
+				new ControllerRule(),
 			],
 			'filename'   => 'required',
 			'modulo'     => [
@@ -42,10 +37,6 @@ class ControllerRequest extends FormRequest
 			],
 			'restrict'   => 'required',
 		];
-
-		// $rules->sometimes('required', function($input){
-		// 	return Rule::unique('mysql2.tb_acl_modulo_controller')
-		// });
 
 		if ($this->use_as) {
 			$rules['use_as'] = [
