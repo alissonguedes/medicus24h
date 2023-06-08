@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 23-Maio-2023 às 19:44
+-- Tempo de geração: 08/06/2023 às 14:02
 -- Versão do servidor: 10.6.12-MariaDB-0ubuntu0.22.04.1
--- versão do PHP: 8.2.6
+-- Versão do PHP: 8.1.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acomodacao`
+-- Estrutura para tabela `tb_acomodacao`
 --
 
 CREATE TABLE `tb_acomodacao` (
@@ -34,7 +34,7 @@ CREATE TABLE `tb_acomodacao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acomodacao`
+-- Despejando dados para a tabela `tb_acomodacao`
 --
 
 INSERT INTO `tb_acomodacao` (`id`, `descricao`, `status`) VALUES
@@ -45,7 +45,7 @@ INSERT INTO `tb_acomodacao` (`id`, `descricao`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_agenda`
+-- Estrutura para tabela `tb_agenda`
 --
 
 CREATE TABLE `tb_agenda` (
@@ -65,20 +65,20 @@ CREATE TABLE `tb_agenda` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_atendimento`
+-- Estrutura para tabela `tb_atendimento`
 --
 
 CREATE TABLE `tb_atendimento` (
   `id` int(11) UNSIGNED NOT NULL,
-  `titulo` varchar(100) DEFAULT NULL,
-  `descricao` text DEFAULT NULL,
-  `observacao` text DEFAULT NULL,
-  `id_parent` int(11) UNSIGNED DEFAULT 0,
   `id_tipo` int(11) UNSIGNED NOT NULL COMMENT 'Pode ser uma primeira consulta ou um retorno, etc.',
   `id_medico` int(11) UNSIGNED NOT NULL,
   `id_clinica` int(11) UNSIGNED NOT NULL,
   `id_paciente` int(11) UNSIGNED NOT NULL,
   `id_categoria` int(11) UNSIGNED NOT NULL COMMENT 'Consulta, exame, procedimento, cirurgia etc.',
+  `id_parent` int(11) UNSIGNED DEFAULT 0,
+  `titulo` varchar(100) DEFAULT NULL,
+  `descricao` text DEFAULT NULL,
+  `observacao` text DEFAULT NULL,
   `data` date NOT NULL DEFAULT '0000-00-00',
   `hora_agendada` time NOT NULL,
   `hora_inicial` time DEFAULT '00:00:00',
@@ -97,10 +97,30 @@ CREATE TABLE `tb_atendimento` (
   `status` enum('0','1','A','I','F','R','C') NOT NULL DEFAULT '1' COMMENT '''1'': ''Agendado'';\r\n''A'': ''Aguardando/Em Espera'';\r\n''I'': ''Iniciado'';\r\n''F'': ''Finalizado'';\r\n''R'': ''Remarcado'';\r\n''C'': ''Cancelado'';\r\n''0'': ''Não compareceu''.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela de cadastro de agendamentos de eventos médicos';
 
+--
+-- Despejando dados para a tabela `tb_atendimento`
+--
+
+INSERT INTO `tb_atendimento` (`id`, `id_tipo`, `id_medico`, `id_clinica`, `id_paciente`, `id_categoria`, `id_parent`, `titulo`, `descricao`, `observacao`, `data`, `hora_agendada`, `hora_inicial`, `hora_final`, `tempo_atendimento`, `recorrencia`, `recorrencia_periodo`, `recorrencia_limite`, `cor`, `criador`, `lembrete`, `tempo_lembrete`, `periodo_lembrete`, `created_at`, `updated_at`, `status`) VALUES
+(1, 1, 12, 17, 2, 1, NULL, NULL, NULL, '-', '2023-05-25', '21:00:00', NULL, NULL, '00:00:00', 'off', 0, NULL, NULL, 1, 'off', 0, 0, '2023-05-26 00:37:08', NULL, '1');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_atendimento_notas`
+-- Estrutura para tabela `tb_atendimento_exame`
+--
+
+CREATE TABLE `tb_atendimento_exame` (
+  `id_atendimento` int(11) NOT NULL,
+  `id_paciente` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_atendimento_notas`
 --
 
 CREATE TABLE `tb_atendimento_notas` (
@@ -116,7 +136,7 @@ CREATE TABLE `tb_atendimento_notas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_atendimento_tipo`
+-- Estrutura para tabela `tb_atendimento_tipo`
 --
 
 CREATE TABLE `tb_atendimento_tipo` (
@@ -129,7 +149,7 @@ CREATE TABLE `tb_atendimento_tipo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela de cadastro para tipos de atendimentos';
 
 --
--- Extraindo dados da tabela `tb_atendimento_tipo`
+-- Despejando dados para a tabela `tb_atendimento_tipo`
 --
 
 INSERT INTO `tb_atendimento_tipo` (`id`, `tipo`, `descricao`, `created_at`, `updated_at`, `status`) VALUES
@@ -139,7 +159,7 @@ INSERT INTO `tb_atendimento_tipo` (`id`, `tipo`, `descricao`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_banner`
+-- Estrutura para tabela `tb_banner`
 --
 
 CREATE TABLE `tb_banner` (
@@ -159,7 +179,7 @@ CREATE TABLE `tb_banner` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_banner_descricao`
+-- Estrutura para tabela `tb_banner_descricao`
 --
 
 CREATE TABLE `tb_banner_descricao` (
@@ -175,7 +195,7 @@ CREATE TABLE `tb_banner_descricao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_banner_imagem`
+-- Estrutura para tabela `tb_banner_imagem`
 --
 
 CREATE TABLE `tb_banner_imagem` (
@@ -192,7 +212,7 @@ CREATE TABLE `tb_banner_imagem` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_banner_imagem_descricao`
+-- Estrutura para tabela `tb_banner_imagem_descricao`
 --
 
 CREATE TABLE `tb_banner_imagem_descricao` (
@@ -209,7 +229,7 @@ CREATE TABLE `tb_banner_imagem_descricao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_categoria`
+-- Estrutura para tabela `tb_categoria`
 --
 
 CREATE TABLE `tb_categoria` (
@@ -225,7 +245,7 @@ CREATE TABLE `tb_categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_categoria`
+-- Despejando dados para a tabela `tb_categoria`
 --
 
 INSERT INTO `tb_categoria` (`id`, `id_parent`, `imagem`, `color`, `text_color`, `ordem`, `created_at`, `updated_at`, `status`) VALUES
@@ -240,7 +260,7 @@ INSERT INTO `tb_categoria` (`id`, `id_parent`, `imagem`, `color`, `text_color`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_categoria_descricao`
+-- Estrutura para tabela `tb_categoria_descricao`
 --
 
 CREATE TABLE `tb_categoria_descricao` (
@@ -254,7 +274,7 @@ CREATE TABLE `tb_categoria_descricao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_categoria_descricao`
+-- Despejando dados para a tabela `tb_categoria_descricao`
 --
 
 INSERT INTO `tb_categoria_descricao` (`id_categoria`, `id_idioma`, `titulo`, `descricao`, `meta_description`, `meta_title`, `meta_keywords`) VALUES
@@ -269,7 +289,7 @@ INSERT INTO `tb_categoria_descricao` (`id_categoria`, `id_idioma`, `titulo`, `de
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_cliente`
+-- Estrutura para tabela `tb_cliente`
 --
 
 CREATE TABLE `tb_cliente` (
@@ -289,7 +309,7 @@ CREATE TABLE `tb_cliente` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_cliente_email`
+-- Estrutura para tabela `tb_cliente_email`
 --
 
 CREATE TABLE `tb_cliente_email` (
@@ -300,7 +320,7 @@ CREATE TABLE `tb_cliente_email` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_cliente_telefone`
+-- Estrutura para tabela `tb_cliente_telefone`
 --
 
 CREATE TABLE `tb_cliente_telefone` (
@@ -311,7 +331,7 @@ CREATE TABLE `tb_cliente_telefone` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_comentario`
+-- Estrutura para tabela `tb_comentario`
 --
 
 CREATE TABLE `tb_comentario` (
@@ -329,7 +349,7 @@ CREATE TABLE `tb_comentario` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_convenio`
+-- Estrutura para tabela `tb_convenio`
 --
 
 CREATE TABLE `tb_convenio` (
@@ -342,7 +362,7 @@ CREATE TABLE `tb_convenio` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de convênios de pacientes.';
 
 --
--- Extraindo dados da tabela `tb_convenio`
+-- Despejando dados para a tabela `tb_convenio`
 --
 
 INSERT INTO `tb_convenio` (`id`, `id_parent`, `descricao`, `codigo`, `flag`, `status`) VALUES
@@ -352,7 +372,7 @@ INSERT INTO `tb_convenio` (`id`, `id_parent`, `descricao`, `codigo`, `flag`, `st
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_convenio_planos`
+-- Estrutura para tabela `tb_convenio_planos`
 --
 
 CREATE TABLE `tb_convenio_planos` (
@@ -366,7 +386,7 @@ CREATE TABLE `tb_convenio_planos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabela para adicionar pacotes de programas';
 
 --
--- Extraindo dados da tabela `tb_convenio_planos`
+-- Despejando dados para a tabela `tb_convenio_planos`
 --
 
 INSERT INTO `tb_convenio_planos` (`id`, `id_convenio`, `descricao`, `flag`, `created_at`, `updated_at`, `status`) VALUES
@@ -378,7 +398,7 @@ INSERT INTO `tb_convenio_planos` (`id`, `id_convenio`, `descricao`, `flag`, `cre
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_convenio_planos_servicos`
+-- Estrutura para tabela `tb_convenio_planos_servicos`
 --
 
 CREATE TABLE `tb_convenio_planos_servicos` (
@@ -391,7 +411,7 @@ CREATE TABLE `tb_convenio_planos_servicos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabela para adicionar serviços';
 
 --
--- Extraindo dados da tabela `tb_convenio_planos_servicos`
+-- Despejando dados para a tabela `tb_convenio_planos_servicos`
 --
 
 INSERT INTO `tb_convenio_planos_servicos` (`id`, `id_plano`, `id_servico`, `created_at`, `updated_at`, `status`) VALUES
@@ -401,7 +421,7 @@ INSERT INTO `tb_convenio_planos_servicos` (`id`, `id_plano`, `id_servico`, `crea
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_departamento`
+-- Estrutura para tabela `tb_departamento`
 --
 
 CREATE TABLE `tb_departamento` (
@@ -414,7 +434,7 @@ CREATE TABLE `tb_departamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para vincular médico a várias clínica';
 
 --
--- Extraindo dados da tabela `tb_departamento`
+-- Despejando dados para a tabela `tb_departamento`
 --
 
 INSERT INTO `tb_departamento` (`id`, `titulo`, `descricao`, `created_at`, `updated_at`, `status`) VALUES
@@ -429,7 +449,7 @@ INSERT INTO `tb_departamento` (`id`, `titulo`, `descricao`, `created_at`, `updat
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_departamento_empresa`
+-- Estrutura para tabela `tb_departamento_empresa`
 --
 
 CREATE TABLE `tb_departamento_empresa` (
@@ -440,11 +460,10 @@ CREATE TABLE `tb_departamento_empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_departamento_empresa`
+-- Despejando dados para a tabela `tb_departamento_empresa`
 --
 
 INSERT INTO `tb_departamento_empresa` (`id`, `id_departamento`, `id_empresa`, `status`) VALUES
-(1, 13, 16, '1'),
 (2, 10, 16, '1'),
 (3, 11, 16, '1'),
 (4, 9, 16, '1'),
@@ -486,19 +505,13 @@ INSERT INTO `tb_departamento_empresa` (`id`, `id_departamento`, `id_empresa`, `s
 (40, 8, 18, '1'),
 (41, 14, 18, '1'),
 (42, 12, 18, '1'),
-(43, 13, 17, '1'),
-(44, 10, 17, '1'),
-(45, 11, 17, '1'),
-(46, 9, 17, '1'),
-(47, 8, 17, '1'),
-(48, 14, 17, '1'),
-(49, 12, 17, '1'),
-(57, 13, 23, '1');
+(57, 13, 23, '1'),
+(58, 13, 24, '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_distribuidor`
+-- Estrutura para tabela `tb_distribuidor`
 --
 
 CREATE TABLE `tb_distribuidor` (
@@ -520,7 +533,7 @@ CREATE TABLE `tb_distribuidor` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_distribuidor_email`
+-- Estrutura para tabela `tb_distribuidor_email`
 --
 
 CREATE TABLE `tb_distribuidor_email` (
@@ -531,7 +544,7 @@ CREATE TABLE `tb_distribuidor_email` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_distribuidor_telefone`
+-- Estrutura para tabela `tb_distribuidor_telefone`
 --
 
 CREATE TABLE `tb_distribuidor_telefone` (
@@ -542,7 +555,7 @@ CREATE TABLE `tb_distribuidor_telefone` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_email`
+-- Estrutura para tabela `tb_email`
 --
 
 CREATE TABLE `tb_email` (
@@ -560,7 +573,7 @@ CREATE TABLE `tb_email` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_empresa`
+-- Estrutura para tabela `tb_empresa`
 --
 
 CREATE TABLE `tb_empresa` (
@@ -610,23 +623,26 @@ CREATE TABLE `tb_empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela de cadastro de lojas/empresas';
 
 --
--- Extraindo dados da tabela `tb_empresa`
+-- Despejando dados para a tabela `tb_empresa`
 --
 
 INSERT INTO `tb_empresa` (`id`, `titulo`, `nome_fantasia`, `razao_social`, `cnpj`, `inscricao_estadual`, `inscricao_municipal`, `cep`, `logradouro`, `numero`, `bairro`, `complemento`, `cidade`, `uf`, `pais`, `quem_somos`, `quem_somos_imagem`, `distribuidor_imagem`, `contato_imagem`, `telefone`, `celular`, `email`, `facebook`, `instagram`, `youtube`, `linkedin`, `github`, `gmaps`, `aliquota_imposto`, `tributacao`, `certificado`, `senha_certificado`, `ambiente`, `sequence_nfe`, `sequence_nfce`, `serie_nfe`, `serie_nfce`, `tokencsc`, `csc`, `matriz`, `created_at`, `updated_at`, `status`) VALUES
-(16, 'ODONTOLOGIA URGENCIA E EMERGENCIA 24H', NULL, 'ALL SMILES INSTITUTO ODONTOLÓGICO LTDA', '31.806.287/0001-75', NULL, NULL, '58040-750', 'RUA DOUTOR OSORIO ABATH', '46', 'TORRE', NULL, 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, NULL, '(83) 986 878 331', 'institutoallsmiles@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, 'N', '2023-03-29 23:46:25', '2023-05-17 18:04:07', '1'),
-(17, 'ISOMED EXAMES DE IMAGEM', NULL, 'INSTITUTO DE SAUDE OCUPACIONAL E MEDICINA', '28.185.950/0001-57', NULL, NULL, '58013-360', 'AVENIDA CAMILO DE HOLANDA', '478', 'CENTRO', 'SALA102', 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, '(83) 3506-1672', '(83) 998 695 732', 'contato@isomedjp.com', NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, 'N', '2023-03-29 23:51:27', '2023-05-17 18:06:02', '1'),
+(16, 'ODONTOLOGIA URGENCIA E EMERGENCIA 24H', NULL, 'ALL SMILES INSTITUTO ODONTOLÓGICO LTDA', '31.806.287/0001-75', NULL, NULL, '58040-750', 'RUA DOUTOR OSORIO ABATH', '46', 'TORRE', NULL, 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, NULL, '(83) 986 878 331', 'institutoallsmiles@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, '', '2023-03-29 23:46:25', '2023-05-30 16:23:09', '1'),
+(17, 'ISOMED EXAMES DE IMAGEM', NULL, 'INSTITUTO DE SAUDE OCUPACIONAL E MEDICINA', '28.185.950/0001-57', NULL, NULL, '58013-360', 'AVENIDA CAMILO DE HOLANDA', '478', 'CENTRO', 'SALA102', 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, '(83) 3506-1672', '(83) 998 695 732', 'contato@isomedjp.com', NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, '', '2023-03-29 23:51:27', '2023-05-30 16:38:57', '1'),
 (18, 'INSTITUTO CLINAM MULTIPROFISSIONAIS.', NULL, 'INSTITUTO CLINAM LTDA', '46.600.770/0001-76', NULL, NULL, '58013-342', 'R. Borja Peregrino', '218', 'Centro', NULL, 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, '(83) 2106-8202', NULL, NULL, NULL, '@CLINAMSAUDE', NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, 'N', '2023-03-30 00:22:35', '2023-05-17 18:05:17', '1'),
 (19, 'DELFIN- EXAMES DE IMAGEM', NULL, 'ECOCLINICA LTDA', '57.754.285/0001-73', NULL, NULL, '58013-240', 'AVENIDA CORALIO SOARES DA OLIVEIRA', '305', 'CENTRO', NULL, 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, '(83) 3049-4444', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, 'N', '2023-03-30 01:31:08', '2023-05-17 18:05:03', '1'),
 (20, 'Consultório Particular', NULL, 'Consultório Particular', '00.000.000/0000-00', NULL, NULL, '58000-000', 'João Pessoa', '0', 'Centro', 'João Pessoa', 'João Pessoa', 'PB', 'Brasil', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, 'N', '2023-03-30 22:24:43', '2023-05-17 19:25:57', '1'),
 (21, 'PSICONEURO - SERVICOS DE PSICOLOGIA', NULL, 'CM SERVICOS DE PSICOLOGIA LTDA', '26.429.306/0001-51', NULL, NULL, '58013-430', 'AVENIDA COREMAS', '478', 'CENTRO', NULL, 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, '(83) 3506-0973', NULL, 'psiconeuro.ltda@hotmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, 'N', '2023-03-30 23:23:35', '2023-05-17 18:04:21', '1'),
 (22, 'POLICLINICA MED SAUDE', NULL, 'DR MENDONCA SERVICOS MEDICOS LTDA', '37.010.056/0001-37', NULL, NULL, '58040-440', 'AVENIDA DOM PEDRO II', '1270', 'TORRE', NULL, 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, '(83) 3508-4663', '(83) 965 676 46', 'adm.medsaudejp@gmail.com', NULL, '@medsaudejp', NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, 'N', '2023-03-30 23:29:37', '2023-05-17 18:04:48', '1'),
-(23, 'Policlinica Emma', NULL, 'Policlinica Emma Saude Medica LTDA', '43.882.086/0001-36', NULL, NULL, '58056-010', 'Rua Elias Pereira de Araujo', '66', 'Mangabeira', NULL, 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, '(83) 3023-3333', NULL, 'emma.policlinica@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, '', '2023-03-30 23:33:49', '2023-05-23 19:37:16', '1');
+(23, 'Policlinica Emma', NULL, 'Policlinica Emma Saude Medica LTDA', '43.882.086/0001-36', NULL, NULL, '58056-010', 'Rua Elias Pereira de Araujo', '66', 'Mangabeira', NULL, 'JOAO PESSOA', 'PB', 'BRASIL', NULL, NULL, NULL, NULL, '(83) 3023-3333', NULL, 'emma.policlinica@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, '', '2023-03-30 23:33:49', '2023-05-23 19:37:16', '1'),
+(24, 'teste', NULL, 'Teste', '33.232.323/2323-23', 'teste', 'teste', '58076-100', 'Teste', 'teste', 'teste', 'teste', 'teste', 'pb', 'teste', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, '', '2023-05-30 16:07:00', NULL, '1'),
+(25, 'teste', NULL, 'Teste', '33.232.323/2323-22', 'test3', 'teste', '58076-100', 'Teste', 'teste', 'teste', 'teste', 'teste', 'pb', 'teste', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, '', '2023-05-30 16:07:57', '2023-05-30 16:08:27', '1'),
+(26, 'fasdf', NULL, 'fasf', '12.343.424/2342-34', '342434', '34243', '33333-333', '333', '3e3', '3', '333', '23', '23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0.000', 'SIMPLES NACIONAL', NULL, NULL, '0', 0, 0, 00, 00, NULL, NULL, '', '2023-05-30 16:10:30', '2023-05-30 16:22:44', '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_especialidade`
+-- Estrutura para tabela `tb_especialidade`
 --
 
 CREATE TABLE `tb_especialidade` (
@@ -639,7 +655,7 @@ CREATE TABLE `tb_especialidade` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de especialidades médicas';
 
 --
--- Extraindo dados da tabela `tb_especialidade`
+-- Despejando dados para a tabela `tb_especialidade`
 --
 
 INSERT INTO `tb_especialidade` (`id`, `especialidade`, `descricao`, `created_at`, `updated_at`, `status`) VALUES
@@ -672,7 +688,7 @@ INSERT INTO `tb_especialidade` (`id`, `especialidade`, `descricao`, `created_at`
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_estado_civil`
+-- Estrutura para tabela `tb_estado_civil`
 --
 
 CREATE TABLE `tb_estado_civil` (
@@ -681,7 +697,7 @@ CREATE TABLE `tb_estado_civil` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
--- Extraindo dados da tabela `tb_estado_civil`
+-- Despejando dados para a tabela `tb_estado_civil`
 --
 
 INSERT INTO `tb_estado_civil` (`id`, `descricao`) VALUES
@@ -694,7 +710,7 @@ INSERT INTO `tb_estado_civil` (`id`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_etnia`
+-- Estrutura para tabela `tb_etnia`
 --
 
 CREATE TABLE `tb_etnia` (
@@ -703,7 +719,7 @@ CREATE TABLE `tb_etnia` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_etnia`
+-- Despejando dados para a tabela `tb_etnia`
 --
 
 INSERT INTO `tb_etnia` (`id`, `descricao`) VALUES
@@ -717,7 +733,7 @@ INSERT INTO `tb_etnia` (`id`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_exame`
+-- Estrutura para tabela `tb_exame`
 --
 
 CREATE TABLE `tb_exame` (
@@ -735,7 +751,7 @@ CREATE TABLE `tb_exame` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabela para cadastro de exames';
 
 --
--- Extraindo dados da tabela `tb_exame`
+-- Despejando dados para a tabela `tb_exame`
 --
 
 INSERT INTO `tb_exame` (`id`, `id_categoria`, `titulo`, `descricao`, `valor`, `meta_description`, `meta_title`, `meta_keywords`, `created_at`, `updated_at`, `status`) VALUES
@@ -744,7 +760,7 @@ INSERT INTO `tb_exame` (`id`, `id_categoria`, `titulo`, `descricao`, `valor`, `m
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_exame_categoria`
+-- Estrutura para tabela `tb_exame_categoria`
 --
 
 CREATE TABLE `tb_exame_categoria` (
@@ -761,7 +777,7 @@ CREATE TABLE `tb_exame_categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabela para cadastro de categorias de exames';
 
 --
--- Extraindo dados da tabela `tb_exame_categoria`
+-- Despejando dados para a tabela `tb_exame_categoria`
 --
 
 INSERT INTO `tb_exame_categoria` (`id`, `titulo`, `descricao`, `classificacao`, `meta_description`, `meta_title`, `meta_keywords`, `created_at`, `updated_at`, `status`) VALUES
@@ -770,7 +786,7 @@ INSERT INTO `tb_exame_categoria` (`id`, `titulo`, `descricao`, `classificacao`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_funcao`
+-- Estrutura para tabela `tb_funcao`
 --
 
 CREATE TABLE `tb_funcao` (
@@ -784,7 +800,7 @@ CREATE TABLE `tb_funcao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de funções';
 
 --
--- Extraindo dados da tabela `tb_funcao`
+-- Despejando dados para a tabela `tb_funcao`
 --
 
 INSERT INTO `tb_funcao` (`id`, `codigo`, `funcao`, `descricao`, `created_at`, `updated_at`, `status`) VALUES
@@ -794,7 +810,7 @@ INSERT INTO `tb_funcao` (`id`, `codigo`, `funcao`, `descricao`, `created_at`, `u
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_funcionario`
+-- Estrutura para tabela `tb_funcionario`
 --
 
 CREATE TABLE `tb_funcionario` (
@@ -812,19 +828,16 @@ CREATE TABLE `tb_funcionario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de funcionários';
 
 --
--- Extraindo dados da tabela `tb_funcionario`
+-- Despejando dados para a tabela `tb_funcionario`
 --
 
 INSERT INTO `tb_funcionario` (`id`, `id_empresa`, `id_departamento`, `id_empresa_departamento`, `id_funcao`, `nome`, `cpf`, `rg`, `created_at`, `updated_at`, `status`) VALUES
-(1, 23, 13, 0, 1, 'tetest', '123.123.123-12', '123123', '2023-05-23 19:37:34', '2023-05-23 19:41:08', '1'),
-(2, 16, 8, 0, 2, 'teste2', '123.133.133-13', '133131', '2023-05-23 19:38:46', '2023-05-23 19:41:36', '1'),
-(3, 16, 8, 0, 1, 'teste2', '123.133.132-22', '133144', '2023-05-23 19:41:00', NULL, '1'),
-(4, 16, 9, 0, 2, '434343', '434.343.434-34', '434343', '2023-05-23 19:41:25', NULL, '1');
+(12, 17, 9, 0, 2, 'Teste', '123.412.341-23', '12341234', '2023-05-24 05:27:28', NULL, '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_galeria`
+-- Estrutura para tabela `tb_galeria`
 --
 
 CREATE TABLE `tb_galeria` (
@@ -840,7 +853,7 @@ CREATE TABLE `tb_galeria` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_galeria_descricao`
+-- Estrutura para tabela `tb_galeria_descricao`
 --
 
 CREATE TABLE `tb_galeria_descricao` (
@@ -856,7 +869,7 @@ CREATE TABLE `tb_galeria_descricao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_galeria_imagem`
+-- Estrutura para tabela `tb_galeria_imagem`
 --
 
 CREATE TABLE `tb_galeria_imagem` (
@@ -873,7 +886,7 @@ CREATE TABLE `tb_galeria_imagem` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_lead`
+-- Estrutura para tabela `tb_lead`
 --
 
 CREATE TABLE `tb_lead` (
@@ -886,7 +899,7 @@ CREATE TABLE `tb_lead` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_link`
+-- Estrutura para tabela `tb_link`
 --
 
 CREATE TABLE `tb_link` (
@@ -905,7 +918,7 @@ CREATE TABLE `tb_link` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_link_descricao`
+-- Estrutura para tabela `tb_link_descricao`
 --
 
 CREATE TABLE `tb_link_descricao` (
@@ -919,7 +932,7 @@ CREATE TABLE `tb_link_descricao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_medico`
+-- Estrutura para tabela `tb_medico`
 --
 
 CREATE TABLE `tb_medico` (
@@ -932,17 +945,16 @@ CREATE TABLE `tb_medico` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de atendimentos realizados.';
 
 --
--- Extraindo dados da tabela `tb_medico`
+-- Despejando dados para a tabela `tb_medico`
 --
 
 INSERT INTO `tb_medico` (`id_funcionario`, `id_especialidade`, `crm`, `created_at`, `updated_at`, `status`) VALUES
-(2, 0, '323232', '2023-05-23 19:41:36', NULL, '1'),
-(4, 0, '3434343', '2023-05-23 19:41:25', NULL, '1');
+(12, 0, '1234', '2023-05-24 05:27:28', NULL, '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_medico_agenda`
+-- Estrutura para tabela `tb_medico_agenda`
 --
 
 CREATE TABLE `tb_medico_agenda` (
@@ -963,7 +975,7 @@ CREATE TABLE `tb_medico_agenda` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_medico_agenda_horario`
+-- Estrutura para tabela `tb_medico_agenda_horario`
 --
 
 CREATE TABLE `tb_medico_agenda_horario` (
@@ -976,23 +988,29 @@ CREATE TABLE `tb_medico_agenda_horario` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_medico_clinica`
+-- Estrutura para tabela `tb_medico_clinica`
 --
 
 CREATE TABLE `tb_medico_clinica` (
   `id` int(11) UNSIGNED NOT NULL,
   `id_medico` int(11) UNSIGNED NOT NULL,
   `id_empresa` int(11) UNSIGNED NOT NULL,
-  `id_empresa_departamento` int(11) UNSIGNED NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para vincular médico a várias clínica';
 
+--
+-- Despejando dados para a tabela `tb_medico_clinica`
+--
+
+INSERT INTO `tb_medico_clinica` (`id`, `id_medico`, `id_empresa`, `created_at`, `updated_at`, `status`) VALUES
+(8, 12, 17, '2023-05-24 05:27:28', NULL, '1');
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_medico_especialidade`
+-- Estrutura para tabela `tb_medico_especialidade`
 --
 
 CREATE TABLE `tb_medico_especialidade` (
@@ -1003,17 +1021,16 @@ CREATE TABLE `tb_medico_especialidade` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela de atribuições de especialidades a médicos';
 
 --
--- Extraindo dados da tabela `tb_medico_especialidade`
+-- Despejando dados para a tabela `tb_medico_especialidade`
 --
 
 INSERT INTO `tb_medico_especialidade` (`id_funcionario`, `id_especialidade`, `created_at`, `updated_at`) VALUES
-(2, 23, '2023-05-23 19:41:36', NULL),
-(4, 20, '2023-05-23 19:41:25', NULL);
+(12, 18, '2023-05-24 05:27:28', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_midia`
+-- Estrutura para tabela `tb_midia`
 --
 
 CREATE TABLE `tb_midia` (
@@ -1039,7 +1056,7 @@ CREATE TABLE `tb_midia` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_midia_descricao`
+-- Estrutura para tabela `tb_midia_descricao`
 --
 
 CREATE TABLE `tb_midia_descricao` (
@@ -1055,7 +1072,7 @@ CREATE TABLE `tb_midia_descricao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_paciente`
+-- Estrutura para tabela `tb_paciente`
 --
 
 CREATE TABLE `tb_paciente` (
@@ -1105,11 +1122,11 @@ CREATE TABLE `tb_paciente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
--- Extraindo dados da tabela `tb_paciente`
+-- Despejando dados para a tabela `tb_paciente`
 --
 
 INSERT INTO `tb_paciente` (`id`, `nome`, `imagem`, `codigo`, `associado`, `id_convenio`, `id_tipo_convenio`, `matricula`, `id_acomodacao`, `validade`, `id_estado_civil`, `id_etnia`, `sexo`, `data_nascimento`, `cpf`, `rg`, `cns`, `mae`, `pai`, `profissao`, `observacoes`, `notas_gerais`, `notas_alergias`, `notas_clinicas`, `logradouro`, `numero`, `complemento`, `cep`, `cidade`, `bairro`, `uf`, `pais`, `email`, `telefone`, `celular`, `created_at`, `updated_at`, `receber_sms`, `receber_email`, `receber_notificacoes`, `obito`, `datahora_obito`, `status`) VALUES
-(1, 'EMANUEL BRAZ DA COSTA ARAUJO', NULL, '', 'yes', 2, 3, '808 934 703436 190', 1, '2024-03', 1, 1, 'M', '1953-05-17', '095.622.904-25', '247063', NULL, 'SEBASTIANA DA COSTA ARAUJO', 'DIÔGO BRAZ DE ARAUJO', NULL, NULL, NULL, NULL, NULL, 'AVENIDA INGÁ', '955', NULL, '58038-251', 'JOÃO PESSOA', 'MANAIRA', 'PB', 'BRASIL', 'rosa_mara2012@gmail.com', NULL, '(83) 988 059 137', '2023-03-07 23:44:27', '2023-03-10 00:33:17', 'on', 'off', 'on', '0', NULL, '1'),
+(1, 'EMANUEL BRAZ DA COSTA ARAUJO', NULL, '', 'yes', 2, 3, '808 934 703436 190', 1, '2024-03', 1, 1, 'M', '1953-05-17', '095.622.904-25', '247063', NULL, 'SEBASTIANA DA COSTA ARAUJO', 'DIÔGO BRAZ DE ARAUJO', NULL, NULL, NULL, NULL, NULL, 'AVENIDA INGÁ', '955', NULL, '58038-251', 'JOÃO PESSOA', 'MANAIRA', 'PB', 'BRASIL', 'rosa_mara2012@gmail.com', NULL, '(83) 988 059 137', '2023-03-07 23:44:27', '2023-06-01 09:33:48', 'on', 'off', 'on', '0', NULL, '1'),
 (2, 'ISABEL CRISTINA MARTINS DANTAS', NULL, '', 'yes', 2, 3, '062 699 805357 823', 1, '2024-03', 1, 2, 'F', '1998-11-30', '062.653.333-30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Rua Violeta Formiga', 'SN', NULL, '58036-042', 'Joao Pessoa', 'Jardim Oceania', 'PB', 'Brasil', 'isabel_dantas02@hotmail.com', NULL, '(83) 982 021 998', '2023-03-07 23:55:45', '2023-03-10 00:30:29', 'on', 'on', 'on', '0', NULL, '1'),
 (3, 'ROSA MARIA ARAUJO GUEDES DE CARVALHO', NULL, '', 'yes', 2, 3, '963 504 831301 813', 1, '2024-03', 2, 1, 'F', '1950-05-10', '094.442.114-87', '3032629', NULL, 'SEBASTIANA DA COSTA ARAUJO', 'DIOGO BRAZ DE ARAUJO', NULL, NULL, NULL, NULL, NULL, 'AVENIDA INGÁ', '955', NULL, '58038-251', 'JOÃO PESSOA', 'MANAIRA', 'PB', 'BRASIL', 'rosa_mara2012@hotmail.com', NULL, '(83) 988 059 137', '2023-03-09 20:50:33', '2023-03-10 00:42:13', 'on', 'off', 'on', '0', NULL, '1'),
 (4, 'VAMBERTO AMARO GUEDES DE CARVALHO', NULL, '', 'yes', 2, 3, '740 879 558137 776', 1, '2024-03', 2, 1, 'M', '1947-11-01', '040.008.974-20', '115045', NULL, 'VANDA FREIRE GUEDES DE CARVALHO', 'ROBERTO LIMA DE CARVALHO', NULL, NULL, NULL, NULL, NULL, 'AVENIDA INGÁ', '955', NULL, '58038-251', 'JOÃO PESSOA', 'MANAIRA', 'PB', 'BRASIL', 'rosa_mara2012@hotmail.com', NULL, '(83) 988 059 137', '2023-03-09 20:58:12', '2023-04-18 22:06:17', 'on', 'off', 'on', '1', '2023-04-16 16:05:00', '0'),
@@ -1118,7 +1135,7 @@ INSERT INTO `tb_paciente` (`id`, `nome`, `imagem`, `codigo`, `associado`, `id_co
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_paciente_convenio`
+-- Estrutura para tabela `tb_paciente_convenio`
 --
 
 CREATE TABLE `tb_paciente_convenio` (
@@ -1138,7 +1155,7 @@ CREATE TABLE `tb_paciente_convenio` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_paciente_homecare`
+-- Estrutura para tabela `tb_paciente_homecare`
 --
 
 CREATE TABLE `tb_paciente_homecare` (
@@ -1152,7 +1169,7 @@ CREATE TABLE `tb_paciente_homecare` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_paciente_nota`
+-- Estrutura para tabela `tb_paciente_nota`
 --
 
 CREATE TABLE `tb_paciente_nota` (
@@ -1167,7 +1184,7 @@ CREATE TABLE `tb_paciente_nota` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_paciente_programa`
+-- Estrutura para tabela `tb_paciente_programa`
 --
 
 CREATE TABLE `tb_paciente_programa` (
@@ -1181,7 +1198,7 @@ CREATE TABLE `tb_paciente_programa` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_paciente_tarefas`
+-- Estrutura para tabela `tb_paciente_tarefas`
 --
 
 CREATE TABLE `tb_paciente_tarefas` (
@@ -1202,7 +1219,7 @@ CREATE TABLE `tb_paciente_tarefas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_paciente_tarefas_anotacoes`
+-- Estrutura para tabela `tb_paciente_tarefas_anotacoes`
 --
 
 CREATE TABLE `tb_paciente_tarefas_anotacoes` (
@@ -1217,7 +1234,7 @@ CREATE TABLE `tb_paciente_tarefas_anotacoes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_post`
+-- Estrutura para tabela `tb_post`
 --
 
 CREATE TABLE `tb_post` (
@@ -1237,7 +1254,7 @@ CREATE TABLE `tb_post` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_post_descricao`
+-- Estrutura para tabela `tb_post_descricao`
 --
 
 CREATE TABLE `tb_post_descricao` (
@@ -1255,7 +1272,7 @@ CREATE TABLE `tb_post_descricao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_post_link`
+-- Estrutura para tabela `tb_post_link`
 --
 
 CREATE TABLE `tb_post_link` (
@@ -1266,7 +1283,7 @@ CREATE TABLE `tb_post_link` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_post_midia`
+-- Estrutura para tabela `tb_post_midia`
 --
 
 CREATE TABLE `tb_post_midia` (
@@ -1277,7 +1294,7 @@ CREATE TABLE `tb_post_midia` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_produto`
+-- Estrutura para tabela `tb_produto`
 --
 
 CREATE TABLE `tb_produto` (
@@ -1296,7 +1313,7 @@ CREATE TABLE `tb_produto` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_produto_categoria`
+-- Estrutura para tabela `tb_produto_categoria`
 --
 
 CREATE TABLE `tb_produto_categoria` (
@@ -1307,7 +1324,7 @@ CREATE TABLE `tb_produto_categoria` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_produto_descricao`
+-- Estrutura para tabela `tb_produto_descricao`
 --
 
 CREATE TABLE `tb_produto_descricao` (
@@ -1323,7 +1340,7 @@ CREATE TABLE `tb_produto_descricao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_produto_imagem`
+-- Estrutura para tabela `tb_produto_imagem`
 --
 
 CREATE TABLE `tb_produto_imagem` (
@@ -1335,7 +1352,7 @@ CREATE TABLE `tb_produto_imagem` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_programas`
+-- Estrutura para tabela `tb_programas`
 --
 
 CREATE TABLE `tb_programas` (
@@ -1353,7 +1370,7 @@ CREATE TABLE `tb_programas` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_servicos`
+-- Estrutura para tabela `tb_servicos`
 --
 
 CREATE TABLE `tb_servicos` (
@@ -1366,7 +1383,7 @@ CREATE TABLE `tb_servicos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabela para adicionar serviços';
 
 --
--- Extraindo dados da tabela `tb_servicos`
+-- Despejando dados para a tabela `tb_servicos`
 --
 
 INSERT INTO `tb_servicos` (`id`, `id_parent`, `descricao`, `created_at`, `updated_at`, `status`) VALUES
@@ -1389,7 +1406,7 @@ INSERT INTO `tb_servicos` (`id`, `id_parent`, `descricao`, `created_at`, `update
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_severidade_nota`
+-- Estrutura para tabela `tb_severidade_nota`
 --
 
 CREATE TABLE `tb_severidade_nota` (
@@ -1405,13 +1422,13 @@ CREATE TABLE `tb_severidade_nota` (
 --
 
 --
--- Índices para tabela `tb_acomodacao`
+-- Índices de tabela `tb_acomodacao`
 --
 ALTER TABLE `tb_acomodacao`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_agenda`
+-- Índices de tabela `tb_agenda`
 --
 ALTER TABLE `tb_agenda`
   ADD PRIMARY KEY (`id`),
@@ -1419,7 +1436,7 @@ ALTER TABLE `tb_agenda`
   ADD KEY `horario_atendimento_UNIQUE` (`dia`,`mes`,`ano`,`hora_inicial`,`hora_final`) USING BTREE;
 
 --
--- Índices para tabela `tb_atendimento`
+-- Índices de tabela `tb_atendimento`
 --
 ALTER TABLE `tb_atendimento`
   ADD PRIMARY KEY (`id`),
@@ -1431,7 +1448,13 @@ ALTER TABLE `tb_atendimento`
   ADD KEY `id_clinica` (`id_clinica`);
 
 --
--- Índices para tabela `tb_atendimento_notas`
+-- Índices de tabela `tb_atendimento_exame`
+--
+ALTER TABLE `tb_atendimento_exame`
+  ADD KEY `fk_tb_atendimento_exame_id_atendimento_id_paciente` (`id_atendimento`,`id_paciente`);
+
+--
+-- Índices de tabela `tb_atendimento_notas`
 --
 ALTER TABLE `tb_atendimento_notas`
   ADD PRIMARY KEY (`id`),
@@ -1440,19 +1463,19 @@ ALTER TABLE `tb_atendimento_notas`
   ADD KEY `fk_tb_atendimento_id_usuario` (`id_usuario`);
 
 --
--- Índices para tabela `tb_atendimento_tipo`
+-- Índices de tabela `tb_atendimento_tipo`
 --
 ALTER TABLE `tb_atendimento_tipo`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_banner`
+-- Índices de tabela `tb_banner`
 --
 ALTER TABLE `tb_banner`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_banner_descricao`
+-- Índices de tabela `tb_banner_descricao`
 --
 ALTER TABLE `tb_banner_descricao`
   ADD PRIMARY KEY (`id_banner`,`id_idioma`),
@@ -1460,7 +1483,7 @@ ALTER TABLE `tb_banner_descricao`
   ADD KEY `fk_tb_banner_descricao_tb_sys_idioma1_idx` (`id_idioma`);
 
 --
--- Índices para tabela `tb_banner_imagem`
+-- Índices de tabela `tb_banner_imagem`
 --
 ALTER TABLE `tb_banner_imagem`
   ADD PRIMARY KEY (`id_banner`,`id_midia`),
@@ -1470,7 +1493,7 @@ ALTER TABLE `tb_banner_imagem`
   ADD KEY `fk_tb_banner_imagem_tb_midia1_idx` (`id_midia`);
 
 --
--- Índices para tabela `tb_banner_imagem_descricao`
+-- Índices de tabela `tb_banner_imagem_descricao`
 --
 ALTER TABLE `tb_banner_imagem_descricao`
   ADD PRIMARY KEY (`id_banner`,`id_midia`,`id_idioma`),
@@ -1478,13 +1501,13 @@ ALTER TABLE `tb_banner_imagem_descricao`
   ADD KEY `fk_tb_banner_imagem_descricao_tb_banner_imagem1_idx` (`id_banner`,`id_midia`);
 
 --
--- Índices para tabela `tb_categoria`
+-- Índices de tabela `tb_categoria`
 --
 ALTER TABLE `tb_categoria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_categoria_descricao`
+-- Índices de tabela `tb_categoria_descricao`
 --
 ALTER TABLE `tb_categoria_descricao`
   ADD PRIMARY KEY (`id_categoria`,`id_idioma`),
@@ -1493,60 +1516,60 @@ ALTER TABLE `tb_categoria_descricao`
   ADD KEY `fk_tb_categoria_descricao_tb_sys_idioma1_idx` (`id_idioma`);
 
 --
--- Índices para tabela `tb_cliente`
+-- Índices de tabela `tb_cliente`
 --
 ALTER TABLE `tb_cliente`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_cliente_email`
+-- Índices de tabela `tb_cliente_email`
 --
 ALTER TABLE `tb_cliente_email`
   ADD PRIMARY KEY (`id_cliente`,`email`),
   ADD KEY `tb_cliente_email_id_cliente` (`id_cliente`);
 
 --
--- Índices para tabela `tb_cliente_telefone`
+-- Índices de tabela `tb_cliente_telefone`
 --
 ALTER TABLE `tb_cliente_telefone`
   ADD PRIMARY KEY (`id_cliente`,`telefone`),
   ADD KEY `tb_cliente_telefone_id_cliente` (`id_cliente`);
 
 --
--- Índices para tabela `tb_comentario`
+-- Índices de tabela `tb_comentario`
 --
 ALTER TABLE `tb_comentario`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_convenio`
+-- Índices de tabela `tb_convenio`
 --
 ALTER TABLE `tb_convenio`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tb_convenio_id_parent` (`id_parent`);
 
 --
--- Índices para tabela `tb_convenio_planos`
+-- Índices de tabela `tb_convenio_planos`
 --
 ALTER TABLE `tb_convenio_planos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tb_convenio_planos_id_convenio` (`id_convenio`);
 
 --
--- Índices para tabela `tb_convenio_planos_servicos`
+-- Índices de tabela `tb_convenio_planos_servicos`
 --
 ALTER TABLE `tb_convenio_planos_servicos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tb_convenio_planos_servicos_id_plano` (`id_plano`);
 
 --
--- Índices para tabela `tb_departamento`
+-- Índices de tabela `tb_departamento`
 --
 ALTER TABLE `tb_departamento`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_departamento_empresa`
+-- Índices de tabela `tb_departamento_empresa`
 --
 ALTER TABLE `tb_departamento_empresa`
   ADD PRIMARY KEY (`id`),
@@ -1554,58 +1577,58 @@ ALTER TABLE `tb_departamento_empresa`
   ADD KEY `fk_tb_departamento_id_empresa` (`id_empresa`);
 
 --
--- Índices para tabela `tb_distribuidor`
+-- Índices de tabela `tb_distribuidor`
 --
 ALTER TABLE `tb_distribuidor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_distribuidor_email`
+-- Índices de tabela `tb_distribuidor_email`
 --
 ALTER TABLE `tb_distribuidor_email`
   ADD PRIMARY KEY (`id_distribuidor`,`email`),
   ADD KEY `fk_tb_distribuidor_email_id_distribuidor` (`id_distribuidor`);
 
 --
--- Índices para tabela `tb_distribuidor_telefone`
+-- Índices de tabela `tb_distribuidor_telefone`
 --
 ALTER TABLE `tb_distribuidor_telefone`
   ADD PRIMARY KEY (`id_distribuidor`,`telefone`),
   ADD KEY `fk_tb_distribuidor_telefone_id_distribuidor` (`id_distribuidor`);
 
 --
--- Índices para tabela `tb_email`
+-- Índices de tabela `tb_email`
 --
 ALTER TABLE `tb_email`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_empresa`
+-- Índices de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cnpj` (`cnpj`);
 
 --
--- Índices para tabela `tb_especialidade`
+-- Índices de tabela `tb_especialidade`
 --
 ALTER TABLE `tb_especialidade`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_estado_civil`
+-- Índices de tabela `tb_estado_civil`
 --
 ALTER TABLE `tb_estado_civil`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_etnia`
+-- Índices de tabela `tb_etnia`
 --
 ALTER TABLE `tb_etnia`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_exame`
+-- Índices de tabela `tb_exame`
 --
 ALTER TABLE `tb_exame`
   ADD PRIMARY KEY (`id`),
@@ -1613,20 +1636,20 @@ ALTER TABLE `tb_exame`
   ADD KEY `fk_tb_exame_id_categoria` (`id_categoria`);
 
 --
--- Índices para tabela `tb_exame_categoria`
+-- Índices de tabela `tb_exame_categoria`
 --
 ALTER TABLE `tb_exame_categoria`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `titulo` (`titulo`);
 
 --
--- Índices para tabela `tb_funcao`
+-- Índices de tabela `tb_funcao`
 --
 ALTER TABLE `tb_funcao`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_funcionario`
+-- Índices de tabela `tb_funcionario`
 --
 ALTER TABLE `tb_funcionario`
   ADD PRIMARY KEY (`id`),
@@ -1638,13 +1661,13 @@ ALTER TABLE `tb_funcionario`
   ADD KEY `fk_tb_funcionario_tb_empresa1_idx` (`id_empresa`);
 
 --
--- Índices para tabela `tb_galeria`
+-- Índices de tabela `tb_galeria`
 --
 ALTER TABLE `tb_galeria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_galeria_descricao`
+-- Índices de tabela `tb_galeria_descricao`
 --
 ALTER TABLE `tb_galeria_descricao`
   ADD PRIMARY KEY (`id_galeria`,`id_idioma`),
@@ -1652,7 +1675,7 @@ ALTER TABLE `tb_galeria_descricao`
   ADD KEY `fk_tb_galeria_descricao_tb_sys_idioma1_idx` (`id_idioma`);
 
 --
--- Índices para tabela `tb_galeria_imagem`
+-- Índices de tabela `tb_galeria_imagem`
 --
 ALTER TABLE `tb_galeria_imagem`
   ADD PRIMARY KEY (`id_galeria`,`id_midia`),
@@ -1660,7 +1683,7 @@ ALTER TABLE `tb_galeria_imagem`
   ADD KEY `fk_tb_galeria_imagem_tb_midia1_idx` (`id_midia`);
 
 --
--- Índices para tabela `tb_lead`
+-- Índices de tabela `tb_lead`
 --
 ALTER TABLE `tb_lead`
   ADD PRIMARY KEY (`id`),
@@ -1668,13 +1691,13 @@ ALTER TABLE `tb_lead`
   ADD KEY `tb_lead_id_produto` (`id_produto`);
 
 --
--- Índices para tabela `tb_link`
+-- Índices de tabela `tb_link`
 --
 ALTER TABLE `tb_link`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_link_descricao`
+-- Índices de tabela `tb_link_descricao`
 --
 ALTER TABLE `tb_link_descricao`
   ADD PRIMARY KEY (`id_link`,`id_idioma`),
@@ -1682,7 +1705,7 @@ ALTER TABLE `tb_link_descricao`
   ADD KEY `fk_tb_link_descricao_tb_sys_idioma1_idx` (`id_idioma`);
 
 --
--- Índices para tabela `tb_medico`
+-- Índices de tabela `tb_medico`
 --
 ALTER TABLE `tb_medico`
   ADD PRIMARY KEY (`id_funcionario`,`crm`),
@@ -1691,42 +1714,41 @@ ALTER TABLE `tb_medico`
   ADD KEY `fk_tb_medico_id_especialidade` (`id_especialidade`);
 
 --
--- Índices para tabela `tb_medico_agenda`
+-- Índices de tabela `tb_medico_agenda`
 --
 ALTER TABLE `tb_medico_agenda`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `horario_atendimento_UNIQUE` (`id_medico_clinica`,`semana`,`mes`,`ano`,`dia`) USING BTREE;
 
 --
--- Índices para tabela `tb_medico_agenda_horario`
+-- Índices de tabela `tb_medico_agenda_horario`
 --
 ALTER TABLE `tb_medico_agenda_horario`
   ADD PRIMARY KEY (`id_agenda`,`hora_inicial`,`hora_final`);
 
 --
--- Índices para tabela `tb_medico_clinica`
+-- Índices de tabela `tb_medico_clinica`
 --
 ALTER TABLE `tb_medico_clinica`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_medico_clinica` (`id_medico`,`id_empresa`) USING BTREE,
-  ADD KEY `fk_tb_medico_clinica_id_empresa_departamento` (`id_empresa_departamento`),
   ADD KEY `fk_tb_medico_clinica_tb_empresa1_idx` (`id_empresa`);
 
 --
--- Índices para tabela `tb_medico_especialidade`
+-- Índices de tabela `tb_medico_especialidade`
 --
 ALTER TABLE `tb_medico_especialidade`
   ADD PRIMARY KEY (`id_funcionario`,`id_especialidade`),
   ADD KEY `fk_tb_medico_especialidade_id_especialidade` (`id_especialidade`);
 
 --
--- Índices para tabela `tb_midia`
+-- Índices de tabela `tb_midia`
 --
 ALTER TABLE `tb_midia`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_midia_descricao`
+-- Índices de tabela `tb_midia_descricao`
 --
 ALTER TABLE `tb_midia_descricao`
   ADD PRIMARY KEY (`id_midia`,`id_idioma`),
@@ -1734,7 +1756,7 @@ ALTER TABLE `tb_midia_descricao`
   ADD KEY `fk_tb_midia_descricao_tb_sys_idioma1_idx` (`id_idioma`);
 
 --
--- Índices para tabela `tb_paciente`
+-- Índices de tabela `tb_paciente`
 --
 ALTER TABLE `tb_paciente`
   ADD PRIMARY KEY (`id`),
@@ -1746,7 +1768,7 @@ ALTER TABLE `tb_paciente`
   ADD KEY `fk_tb_paciente_id_convenio` (`id_convenio`);
 
 --
--- Índices para tabela `tb_paciente_convenio`
+-- Índices de tabela `tb_paciente_convenio`
 --
 ALTER TABLE `tb_paciente_convenio`
   ADD PRIMARY KEY (`id`),
@@ -1755,14 +1777,14 @@ ALTER TABLE `tb_paciente_convenio`
   ADD KEY `fk_tb_paciente_convenio_id_paciente` (`id_paciente`);
 
 --
--- Índices para tabela `tb_paciente_homecare`
+-- Índices de tabela `tb_paciente_homecare`
 --
 ALTER TABLE `tb_paciente_homecare`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `fk_tb_paciente_homecare_id_paciente_UNIQUE` (`id_paciente`);
 
 --
--- Índices para tabela `tb_paciente_nota`
+-- Índices de tabela `tb_paciente_nota`
 --
 ALTER TABLE `tb_paciente_nota`
   ADD PRIMARY KEY (`id`),
@@ -1770,34 +1792,34 @@ ALTER TABLE `tb_paciente_nota`
   ADD KEY `fk_tb_paciente_nota_id_severidade` (`id_severidade`);
 
 --
--- Índices para tabela `tb_paciente_programa`
+-- Índices de tabela `tb_paciente_programa`
 --
 ALTER TABLE `tb_paciente_programa`
   ADD PRIMARY KEY (`id_paciente`,`id_programa`),
   ADD KEY `fk_tb_paciente_programa_id_programa` (`id_programa`);
 
 --
--- Índices para tabela `tb_paciente_tarefas`
+-- Índices de tabela `tb_paciente_tarefas`
 --
 ALTER TABLE `tb_paciente_tarefas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_paciente` (`id_paciente`);
 
 --
--- Índices para tabela `tb_paciente_tarefas_anotacoes`
+-- Índices de tabela `tb_paciente_tarefas_anotacoes`
 --
 ALTER TABLE `tb_paciente_tarefas_anotacoes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_post`
+-- Índices de tabela `tb_post`
 --
 ALTER TABLE `tb_post`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tb_post_tb_acl_modulo_id_controller` (`id_controller`);
 
 --
--- Índices para tabela `tb_post_descricao`
+-- Índices de tabela `tb_post_descricao`
 --
 ALTER TABLE `tb_post_descricao`
   ADD PRIMARY KEY (`id_post`,`id_idioma`),
@@ -1805,7 +1827,7 @@ ALTER TABLE `tb_post_descricao`
   ADD KEY `fk_tb_pagina_descricao_tb_sys_idioma1_idx` (`id_idioma`);
 
 --
--- Índices para tabela `tb_post_link`
+-- Índices de tabela `tb_post_link`
 --
 ALTER TABLE `tb_post_link`
   ADD PRIMARY KEY (`id_post`,`id_link`),
@@ -1813,7 +1835,7 @@ ALTER TABLE `tb_post_link`
   ADD KEY `fk_tb_link_pagina_id_pagina` (`id_post`);
 
 --
--- Índices para tabela `tb_post_midia`
+-- Índices de tabela `tb_post_midia`
 --
 ALTER TABLE `tb_post_midia`
   ADD PRIMARY KEY (`id_pagina`,`id_midia`),
@@ -1823,14 +1845,14 @@ ALTER TABLE `tb_post_midia`
   ADD KEY `fk_tb_pagina_midia_tb_midia1_idx` (`id_midia`);
 
 --
--- Índices para tabela `tb_produto`
+-- Índices de tabela `tb_produto`
 --
 ALTER TABLE `tb_produto`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tb_produto_distribuidor_id_distribuidor` (`id_distribuidor`);
 
 --
--- Índices para tabela `tb_produto_categoria`
+-- Índices de tabela `tb_produto_categoria`
 --
 ALTER TABLE `tb_produto_categoria`
   ADD PRIMARY KEY (`id_produto`,`id_categoria`),
@@ -1839,7 +1861,7 @@ ALTER TABLE `tb_produto_categoria`
   ADD KEY `fk_tb_produto_categoria_tb_produto1_idx` (`id_produto`,`id_categoria`);
 
 --
--- Índices para tabela `tb_produto_descricao`
+-- Índices de tabela `tb_produto_descricao`
 --
 ALTER TABLE `tb_produto_descricao`
   ADD PRIMARY KEY (`id_idioma`,`id_produto`),
@@ -1847,7 +1869,7 @@ ALTER TABLE `tb_produto_descricao`
   ADD KEY `fk_tb_produto_descricao_tb_sys_idioma1_idx` (`id_idioma`);
 
 --
--- Índices para tabela `tb_produto_imagem`
+-- Índices de tabela `tb_produto_imagem`
 --
 ALTER TABLE `tb_produto_imagem`
   ADD PRIMARY KEY (`id_produto`,`id_midia`),
@@ -1856,13 +1878,13 @@ ALTER TABLE `tb_produto_imagem`
   ADD KEY `fk_tb_produto_imagem_tb_produto1_idx` (`id_produto`,`id_midia`);
 
 --
--- Índices para tabela `tb_programas`
+-- Índices de tabela `tb_programas`
 --
 ALTER TABLE `tb_programas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_servicos`
+-- Índices de tabela `tb_servicos`
 --
 ALTER TABLE `tb_servicos`
   ADD PRIMARY KEY (`id`),
@@ -1870,13 +1892,13 @@ ALTER TABLE `tb_servicos`
   ADD KEY `fk_tb_servicos_id_parent` (`id_parent`);
 
 --
--- Índices para tabela `tb_severidade_nota`
+-- Índices de tabela `tb_severidade_nota`
 --
 ALTER TABLE `tb_severidade_nota`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -1895,7 +1917,7 @@ ALTER TABLE `tb_agenda`
 -- AUTO_INCREMENT de tabela `tb_atendimento`
 --
 ALTER TABLE `tb_atendimento`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tb_atendimento_notas`
@@ -1961,7 +1983,7 @@ ALTER TABLE `tb_departamento`
 -- AUTO_INCREMENT de tabela `tb_departamento_empresa`
 --
 ALTER TABLE `tb_departamento_empresa`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de tabela `tb_distribuidor`
@@ -1979,7 +2001,7 @@ ALTER TABLE `tb_email`
 -- AUTO_INCREMENT de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Chave primária da tabela.', AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Chave primária da tabela.', AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de tabela `tb_especialidade`
@@ -2021,7 +2043,7 @@ ALTER TABLE `tb_funcao`
 -- AUTO_INCREMENT de tabela `tb_funcionario`
 --
 ALTER TABLE `tb_funcionario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `tb_galeria`
@@ -2051,7 +2073,7 @@ ALTER TABLE `tb_medico_agenda`
 -- AUTO_INCREMENT de tabela `tb_medico_clinica`
 --
 ALTER TABLE `tb_medico_clinica`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `tb_midia`
@@ -2126,17 +2148,17 @@ ALTER TABLE `tb_severidade_nota`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `tb_agenda`
+-- Restrições para tabelas `tb_agenda`
 --
 ALTER TABLE `tb_agenda`
   ADD CONSTRAINT `fk_tb_agenda_id_medico` FOREIGN KEY (`id_medico`) REFERENCES `tb_medico` (`id_funcionario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_atendimento`
+-- Restrições para tabelas `tb_atendimento`
 --
 ALTER TABLE `tb_atendimento`
   ADD CONSTRAINT `fk_tb_agendamento_id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -2147,7 +2169,7 @@ ALTER TABLE `tb_atendimento`
   ADD CONSTRAINT `fk_tb_atendimento_id_medico` FOREIGN KEY (`id_medico`) REFERENCES `tb_medico_clinica` (`id_medico`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_atendimento_notas`
+-- Restrições para tabelas `tb_atendimento_notas`
 --
 ALTER TABLE `tb_atendimento_notas`
   ADD CONSTRAINT `fk_tb_atendimento_id_atendimento` FOREIGN KEY (`id_atendimento`) REFERENCES `tb_atendimento` (`id`),
@@ -2155,90 +2177,90 @@ ALTER TABLE `tb_atendimento_notas`
   ADD CONSTRAINT `fk_tb_atendimento_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `medicus_sistema`.`tb_acl_usuario` (`id`);
 
 --
--- Limitadores para a tabela `tb_banner_descricao`
+-- Restrições para tabelas `tb_banner_descricao`
 --
 ALTER TABLE `tb_banner_descricao`
   ADD CONSTRAINT `fk_tb_banner_descricao_tb_banner1` FOREIGN KEY (`id_banner`) REFERENCES `tb_banner` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_banner_descricao_tb_sys_idioma1` FOREIGN KEY (`id_idioma`) REFERENCES `medicus_sistema`.`tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_banner_imagem`
+-- Restrições para tabelas `tb_banner_imagem`
 --
 ALTER TABLE `tb_banner_imagem`
   ADD CONSTRAINT `fk_tb_banner_imagem_tb_banner1` FOREIGN KEY (`id_banner`) REFERENCES `tb_banner` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_banner_imagem_tb_midia1` FOREIGN KEY (`id_midia`) REFERENCES `tb_midia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_banner_imagem_descricao`
+-- Restrições para tabelas `tb_banner_imagem_descricao`
 --
 ALTER TABLE `tb_banner_imagem_descricao`
   ADD CONSTRAINT `fk_tb_banner_imagem_descricao_tb_banner_imagem1` FOREIGN KEY (`id_banner`,`id_midia`) REFERENCES `tb_banner_imagem` (`id_banner`, `id_midia`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_banner_imagem_descricao_tb_sys_idioma1` FOREIGN KEY (`id_idioma`) REFERENCES `medicus_sistema`.`tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_categoria_descricao`
+-- Restrições para tabelas `tb_categoria_descricao`
 --
 ALTER TABLE `tb_categoria_descricao`
   ADD CONSTRAINT `fk_tb_categoria_descricao_tb_categoria1` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_categoria_descricao_tb_sys_idioma1` FOREIGN KEY (`id_idioma`) REFERENCES `medicus_sistema`.`tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_cliente_email`
+-- Restrições para tabelas `tb_cliente_email`
 --
 ALTER TABLE `tb_cliente_email`
   ADD CONSTRAINT `tb_cliente_email_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `tb_cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_cliente_telefone`
+-- Restrições para tabelas `tb_cliente_telefone`
 --
 ALTER TABLE `tb_cliente_telefone`
   ADD CONSTRAINT `tb_cliente_telefone_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `tb_cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_convenio`
+-- Restrições para tabelas `tb_convenio`
 --
 ALTER TABLE `tb_convenio`
   ADD CONSTRAINT `fk_tb_convenio_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `tb_convenio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_convenio_planos`
+-- Restrições para tabelas `tb_convenio_planos`
 --
 ALTER TABLE `tb_convenio_planos`
   ADD CONSTRAINT `fk_tb_convenio_planos_id_convenio` FOREIGN KEY (`id_convenio`) REFERENCES `tb_convenio` (`id`);
 
 --
--- Limitadores para a tabela `tb_convenio_planos_servicos`
+-- Restrições para tabelas `tb_convenio_planos_servicos`
 --
 ALTER TABLE `tb_convenio_planos_servicos`
   ADD CONSTRAINT `fk_tb_convenio_planos_servicos_id_plano` FOREIGN KEY (`id_plano`) REFERENCES `tb_convenio_planos` (`id`);
 
 --
--- Limitadores para a tabela `tb_departamento_empresa`
+-- Restrições para tabelas `tb_departamento_empresa`
 --
 ALTER TABLE `tb_departamento_empresa`
   ADD CONSTRAINT `fk_tb_departamento_id_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `tb_departamento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_departamento_id_empresa` FOREIGN KEY (`id_empresa`) REFERENCES `tb_empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_distribuidor_email`
+-- Restrições para tabelas `tb_distribuidor_email`
 --
 ALTER TABLE `tb_distribuidor_email`
   ADD CONSTRAINT `fk_tb_distribuidor_email_id_distribuidor` FOREIGN KEY (`id_distribuidor`) REFERENCES `tb_distribuidor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_distribuidor_telefone`
+-- Restrições para tabelas `tb_distribuidor_telefone`
 --
 ALTER TABLE `tb_distribuidor_telefone`
   ADD CONSTRAINT `fk_tb_distribuidor_telefone_id_distribuidor` FOREIGN KEY (`id_distribuidor`) REFERENCES `tb_distribuidor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_exame`
+-- Restrições para tabelas `tb_exame`
 --
 ALTER TABLE `tb_exame`
   ADD CONSTRAINT `fk_tb_exame_id_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `tb_exame_categoria` (`id`);
 
 --
--- Limitadores para a tabela `tb_funcionario`
+-- Restrições para tabelas `tb_funcionario`
 --
 ALTER TABLE `tb_funcionario`
   ADD CONSTRAINT `fk_tb_funcionario_id_funcao` FOREIGN KEY (`id_funcao`) REFERENCES `tb_funcao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -2246,74 +2268,74 @@ ALTER TABLE `tb_funcionario`
   ADD CONSTRAINT `fk_tb_funcionario_tb_empresa1` FOREIGN KEY (`id_empresa`) REFERENCES `tb_empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_galeria_descricao`
+-- Restrições para tabelas `tb_galeria_descricao`
 --
 ALTER TABLE `tb_galeria_descricao`
   ADD CONSTRAINT `fk_tb_galeria_descricao_tb_galeria1` FOREIGN KEY (`id_galeria`) REFERENCES `tb_galeria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_galeria_descricao_tb_sys_idioma1` FOREIGN KEY (`id_idioma`) REFERENCES `medicus_sistema`.`tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_galeria_imagem`
+-- Restrições para tabelas `tb_galeria_imagem`
 --
 ALTER TABLE `tb_galeria_imagem`
   ADD CONSTRAINT `fk_tb_album_foto_id_album` FOREIGN KEY (`id_galeria`) REFERENCES `tb_galeria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_galeria_imagem_tb_midia1` FOREIGN KEY (`id_midia`) REFERENCES `tb_midia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_lead`
+-- Restrições para tabelas `tb_lead`
 --
 ALTER TABLE `tb_lead`
   ADD CONSTRAINT `tb_lead_id_cliente` FOREIGN KEY (`id_cliente`) REFERENCES `tb_cliente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_lead_id_produto` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_link_descricao`
+-- Restrições para tabelas `tb_link_descricao`
 --
 ALTER TABLE `tb_link_descricao`
   ADD CONSTRAINT `fk_tb_link_descricao_tb_link1` FOREIGN KEY (`id_link`) REFERENCES `tb_link` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_link_descricao_tb_sys_idioma1` FOREIGN KEY (`id_idioma`) REFERENCES `medicus_sistema`.`tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_medico`
+-- Restrições para tabelas `tb_medico`
 --
 ALTER TABLE `tb_medico`
   ADD CONSTRAINT `fk_tb_medico_id_funcionario` FOREIGN KEY (`id_funcionario`) REFERENCES `tb_funcionario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_medico_agenda`
+-- Restrições para tabelas `tb_medico_agenda`
 --
 ALTER TABLE `tb_medico_agenda`
   ADD CONSTRAINT `fk_tb_medico_agenda_id_medico_clinica` FOREIGN KEY (`id_medico_clinica`) REFERENCES `tb_medico_clinica` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_medico_agenda_horario`
+-- Restrições para tabelas `tb_medico_agenda_horario`
 --
 ALTER TABLE `tb_medico_agenda_horario`
   ADD CONSTRAINT `fk_tb_medico_agenda_horario_id_agenda` FOREIGN KEY (`id_agenda`) REFERENCES `tb_medico_agenda` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_medico_clinica`
+-- Restrições para tabelas `tb_medico_clinica`
 --
 ALTER TABLE `tb_medico_clinica`
   ADD CONSTRAINT `fk_tb_medico_clinica_id_empresa1` FOREIGN KEY (`id_empresa`) REFERENCES `tb_empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_medico_clinica_id_medico` FOREIGN KEY (`id_medico`) REFERENCES `tb_medico` (`id_funcionario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_medico_especialidade`
+-- Restrições para tabelas `tb_medico_especialidade`
 --
 ALTER TABLE `tb_medico_especialidade`
   ADD CONSTRAINT `fk_tb_medico_especialidade_id_especialidade` FOREIGN KEY (`id_especialidade`) REFERENCES `tb_especialidade` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_medico_especialidade_id_funcionario` FOREIGN KEY (`id_funcionario`) REFERENCES `tb_medico` (`id_funcionario`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_midia_descricao`
+-- Restrições para tabelas `tb_midia_descricao`
 --
 ALTER TABLE `tb_midia_descricao`
   ADD CONSTRAINT `fk_tb_midia_descricao_tb_midia1` FOREIGN KEY (`id_midia`) REFERENCES `tb_midia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_midia_descricao_tb_sys_idioma1` FOREIGN KEY (`id_idioma`) REFERENCES `medicus_sistema`.`tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_paciente`
+-- Restrições para tabelas `tb_paciente`
 --
 ALTER TABLE `tb_paciente`
   ADD CONSTRAINT `fk_tb_paciente_id_acomodacao` FOREIGN KEY (`id_acomodacao`) REFERENCES `tb_acomodacao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -2323,7 +2345,7 @@ ALTER TABLE `tb_paciente`
   ADD CONSTRAINT `fk_tb_paciente_id_tipo_convenio` FOREIGN KEY (`id_tipo_convenio`) REFERENCES `tb_convenio_planos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_paciente_convenio`
+-- Restrições para tabelas `tb_paciente_convenio`
 --
 ALTER TABLE `tb_paciente_convenio`
   ADD CONSTRAINT `fk_tb_paciente_convenio_id_acomodacao` FOREIGN KEY (`id_acomodacao`) REFERENCES `tb_acomodacao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -2331,81 +2353,81 @@ ALTER TABLE `tb_paciente_convenio`
   ADD CONSTRAINT `fk_tb_paciente_convenio_id_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `tb_paciente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_paciente_homecare`
+-- Restrições para tabelas `tb_paciente_homecare`
 --
 ALTER TABLE `tb_paciente_homecare`
   ADD CONSTRAINT `fk_tb_paciente_homecare_id_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `tb_paciente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_paciente_nota`
+-- Restrições para tabelas `tb_paciente_nota`
 --
 ALTER TABLE `tb_paciente_nota`
   ADD CONSTRAINT `fk_tb_paciente_nota` FOREIGN KEY (`id_paciente`) REFERENCES `tb_paciente` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_paciente_nota_id_severidade` FOREIGN KEY (`id_severidade`) REFERENCES `tb_severidade_nota` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_paciente_programa`
+-- Restrições para tabelas `tb_paciente_programa`
 --
 ALTER TABLE `tb_paciente_programa`
   ADD CONSTRAINT `fk_tb_paciente_programa_id_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `tb_paciente` (`id`),
   ADD CONSTRAINT `fk_tb_paciente_programa_id_programa` FOREIGN KEY (`id_programa`) REFERENCES `tb_programas` (`id`);
 
 --
--- Limitadores para a tabela `tb_post`
+-- Restrições para tabelas `tb_post`
 --
 ALTER TABLE `tb_post`
   ADD CONSTRAINT `fk_tb_post_tb_acl_modulo_classe1` FOREIGN KEY (`id_controller`) REFERENCES `medicus_sistema`.`tb_acl_modulo_controller` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_post_descricao`
+-- Restrições para tabelas `tb_post_descricao`
 --
 ALTER TABLE `tb_post_descricao`
   ADD CONSTRAINT `fk_tb_pagina_descricao_tb_post` FOREIGN KEY (`id_post`) REFERENCES `tb_post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_pagina_descricao_tb_sys_idioma1` FOREIGN KEY (`id_idioma`) REFERENCES `medicus_sistema`.`tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_post_link`
+-- Restrições para tabelas `tb_post_link`
 --
 ALTER TABLE `tb_post_link`
   ADD CONSTRAINT `fk_tb_link_pagina_id_link` FOREIGN KEY (`id_link`) REFERENCES `tb_link` (`id`),
   ADD CONSTRAINT `fk_tb_link_pagina_id_post` FOREIGN KEY (`id_post`) REFERENCES `tb_post` (`id`);
 
 --
--- Limitadores para a tabela `tb_post_midia`
+-- Restrições para tabelas `tb_post_midia`
 --
 ALTER TABLE `tb_post_midia`
   ADD CONSTRAINT `fk_tb_pagina_midia_tb_midia1` FOREIGN KEY (`id_midia`) REFERENCES `tb_midia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_pagina_midia_tb_pagina1` FOREIGN KEY (`id_pagina`) REFERENCES `tb_post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_produto`
+-- Restrições para tabelas `tb_produto`
 --
 ALTER TABLE `tb_produto`
   ADD CONSTRAINT `fk_tb_produto_distribuidor_id_distribuidor` FOREIGN KEY (`id_distribuidor`) REFERENCES `tb_distribuidor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_produto_categoria`
+-- Restrições para tabelas `tb_produto_categoria`
 --
 ALTER TABLE `tb_produto_categoria`
   ADD CONSTRAINT `fk_tb_produto_categoria_tb_categoria1` FOREIGN KEY (`id_categoria`) REFERENCES `tb_categoria` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_produto_categoria_tb_produto1` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_produto_descricao`
+-- Restrições para tabelas `tb_produto_descricao`
 --
 ALTER TABLE `tb_produto_descricao`
   ADD CONSTRAINT `fk_tb_produto_descricao_tb_produto1` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_produto_descricao_tb_sys_idioma1` FOREIGN KEY (`id_idioma`) REFERENCES `medicus_sistema`.`tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_produto_imagem`
+-- Restrições para tabelas `tb_produto_imagem`
 --
 ALTER TABLE `tb_produto_imagem`
   ADD CONSTRAINT `fk_tb_produto_imagem_tb_midia1` FOREIGN KEY (`id_midia`) REFERENCES `tb_midia` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_produto_imagem_tb_produto1` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_servicos`
+-- Restrições para tabelas `tb_servicos`
 --
 ALTER TABLE `tb_servicos`
   ADD CONSTRAINT `fk_tb_servicos_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `tb_servicos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 23-Maio-2023 às 19:44
+-- Tempo de geração: 08/06/2023 às 14:02
 -- Versão do servidor: 10.6.12-MariaDB-0ubuntu0.22.04.1
--- versão do PHP: 8.2.6
+-- Versão do PHP: 8.1.18
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_grupo`
+-- Estrutura para tabela `tb_acl_grupo`
 --
 
 CREATE TABLE `tb_acl_grupo` (
@@ -38,7 +38,7 @@ CREATE TABLE `tb_acl_grupo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de grupos de usuários.';
 
 --
--- Extraindo dados da tabela `tb_acl_grupo`
+-- Despejando dados para a tabela `tb_acl_grupo`
 --
 
 INSERT INTO `tb_acl_grupo` (`id`, `grupo`, `descricao`, `permissao`, `created_at`, `updated_at`, `status`) VALUES
@@ -50,7 +50,7 @@ INSERT INTO `tb_acl_grupo` (`id`, `grupo`, `descricao`, `permissao`, `created_at
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_menu`
+-- Estrutura para tabela `tb_acl_menu`
 --
 
 CREATE TABLE `tb_acl_menu` (
@@ -63,7 +63,7 @@ CREATE TABLE `tb_acl_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de grupos de menus';
 
 --
--- Extraindo dados da tabela `tb_acl_menu`
+-- Despejando dados para a tabela `tb_acl_menu`
 --
 
 INSERT INTO `tb_acl_menu` (`id`, `id_grupo`, `created_at`, `updated_at`, `editavel`, `status`) VALUES
@@ -77,7 +77,7 @@ INSERT INTO `tb_acl_menu` (`id`, `id_grupo`, `created_at`, `updated_at`, `editav
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_menu_descricao`
+-- Estrutura para tabela `tb_acl_menu_descricao`
 --
 
 CREATE TABLE `tb_acl_menu_descricao` (
@@ -93,7 +93,7 @@ CREATE TABLE `tb_acl_menu_descricao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acl_menu_descricao`
+-- Despejando dados para a tabela `tb_acl_menu_descricao`
 --
 
 INSERT INTO `tb_acl_menu_descricao` (`id_menu`, `id_idioma`, `titulo`, `descricao`, `meta_description`, `meta_title`, `meta_keywords`, `created_at`, `updated_at`) VALUES
@@ -110,7 +110,7 @@ INSERT INTO `tb_acl_menu_descricao` (`id_menu`, `id_idioma`, `titulo`, `descrica
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_menu_grupo`
+-- Estrutura para tabela `tb_acl_menu_grupo`
 --
 
 CREATE TABLE `tb_acl_menu_grupo` (
@@ -119,7 +119,7 @@ CREATE TABLE `tb_acl_menu_grupo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para atribuir menus a grupos de usuários';
 
 --
--- Extraindo dados da tabela `tb_acl_menu_grupo`
+-- Despejando dados para a tabela `tb_acl_menu_grupo`
 --
 
 INSERT INTO `tb_acl_menu_grupo` (`id_grupo`, `id_menu`) VALUES
@@ -129,7 +129,7 @@ INSERT INTO `tb_acl_menu_grupo` (`id_grupo`, `id_menu`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_menu_item`
+-- Estrutura para tabela `tb_acl_menu_item`
 --
 
 CREATE TABLE `tb_acl_menu_item` (
@@ -152,7 +152,7 @@ CREATE TABLE `tb_acl_menu_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de itens do menus';
 
 --
--- Extraindo dados da tabela `tb_acl_menu_item`
+-- Despejando dados para a tabela `tb_acl_menu_item`
 --
 
 INSERT INTO `tb_acl_menu_item` (`id`, `id_controller`, `id_parent`, `id_route`, `descricao`, `item_type`, `link`, `icon`, `target`, `ordem`, `permissao`, `created_at`, `updated_at`, `divider`, `editavel`, `status`) VALUES
@@ -195,7 +195,7 @@ INSERT INTO `tb_acl_menu_item` (`id`, `id_controller`, `id_parent`, `id_route`, 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_menu_item_descricao`
+-- Estrutura para tabela `tb_acl_menu_item_descricao`
 --
 
 CREATE TABLE `tb_acl_menu_item_descricao` (
@@ -211,7 +211,7 @@ CREATE TABLE `tb_acl_menu_item_descricao` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acl_menu_item_descricao`
+-- Despejando dados para a tabela `tb_acl_menu_item_descricao`
 --
 
 INSERT INTO `tb_acl_menu_item_descricao` (`id_item`, `id_idioma`, `titulo`, `descricao`, `meta_description`, `meta_title`, `meta_keywords`, `created_at`, `updated_at`) VALUES
@@ -257,7 +257,7 @@ INSERT INTO `tb_acl_menu_item_descricao` (`id_item`, `id_idioma`, `titulo`, `des
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_menu_item_menu`
+-- Estrutura para tabela `tb_acl_menu_item_menu`
 --
 
 CREATE TABLE `tb_acl_menu_item_menu` (
@@ -269,7 +269,7 @@ CREATE TABLE `tb_acl_menu_item_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acl_menu_item_menu`
+-- Despejando dados para a tabela `tb_acl_menu_item_menu`
 --
 
 INSERT INTO `tb_acl_menu_item_menu` (`id_menu`, `id_item`, `created_at`, `updated_at`, `status`) VALUES
@@ -305,6 +305,7 @@ INSERT INTO `tb_acl_menu_item_menu` (`id_menu`, `id_item`, `created_at`, `update
 (4, 19, '2023-03-04 21:14:08', NULL, '1'),
 (1, 20, '2023-03-30 18:29:20', NULL, '1'),
 (2, 20, '2023-03-30 18:29:41', NULL, '1'),
+(3, 20, '2023-03-04 20:26:47', NULL, '1'),
 (2, 21, '2023-02-14 04:51:09', NULL, '1'),
 (3, 21, '2023-03-04 20:26:47', NULL, '1'),
 (4, 21, '2023-03-04 21:14:08', NULL, '0'),
@@ -316,20 +317,19 @@ INSERT INTO `tb_acl_menu_item_menu` (`id_menu`, `id_item`, `created_at`, `update
 (4, 23, '2023-03-04 21:14:08', NULL, '1'),
 (1, 24, '2023-03-30 18:29:20', NULL, '1'),
 (2, 24, '2023-03-30 18:29:41', NULL, '1'),
+(3, 24, '2023-03-04 20:26:47', NULL, '1'),
 (1, 25, '2023-03-30 18:21:41', NULL, '1'),
 (2, 25, '2023-03-30 18:21:41', NULL, '1'),
+(3, 25, '2023-03-04 20:26:47', NULL, '1'),
 (2, 26, '2023-02-14 04:52:17', NULL, '1'),
 (3, 26, '2023-03-04 20:26:47', NULL, '1'),
 (4, 26, '2023-03-04 21:14:08', NULL, '1'),
 (2, 27, '2023-02-14 04:53:45', NULL, '1'),
-(3, 27, '2023-03-04 20:26:47', NULL, '0'),
 (4, 27, '2023-03-04 21:14:08', NULL, '0'),
 (2, 28, '2023-02-14 04:53:05', NULL, '1'),
-(3, 28, '2023-03-04 20:26:47', NULL, '1'),
 (4, 28, '2023-03-04 21:14:08', NULL, '1'),
 (1, 29, '2023-03-11 10:29:40', NULL, '1'),
 (2, 29, '2023-02-14 04:53:23', NULL, '1'),
-(3, 29, '2023-03-04 20:26:47', NULL, '1'),
 (4, 29, '2023-03-04 21:14:08', NULL, '1'),
 (1, 30, '2023-03-11 10:25:48', NULL, '1'),
 (2, 31, '2023-02-14 04:51:46', NULL, '1'),
@@ -338,13 +338,13 @@ INSERT INTO `tb_acl_menu_item_menu` (`id_menu`, `id_item`, `created_at`, `update
 (1, 34, '2023-03-11 10:20:03', NULL, '1'),
 (1, 35, '2023-03-11 10:20:03', NULL, '1'),
 (2, 35, '2023-02-13 23:21:39', NULL, '1'),
-(3, 35, '2023-03-11 10:20:03', NULL, '1'),
+(3, 35, '2023-03-11 10:20:03', NULL, '0'),
 (4, 35, '2023-03-04 21:14:08', NULL, '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_menu_secao`
+-- Estrutura para tabela `tb_acl_menu_secao`
 --
 
 CREATE TABLE `tb_acl_menu_secao` (
@@ -358,7 +358,7 @@ CREATE TABLE `tb_acl_menu_secao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_modulo`
+-- Estrutura para tabela `tb_acl_modulo`
 --
 
 CREATE TABLE `tb_acl_modulo` (
@@ -376,84 +376,89 @@ CREATE TABLE `tb_acl_modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de módulos. Módulos correspondem aos diretórios da aplicação: main, admin, etc...';
 
 --
--- Extraindo dados da tabela `tb_acl_modulo`
+-- Despejando dados para a tabela `tb_acl_modulo`
 --
 
 INSERT INTO `tb_acl_modulo` (`id`, `modulo`, `path`, `namespace`, `permissao`, `descricao`, `homepage`, `created_at`, `updated_at`, `restrict`, `status`) VALUES
 (1, 'Site básico', '/', 'App\\Http\\Controllers\\Main\\', 1111, 'Diretório público do site', NULL, '2022-06-24 03:16:39', NULL, 'no', '1'),
 (2, 'Sistema de administração de site', '/admin', 'App\\Http\\Controllers\\Admin\\', 1111, 'Diretório de administração do sistema', NULL, '2022-06-24 03:16:39', '2023-04-25 00:14:08', 'yes', '1'),
-(3, 'teste', '/teste', 'App\\Http\\Controllers\\Teste\\', 1111, NULL, NULL, '2022-06-24 08:22:18', NULL, 'no', '1'),
 (4, 'Sistema de Autenticação de usuários', '/auth', 'App\\Http\\Controllers\\', 1111, 'AuthController', NULL, '2022-06-24 03:16:39', NULL, 'no', '1'),
 (5, 'Sistema de Clínicas', '/clinica', 'App\\Http\\Controllers\\Clinica\\', 1111, 'Módulo para Clínicias', NULL, '2022-11-08 22:56:55', '2023-04-25 04:44:56', 'yes', '1'),
 (6, 'Controle de Estoque', '/estoque', 'App\\Http\\Controllers\\Estoque\\', 1111, 'Módulo para Controle de Estoque', NULL, '2022-11-08 22:56:55', NULL, 'yes', '1'),
-(7, 'Sistema de e-mails', '/mail', 'App\\Http\\Controllers\\Mail\\', 1111, 'Módulo para E-mails', NULL, '2023-03-11 05:58:06', NULL, 'yes', '1');
+(7, 'Sistema de e-mails', '/mail', 'App\\Http\\Controllers\\Mail\\', 1111, 'Módulo para E-mails', NULL, '2023-03-11 05:58:06', NULL, 'yes', '1'),
+(9, 'OS Tickets', '/tickets', 'App\\Http\\Controllers\\OSTicket\\', 1111, NULL, NULL, '2023-06-01 10:36:46', '2023-06-02 17:25:37', 'yes', '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_modulo_controller`
+-- Estrutura para tabela `tb_acl_modulo_controller`
 --
 
 CREATE TABLE `tb_acl_modulo_controller` (
   `id` int(11) UNSIGNED NOT NULL,
   `id_modulo` int(11) UNSIGNED NOT NULL,
+  `nome` varchar(255) NOT NULL,
   `descricao` varchar(255) NOT NULL,
   `controller` varchar(100) NOT NULL,
+  `filename` varchar(255) NOT NULL,
   `use_as` varchar(100) DEFAULT NULL,
   `permissao` smallint(4) UNSIGNED ZEROFILL NOT NULL DEFAULT 1111,
   `restrict` enum('yes','no') NOT NULL DEFAULT 'no',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acl_modulo_controller`
+-- Despejando dados para a tabela `tb_acl_modulo_controller`
 --
 
-INSERT INTO `tb_acl_modulo_controller` (`id`, `id_modulo`, `descricao`, `controller`, `use_as`, `permissao`, `restrict`, `status`) VALUES
-(1, 1, 'Main Home', 'HomeController', NULL, 1111, 'no', '1'),
-(2, 1, 'Main Galeria', 'GaleriaController', 'PageController', 1111, 'no', '1'),
-(3, 2, 'Admin Home', 'HomeController', 'Dashboard', 1111, 'yes', '1'),
-(4, 2, 'Admin Menus', 'MenusController', 'MenusController', 0111, 'yes', '1'),
-(5, 4, 'Auth Controller', 'AuthController', 'Auth', 1111, 'no', '1'),
-(6, 3, 'Teste Home', 'HomeController', 'TesteController', 1111, 'no', '1'),
-(7, 1, 'API Main', 'ApiController', 'API', 0001, 'no', '1'),
-(8, 2, 'API Admin', 'ApiController', 'API_Admin', 0001, 'no', '1'),
-(9, 2, 'Admin Config', 'ConfigController', 'Config', 1111, 'yes', '1'),
-(10, 1, 'Main Sobre Nós', 'AboutController', 'AboutController', 1111, 'no', '1'),
-(11, 2, 'Admin usuários', 'UserController', 'UserController', 1111, 'yes', '1'),
-(12, 5, 'ClinicCloud - Home', 'HomeController', 'Cl_Dashboard', 1111, 'yes', '1'),
-(16, 5, 'API Clinica', 'ApiController', 'API_Clinica', 0001, 'no', '1'),
-(18, 5, 'Clinica Config', 'ConfigController', 'C_Config', 1111, 'yes', '1'),
-(19, 5, 'Pacientes', 'PacientesController', 'C_Pacientes', 1111, 'yes', '1'),
-(20, 5, 'Prontuários de pacientes', 'ProntuariosController', 'C_Prontuarios', 1111, 'yes', '1'),
-(21, 5, 'Médicos', 'MedicosController', 'C_Medicos', 1111, 'yes', '1'),
-(22, 5, 'Especialidades', 'EspecialidadesController', 'C_Especialidades', 1111, 'yes', '1'),
-(23, 5, 'Empresas', 'EmpresasController', 'C_Empresas', 1111, 'yes', '1'),
-(24, 1, 'Main Serviços', 'ServicesController', 'ServicesController', 1111, 'no', '1'),
-(25, 5, 'Departamentos', 'DepartamentosController', 'C_Departamentos', 1111, 'yes', '1'),
-(26, 5, 'Funcionários', 'FuncionariosController', 'C_Funcionarios', 1111, 'yes', '1'),
-(27, 5, 'Agendamentos', 'AgendamentosController', 'C_Agendamentos', 1111, 'yes', '1'),
-(28, 5, 'Atendimentos', 'AtendimentosController', 'C_Atendimentos', 1111, 'yes', '1'),
-(29, 5, 'Grupos', 'GruposController', 'C_Grupos', 1111, 'yes', '1'),
-(30, 5, 'Usuários', 'UsuariosController', 'C_Usuarios', 1111, 'yes', '1'),
-(31, 5, 'HomeCare', 'HomeCareController', 'C_HomeCare', 1111, 'yes', '1'),
-(32, 5, 'Planosdesaude', 'PlanosdesaudeController', 'C_Planosdesaude', 1111, 'yes', '1'),
-(33, 5, 'Convenios', 'ConveniosController', 'C_Convenios', 1111, 'yes', '1'),
-(34, 7, 'E-mails - Home', 'HomeController', 'Cl_Mailbox', 1111, 'yes', '1'),
-(35, 2, 'Admin Controllers', 'ModuloController', 'Controllers', 1111, 'yes', '1'),
-(36, 2, 'Admin Rotas', 'RoutesController', 'Routes', 1111, 'yes', '1'),
-(37, 5, 'Exames', 'ExamesController', 'C_Exames', 1111, 'yes', '1'),
-(38, 1, 'UsuarioController', 'UsuarioController', 'M_UsuarioController', 1111, 'no', '1'),
-(39, 2, 'Admin Módulos', 'ModulosController', 'Modulos', 1111, 'yes', '1'),
-(40, 5, 'Tipos de Exames', 'ExamesTiposController', 'C_ExamesTipo', 1111, 'yes', '1'),
-(43, 2, 'Admin Menus Itens', 'MenuitensController', 'A_MenusController', 0111, 'yes', '1'),
-(44, 5, 'Recursos Médicos', 'RecursosMedicosController', 'Recursos_Medicos', 1111, 'yes', '1'),
-(45, 5, 'Agenda Médica', 'AgendaController', 'Agenda', 1111, 'yes', '1');
+INSERT INTO `tb_acl_modulo_controller` (`id`, `id_modulo`, `nome`, `descricao`, `controller`, `filename`, `use_as`, `permissao`, `restrict`, `created_at`, `updated_at`, `status`) VALUES
+(1, 1, 'Main Home', 'Main Home', 'HomeController', 'App\\Http\\Controllers\\Main\\HomController.php', 'Main_Home_Controller', 1111, 'no', '2023-06-01 10:00:05', '2023-06-01 10:08:26', '1'),
+(2, 1, '', 'Main Galeria', 'GaleriaController', '', 'PageController', 1111, 'no', '2023-06-01 10:00:05', NULL, '1'),
+(3, 2, '', 'Admin Home', 'HomeController', '', 'Dashboard', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(4, 2, '', 'Admin Menus', 'MenusController', '', 'MenusController', 0111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(5, 4, '', 'Auth Controller', 'AuthController', '', 'Auth', 1111, 'no', '2023-06-01 10:00:05', NULL, '1'),
+(7, 1, '', 'API Main', 'ApiController', '', 'API', 0001, 'no', '2023-06-01 10:00:05', NULL, '1'),
+(8, 2, '', 'API Admin', 'ApiController', '', 'API_Admin', 0001, 'no', '2023-06-01 10:00:05', NULL, '1'),
+(9, 2, '', 'Admin Config', 'ConfigController', '', 'Config', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(10, 1, '', 'Main Sobre Nós', 'AboutController', '', 'AboutController', 1111, 'no', '2023-06-01 10:00:05', NULL, '1'),
+(11, 2, '', 'Admin usuários', 'UserController', '', 'UserController', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(12, 5, '', 'ClinicCloud - Home', 'HomeController', '', 'Cl_Dashboard', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(16, 5, '', 'API Clinica', 'ApiController', '', 'API_Clinica', 0001, 'no', '2023-06-01 10:00:05', NULL, '1'),
+(18, 5, '', 'Clinica Config', 'ConfigController', '', 'C_Config', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(19, 5, '', 'Pacientes', 'PacientesController', '', 'C_Pacientes', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(20, 5, '', 'Prontuários de pacientes', 'ProntuariosController', '', 'C_Prontuarios', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(21, 5, '', 'Médicos', 'MedicosController', '', 'C_Medicos', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(22, 5, '', 'Especialidades', 'EspecialidadesController', '', 'C_Especialidades', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(23, 5, '', 'Empresas', 'EmpresasController', '', 'C_Empresas', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(24, 1, '', 'Main Serviços', 'ServicesController', '', 'ServicesController', 1111, 'no', '2023-06-01 10:00:05', NULL, '1'),
+(25, 5, '', 'Departamentos', 'DepartamentosController', '', 'C_Departamentos', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(26, 5, '', 'Funcionários', 'FuncionariosController', '', 'C_Funcionarios', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(27, 5, '', 'Agendamentos', 'AgendamentosController', '', 'C_Agendamentos', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(28, 5, '', 'Atendimentos', 'AtendimentosController', '', 'C_Atendimentos', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(29, 5, '', 'Grupos', 'GruposController', '', 'C_Grupos', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(30, 5, '', 'Usuários', 'UsuariosController', '', 'C_Usuarios', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(31, 5, '', 'HomeCare', 'HomeCareController', '', 'C_HomeCare', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(32, 5, '', 'Planosdesaude', 'PlanosdesaudeController', '', 'C_Planosdesaude', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(33, 5, '', 'Convenios', 'ConveniosController', '', 'C_Convenios', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(34, 7, '', 'E-mails - Home', 'HomeController', '', 'Cl_Mailbox', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(35, 2, '', 'Admin Controllers', 'ModuloController', '', 'Controllers', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(36, 2, '', 'Admin Rotas', 'RoutesController', '', 'Routes', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(37, 5, '', 'Exames', 'ExamesController', '', 'C_Exames', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(38, 1, 'Usuário', 'UsuarioController', 'UsuarioController', 'App\\Http\\Controllers\\Main\\UsuarioController.php', 'Main_Usuario_Controller', 1111, 'no', '2023-06-01 10:00:05', '2023-06-01 10:08:48', '1'),
+(39, 2, '', 'Admin Módulos', 'ModulosController', '', 'Modulos', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(40, 5, '', 'Tipos de Exames', 'ExamesTiposController', '', 'C_ExamesTipo', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(43, 2, '', 'Admin Menus Itens', 'MenuitensController', '', 'A_MenusController', 0111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(44, 5, '', 'Recursos Médicos', 'RecursosMedicosController', '', 'Recursos_Medicos', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(45, 5, '', 'Agenda Médica', 'AgendaController', '', 'Agenda', 1111, 'yes', '2023-06-01 10:00:05', NULL, '1'),
+(47, 9, 'Dashboard', '', 'HomeController', 'App\\Http\\Controllers\\OSTickets\\HomController.php', 'OSTickets_Home_Controller', 1111, '', '2023-06-01 10:37:48', NULL, '1'),
+(48, 9, 'Teste', '', 'TesteController', 'App\\Http\\Controllers\\OSTicket\\TestController.php', 'Teste', 1111, '', '2023-06-03 03:51:33', NULL, '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_modulo_controller_descricao`
+-- Estrutura para tabela `tb_acl_modulo_controller_descricao`
 --
 
 CREATE TABLE `tb_acl_modulo_controller_descricao` (
@@ -469,7 +474,7 @@ CREATE TABLE `tb_acl_modulo_controller_descricao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_modulo_grupo`
+-- Estrutura para tabela `tb_acl_modulo_grupo`
 --
 
 CREATE TABLE `tb_acl_modulo_grupo` (
@@ -479,7 +484,7 @@ CREATE TABLE `tb_acl_modulo_grupo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para atribuições de menus a grupos de usuários.';
 
 --
--- Extraindo dados da tabela `tb_acl_modulo_grupo`
+-- Despejando dados para a tabela `tb_acl_modulo_grupo`
 --
 
 INSERT INTO `tb_acl_modulo_grupo` (`id`, `id_grupo`, `id_modulo`) VALUES
@@ -495,7 +500,7 @@ INSERT INTO `tb_acl_modulo_grupo` (`id`, `id_grupo`, `id_modulo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_modulo_grupo_menu`
+-- Estrutura para tabela `tb_acl_modulo_grupo_menu`
 --
 
 CREATE TABLE `tb_acl_modulo_grupo_menu` (
@@ -505,17 +510,18 @@ CREATE TABLE `tb_acl_modulo_grupo_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acl_modulo_grupo_menu`
+-- Despejando dados para a tabela `tb_acl_modulo_grupo_menu`
 --
 
 INSERT INTO `tb_acl_modulo_grupo_menu` (`id_modulo_grupo`, `id_menu`, `status`) VALUES
 (2, 1, '1'),
-(3, 2, '1');
+(3, 2, '1'),
+(5, 3, '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_modulo_routes`
+-- Estrutura para tabela `tb_acl_modulo_routes`
 --
 
 CREATE TABLE `tb_acl_modulo_routes` (
@@ -533,7 +539,7 @@ CREATE TABLE `tb_acl_modulo_routes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de rotas de menus.';
 
 --
--- Extraindo dados da tabela `tb_acl_modulo_routes`
+-- Despejando dados para a tabela `tb_acl_modulo_routes`
 --
 
 INSERT INTO `tb_acl_modulo_routes` (`id`, `name`, `id_controller`, `id_parent`, `type`, `route`, `action`, `filter`, `permissao`, `restrict`, `status`) VALUES
@@ -549,7 +555,6 @@ INSERT INTO `tb_acl_modulo_routes` (`id`, `name`, `id_controller`, `id_parent`, 
 (11, 'admin.menus', 4, NULL, 'any', '/menus/grupos', 'index', NULL, 1111, 'inherit', '1'),
 (12, 'admin.menus', 4, 11, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
 (13, 'admin.menus.add', 4, 11, 'get', '/add', 'form', NULL, 1111, 'inherit', '1'),
-(14, 'teste.index', 6, NULL, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
 (15, 'admin.menus.patch', 4, 11, 'patch', '/{id}', 'patch', NULL, 1111, 'inherit', '1'),
 (17, 'account.auth.login', 5, NULL, 'post', '/login', 'login_validate', NULL, 1111, 'inherit', '1'),
 (18, 'logout', 5, NULL, 'any', '/logout', 'logout', NULL, 1111, 'inherit', '1'),
@@ -773,12 +778,47 @@ INSERT INTO `tb_acl_modulo_routes` (`id`, `name`, `id_controller`, `id_parent`, 
 (251, 'clinica.recursosmedicos.agenda.autocomplete', 45, 242, 'get', '/json/autocomplete', 'autocomplete', NULL, 1111, 'inherit', '1'),
 (253, 'clinica.departamentos.autocomplete', 25, NULL, 'any', '/json/autocomplete', 'autocomplete', NULL, 1111, 'inherit', '1'),
 (254, 'clinica.recursosmedicos.agenda.calendario', 45, NULL, 'any', '/calendario', 'calendario', NULL, 1111, 'inherit', '1'),
-(255, 'clinica.funcionario.autocomplete_clinica', 26, 56, 'get', '/json/clinicas', 'autocomplete_clinica', NULL, 1111, 'inherit', '1');
+(255, 'clinica.funcionario.autocomplete_clinica', 26, 56, 'get', '/json/clinicas', 'autocomplete_clinica', NULL, 1111, 'inherit', '1'),
+(256, 'admin.modulos.estrutura', 39, 216, 'post', '/{id}/estrutura', 'criar_estrutura', NULL, 1111, 'inherit', '1'),
+(258, 'admin.api.include_js', 8, NULL, 'get', '/api/js', 'include_js_app', NULL, 1111, 'no', '1'),
+(259, 'admin.controllers.index', 3, NULL, 'any', '/controllers', 'index', NULL, 1111, 'inherit', '1'),
+(260, 'admin.controllers.index', 3, 259, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
+(261, 'admin.controllers.post', 3, 259, 'post', '/', 'create', NULL, 1111, 'inherit', '1'),
+(262, 'admin.controllers.modulos.add', 3, 259, 'any', '/modulo/{id_modulo}', 'form', NULL, 1111, 'inherit', '1'),
+(263, 'admin.controllers.edit', 3, 259, 'get', '/id/{id}', 'form', NULL, 1111, 'inherit', '1'),
+(264, 'admin.controllers.post', 3, 259, 'put', '/', 'update', NULL, 1111, 'inherit', '1'),
+(265, 'admin.modulos.controller.index', 39, 216, 'any', 'id/{id_modulo?}/controllers', 'list_controller', NULL, 1111, 'inherit', '1'),
+(266, 'admin.modulos.controller.index', 39, 265, 'any', '/', 'list_controller', NULL, 1111, 'inherit', '1'),
+(267, 'admin.modulos.controller.add', 39, 265, 'any', '/add', 'form_controller', NULL, 1111, 'inherit', '1'),
+(268, 'admin.modulos.controller.post', 39, 265, 'post', '/', 'create_controller', NULL, 1111, 'inherit', '1'),
+(269, 'admin.modulos.controller.edit', 39, 265, 'get', '/{id_controller}', 'form_controller', NULL, 1111, 'inherit', '1'),
+(270, 'admin.modulos.controller.post', 39, 265, 'put', '/', 'update_controller', NULL, 1111, 'inherit', '1'),
+(271, 'tickets.index', 47, NULL, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
+(272, 'tickets.home.index', 47, NULL, 'any', '/home', 'index', NULL, 1111, 'inherit', '1'),
+(273, 'tickets.home.index', 47, 272, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
+(274, 'tickets.home.add', 47, 272, 'any', '/cadastro', 'form', NULL, 1111, 'inherit', '1'),
+(275, 'tickets.home.show', 47, 272, 'get', '/{id}', 'show', NULL, 1111, 'inherit', '1'),
+(276, 'tickets.home.autocomplete', 47, 272, 'get', '/json/autocomplete', 'autocomplete', NULL, 1111, 'inherit', '1'),
+(277, 'tickets.home.post', 47, 272, 'post', '/', 'store', NULL, 1111, 'inherit', '1'),
+(278, 'tickets.home.post', 47, 272, 'put', '/', 'update', NULL, 1111, 'inherit', '1'),
+(279, 'tickets.home.edit', 47, 272, 'get', '/id/{id}', 'form', NULL, 1111, 'inherit', '1'),
+(280, 'tickets.home.patch', 47, 272, 'patch', '/{id}', 'patch', NULL, 1111, 'inherit', '1'),
+(281, 'tickets.home.delete', 47, 272, 'delete', '/', 'destroy', NULL, 1111, 'inherit', '1'),
+(282, 'tickets.teste.index', 48, NULL, 'any', '/teste', 'index', NULL, 1111, 'inherit', '1'),
+(283, 'tickets.teste.index', 48, 283, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
+(284, 'tickets.teste.add', 48, 283, 'any', '/cadastro', 'form', NULL, 1111, 'inherit', '1'),
+(285, 'tickets.teste.show', 48, 283, 'get', '/{id}', 'show', NULL, 1111, 'inherit', '1'),
+(286, 'tickets.teste.autocomplete', 48, 283, 'get', '/json/autocomplete', 'autocomplete', NULL, 1111, 'inherit', '1'),
+(287, 'tickets.teste.post', 48, 283, 'post', '/', 'store', NULL, 1111, 'inherit', '1'),
+(288, 'tickets.teste.post', 48, 283, 'put', '/', 'update', NULL, 1111, 'inherit', '1'),
+(289, 'tickets.teste.edit', 48, 283, 'get', '/id/{id}', 'form', NULL, 1111, 'inherit', '1'),
+(290, 'tickets.teste.patch', 48, 283, 'patch', '/{id}', 'patch', NULL, 1111, 'inherit', '1'),
+(291, 'tickets.teste.delete', 48, 283, 'delete', '/', 'destroy', NULL, 1111, 'inherit', '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_pacote`
+-- Estrutura para tabela `tb_acl_pacote`
 --
 
 CREATE TABLE `tb_acl_pacote` (
@@ -791,7 +831,7 @@ CREATE TABLE `tb_acl_pacote` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acl_pacote`
+-- Despejando dados para a tabela `tb_acl_pacote`
 --
 
 INSERT INTO `tb_acl_pacote` (`id`, `titulo`, `descricao`, `created_at`, `updated_at`, `status`) VALUES
@@ -801,7 +841,7 @@ INSERT INTO `tb_acl_pacote` (`id`, `titulo`, `descricao`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_pacote_modulo`
+-- Estrutura para tabela `tb_acl_pacote_modulo`
 --
 
 CREATE TABLE `tb_acl_pacote_modulo` (
@@ -813,7 +853,7 @@ CREATE TABLE `tb_acl_pacote_modulo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acl_pacote_modulo`
+-- Despejando dados para a tabela `tb_acl_pacote_modulo`
 --
 
 INSERT INTO `tb_acl_pacote_modulo` (`id_pacote`, `id_modulo`, `created_at`, `updated_at`, `status`) VALUES
@@ -823,7 +863,7 @@ INSERT INTO `tb_acl_pacote_modulo` (`id_pacote`, `id_modulo`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_usuario`
+-- Estrutura para tabela `tb_acl_usuario`
 --
 
 CREATE TABLE `tb_acl_usuario` (
@@ -845,26 +885,20 @@ CREATE TABLE `tb_acl_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela para cadastro de usuários';
 
 --
--- Extraindo dados da tabela `tb_acl_usuario`
+-- Despejando dados para a tabela `tb_acl_usuario`
 --
 
 INSERT INTO `tb_acl_usuario` (`id`, `id_grupo`, `id_funcionario`, `id_gestor`, `nome`, `email`, `login`, `senha`, `salt`, `token`, `permissao`, `ultimo_login`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, NULL, 0, 'Alisson Guedes', 'alissonguedes87@gmail.com', 'alisson', '6b2a792a47f194d7574a86218ca5f082446d9b4198c658e66d2ec98c5f034905788848e5b38a7', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODAxMjUyNDgsImV4cGlyZXMiOjE2ODAxMzI0NDgsIm1vZHVsbyI6Nn0=', 1111, '2023-05-23 14:30:45', '2022-06-24 02:43:09', '2023-03-30 00:27:28', '1'),
-(2, 4, NULL, 0, 'Teste', 'teste', 'teste', '3c702e76fdd1a5c46f902ccd2287e2eabaea8f673497350ea105511d27573b3bf199433c3037d', NULL, NULL, 1111, '2023-05-16 18:58:35', '2023-01-28 16:12:58', '2023-03-29 08:29:43', '1'),
-(3, 2, NULL, 0, 'Teste 2', 'teste2', 'teste2', '3c702e76fdd1a5c46f902ccd2287e2eabaea8f673497350ea105511d27573b3bf199433c3037d', NULL, NULL, 1111, '2023-05-16 18:58:47', '2023-01-28 16:52:08', '2023-03-29 08:29:43', '1'),
-(4, 3, NULL, 0, 'teste3', 'teste3', 'teste3', '3c702e76fdd1a5c46f902ccd2287e2eabaea8f673497350ea105511d27573b3bf199433c3037d', NULL, NULL, 1111, '2023-05-16 18:58:57', '2023-01-28 16:52:39', '2023-03-29 08:29:43', '1'),
-(5, 4, NULL, 0, 'teste4', 'teste4', 'teste4', '3c702e76fdd1a5c46f902ccd2287e2eabaea8f673497350ea105511d27573b3bf199433c3037d', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODQzMDM5NDIsImV4cGlyZXMiOjE2ODQzMTExNDIsIm1vZHVsbyI6NX0=', 1111, '2023-05-16 18:59:07', '2023-01-28 17:36:31', '2023-05-17 09:12:22', '1'),
-(6, 2, NULL, 0, 'Edinilton', 'edinilton@medicus24.com.br', 'edinilton', '3c702e76fdd1a5c46f902ccd2287e2eabaea8f673497350ea105511d27573b3bf199433c3037d', NULL, NULL, 1111, '2023-03-04 14:19:51', '2023-03-04 20:19:06', '2023-03-29 08:29:43', '1'),
-(10, 2, NULL, 0, 'Teste', 'desenvolvimentowebmin@gmail.com', 'phpmyadmin', '2778c3f104a859d523a6fe2c2041fd7c18fab34dabdd4e8454bfd5f1970d657ea4ccf3a7220f1', NULL, NULL, 1111, NULL, '2023-03-28 17:31:56', '2023-03-29 08:29:43', '1'),
-(11, 2, NULL, 0, 'teste', 'asdf', 'adf', '2778c3f104a859d523a6fe2c2041fd7c18fab34dabdd4e8454bfd5f1970d657ea4ccf3a7220f1', NULL, NULL, 1111, NULL, '2023-04-24 11:05:48', NULL, '1'),
-(12, 2, NULL, 0, 'teste', 'asdf@asdf.com', 'asdf', '2778c3f104a859d523a6fe2c2041fd7c18fab34dabdd4e8454bfd5f1970d657ea4ccf3a7220f1', NULL, NULL, 1111, NULL, '2023-04-24 11:06:04', NULL, '1'),
-(13, 1, NULL, 0, 'Teste', 'testeteste', 'testeteste', '2778c3f104a859d523a6fe2c2041fd7c18fab34dabdd4e8454bfd5f1970d657ea4ccf3a7220f1', NULL, NULL, 1111, NULL, '2023-05-16 10:21:16', NULL, '0'),
-(14, 1, NULL, 0, 'Teste', 'testeteste1', 'testeteste1', '2778c3f104a859d523a6fe2c2041fd7c18fab34dabdd4e8454bfd5f1970d657ea4ccf3a7220f1', NULL, NULL, 1111, NULL, '2023-05-16 10:21:37', NULL, '0');
+(1, 1, NULL, 0, 'Alisson Guedes', 'alissonguedes87@gmail.com', 'alisson', '6b2a792a47f194d7574a86218ca5f082446d9b4198c658e66d2ec98c5f034905788848e5b38a7', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODU2MTMzNDYsImV4cGlyZXMiOjE2ODU2MjA1NDYsIm1vZHVsbyI6Mn0=', 1111, '2023-06-07 07:21:25', '2022-06-24 05:43:09', '2023-06-01 09:55:46', '1'),
+(2, 2, NULL, 0, 'Déborah Chianca', 'deborahchianca@medicus24h.com.br', 'deborahchianca@medicus24h.com.br', '3ffbf99945de7a986ed29db1701b54a3a9973de76912a954ae45f9014059cfae97ea90ddc437d', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODQ5NTQ5NzAsImV4cGlyZXMiOjE2ODQ5NjIxNzAsIm1vZHVsbyI6NX0=', 1111, '2023-05-25 14:02:07', '2023-01-28 19:12:58', '2023-05-24 19:25:19', '1'),
+(3, 2, NULL, 0, 'Tatiana', 'gestao@medicus24h.com.br', 'tatiana', '1d4aa2e76b81177494333f8c4d05b75f492faae23c3b7658231aa61b42f5bd00988ea64dcf960', NULL, NULL, 1111, '2023-05-30 11:22:27', '2023-01-28 19:52:08', NULL, '1'),
+(6, 2, NULL, 0, 'Edinilton', 'edinilton.souza@medicus24h.com.br', 'edinilton', '4b0073f96547546b699c59f16c77c603a46c28e5e0ad787fda2b8015f0e3dd232306cf076e262', NULL, NULL, 1111, '2023-03-06 16:00:12', '2023-03-04 23:19:06', '2023-03-07 01:00:22', '1'),
+(7, 2, NULL, 0, 'Gleizer', 'gleizermedicus24h@gmail.com', 'gleizermedicus24h@gmail.com', '0cce35184a2bbfd4d97536f7df2b5c89456429485e6934b3dd279cbbfe889bc51122a4036f5e3', NULL, NULL, 1111, '2023-04-12 09:57:58', '2023-03-28 19:35:02', '2023-03-28 23:55:16', '1');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_usuario_config`
+-- Estrutura para tabela `tb_acl_usuario_config`
 --
 
 CREATE TABLE `tb_acl_usuario_config` (
@@ -877,17 +911,16 @@ CREATE TABLE `tb_acl_usuario_config` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela de configurações do site';
 
 --
--- Extraindo dados da tabela `tb_acl_usuario_config`
+-- Despejando dados para a tabela `tb_acl_usuario_config`
 --
 
 INSERT INTO `tb_acl_usuario_config` (`id_usuario`, `id_modulo`, `id_config`, `value`, `created_at`, `updated_at`) VALUES
-(1, 5, 6, 'expanded', '2023-02-13 19:48:21', '2023-05-23 19:42:28'),
-(5, 5, 6, 'expanded', '2023-04-02 04:21:51', '2023-04-02 04:22:10');
+(1, 5, 6, 'expanded', '2023-02-13 19:48:21', '2023-05-25 22:24:18');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_usuario_imagem`
+-- Estrutura para tabela `tb_acl_usuario_imagem`
 --
 
 CREATE TABLE `tb_acl_usuario_imagem` (
@@ -907,7 +940,7 @@ CREATE TABLE `tb_acl_usuario_imagem` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_acl_usuario_session`
+-- Estrutura para tabela `tb_acl_usuario_session`
 --
 
 CREATE TABLE `tb_acl_usuario_session` (
@@ -922,59 +955,40 @@ CREATE TABLE `tb_acl_usuario_session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_acl_usuario_session`
+-- Despejando dados para a tabela `tb_acl_usuario_session`
 --
 
 INSERT INTO `tb_acl_usuario_session` (`id`, `id_usuario`, `id_modulo`, `token`, `ip`, `user_agent`, `started_at`, `expired_at`) VALUES
 (1, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 19:47:38', '2023-02-13 20:15:03'),
-(2, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 20:15:04', '2023-02-13 20:17:21'),
 (3, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 20:17:23', '2023-02-13 21:08:04'),
-(4, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 21:08:12', '2023-02-13 21:08:30'),
 (5, 2, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 21:08:34', '2023-02-13 21:13:54'),
-(6, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 21:13:59', '2023-02-13 21:14:51'),
-(7, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 21:14:53', '2023-02-13 21:15:04'),
-(8, 5, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 21:15:51', '2023-02-13 21:17:11'),
-(9, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 21:17:14', '2023-02-13 21:25:58'),
 (10, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 21:26:01', '2023-02-13 22:04:10'),
-(11, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:04:12', '2023-02-13 22:04:17'),
 (12, 2, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:04:22', '2023-02-13 22:04:35'),
-(13, 5, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:04:38', '2023-02-13 22:05:36'),
 (14, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:05:41', '2023-02-13 22:06:57'),
 (15, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:06:59', '2023-02-13 22:24:29'),
 (16, 2, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:24:30', '2023-02-13 22:24:37'),
 (17, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:24:40', '2023-02-13 22:24:44'),
-(18, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:24:47', '2023-02-13 22:24:51'),
-(19, 5, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:24:54', '2023-02-13 22:25:04'),
 (20, 2, 4, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-01 21:13:49', '2023-04-01 21:16:31'),
-(21, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:25:11', '2023-02-13 22:27:15'),
 (22, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 22:27:16', '2023-02-13 23:05:33'),
 (23, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 23:05:37', '2023-02-13 23:16:43'),
 (24, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-13 23:16:45', '2023-02-14 02:31:10'),
 (25, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-14 02:31:13', '2023-02-14 04:53:59'),
 (26, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-14 04:54:02', '2023-02-14 04:54:09'),
-(27, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-14 04:54:12', '2023-02-14 04:54:18'),
-(28, 5, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-02-14 04:54:21', '2023-02-14 04:54:29'),
 (29, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-03-04 19:59:53', '2023-03-04 20:19:44'),
 (30, 1, 5, NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-13 19:23:11', '2023-05-13 19:25:42'),
 (31, 6, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-03-04 20:19:48', '2023-03-04 21:11:01'),
-(32, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-03-04 21:11:06', '2023-03-04 21:17:50'),
 (33, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-01 18:18:12', '2023-04-01 21:13:31'),
 (34, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-01 21:13:34', '2023-04-01 21:13:46'),
 (35, 1, 4, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-01 21:16:33', '2023-04-01 21:26:11'),
 (36, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-01 21:26:19', '2023-04-01 21:26:53'),
 (37, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 01:46:04', '2023-04-02 04:01:13'),
-(38, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 01:24:12', '2023-04-02 01:44:27'),
-(39, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 01:44:31', '2023-04-02 01:46:01'),
 (40, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 04:01:15', '2023-04-02 04:11:35'),
 (41, 2, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 04:11:39', '2023-04-02 04:18:07'),
-(42, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 04:18:11', '2023-04-02 04:18:23'),
-(43, 5, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 04:18:26', '2023-04-02 04:23:18'),
 (44, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 21:20:42', '2023-04-02 23:06:11'),
 (45, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 23:25:47', '2023-04-02 23:26:36'),
 (46, 2, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 23:06:35', '2023-04-02 23:19:29'),
 (47, 2, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 23:19:31', '2023-04-02 23:24:45'),
 (48, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-02 23:24:48', '2023-04-02 23:25:46'),
-(49, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-24 04:39:32', '2023-04-24 04:39:43'),
 (50, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-03 02:47:27', '2023-04-03 02:47:37'),
 (51, 2, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-03 02:50:59', '2023-04-03 02:51:28'),
 (52, 2, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-24 04:39:02', '2023-04-24 04:39:29'),
@@ -985,18 +999,35 @@ INSERT INTO `tb_acl_usuario_session` (`id`, `id_usuario`, `id_modulo`, `token`, 
 (57, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-24 08:33:32', '2023-04-24 10:27:52'),
 (58, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-04-25 02:45:19', '2023-04-25 04:18:07'),
 (59, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-17 00:28:42', '2023-05-17 00:58:29'),
-(60, 1, 5, 'b2d774e434eaf0cdde5d35e1d89133f2645fba0b628ee', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-13 19:25:47', NULL),
+(60, 1, 9, NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-06-02 17:24:01', '2023-06-02 17:24:18'),
 (61, 2, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-17 00:58:33', '2023-05-17 00:58:41'),
 (62, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-17 00:58:45', '2023-05-17 00:58:53'),
-(63, 4, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-17 00:58:55', '2023-05-17 00:59:02'),
-(64, 5, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-17 00:59:05', '2023-05-17 00:59:13'),
-(65, 1, 5, '3c0b7668fa64af11437cf05714a46e6c646cf8439ca3f', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-23 20:30:43', NULL),
-(66, 1, 5, '7eb65b30d60fe1a8b2fe11839c3d504e6467a86edf947', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-19 19:48:46', NULL);
+(65, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-24 03:29:40', '2023-05-24 05:32:02'),
+(66, 1, 5, '7eb65b30d60fe1a8b2fe11839c3d504e6467a86edf947', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-19 19:48:46', NULL),
+(67, 1, 2, '647799af3ad752c79e569cfa929eb59b64805a23342f9', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-06-07 10:21:23', NULL),
+(68, 1, 5, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-24 17:01:52', '2023-05-24 17:10:20'),
+(69, 3, 5, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-24 17:10:26', '2023-05-24 17:27:45'),
+(70, 1, 2, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-24 18:15:32', '2023-05-24 18:16:05'),
+(71, 2, 5, '87a40a05b9ee282ff20a9f78acc73226646e64af52d88', '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-24 19:25:35', NULL),
+(72, 1, 5, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-24 18:16:37', '2023-05-24 19:24:43'),
+(73, 2, 5, 'dabcb4ed4c5517675c37cb8e2dd3aba7646f948cc1f2e', '187.64.21.248', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-25 17:02:04', NULL),
+(74, 1, 5, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-24 19:25:04', '2023-05-24 19:25:24'),
+(75, 3, 5, 'b6d407bb5842b117831234c98911e0ae64760692a344b', '187.64.21.248', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-30 14:22:10', NULL),
+(76, 1, 5, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-25 15:12:45', '2023-05-25 16:40:21'),
+(77, 3, 5, 'eea004b2f8a977dff90cd26779a7be96646f8f81be9bd', '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-25 16:40:33', NULL),
+(78, 1, 5, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-25 16:53:51', '2023-05-25 16:55:41'),
+(79, 1, 5, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-25 18:39:47', '2023-05-25 18:40:30'),
+(81, 1, 5, NULL, '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-25 21:56:58', '2023-05-25 22:01:28'),
+(82, 1, 5, '995879b40f32ea0eb1c087e57ad8e19f6471020b70b7a', '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36', '2023-05-26 19:01:31', NULL),
+(83, 1, 5, 'a10d853c8353a5c8be1141e616f17a516477dee61708e', '187.19.178.103', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-05-31 23:57:26', NULL),
+(84, 1, 2, NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-06-02 17:24:35', '2023-06-02 17:24:50'),
+(85, 1, 2, NULL, '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-06-02 17:25:26', '2023-06-02 17:25:44'),
+(86, 1, 2, '4aae5b2bf4b4e47b9601d115e29ef0e5647cbd2900e4d', '127.0.0.1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', '2023-06-04 16:34:49', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_sys_config`
+-- Estrutura para tabela `tb_sys_config`
 --
 
 CREATE TABLE `tb_sys_config` (
@@ -1009,7 +1040,7 @@ CREATE TABLE `tb_sys_config` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci COMMENT='Tabela de configurações do site';
 
 --
--- Extraindo dados da tabela `tb_sys_config`
+-- Despejando dados para a tabela `tb_sys_config`
 --
 
 INSERT INTO `tb_sys_config` (`id`, `id_modulo`, `config`, `value`, `created_at`, `updated_at`) VALUES
@@ -1026,7 +1057,7 @@ INSERT INTO `tb_sys_config` (`id`, `id_modulo`, `config`, `value`, `created_at`,
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_sys_dicionario`
+-- Estrutura para tabela `tb_sys_dicionario`
 --
 
 CREATE TABLE `tb_sys_dicionario` (
@@ -1038,7 +1069,7 @@ CREATE TABLE `tb_sys_dicionario` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_sys_idioma`
+-- Estrutura para tabela `tb_sys_idioma`
 --
 
 CREATE TABLE `tb_sys_idioma` (
@@ -1053,7 +1084,7 @@ CREATE TABLE `tb_sys_idioma` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_sys_idioma`
+-- Despejando dados para a tabela `tb_sys_idioma`
 --
 
 INSERT INTO `tb_sys_idioma` (`id`, `descricao`, `sigla`, `label`, `imagem`, `created_at`, `updated_at`, `status`) VALUES
@@ -1063,7 +1094,7 @@ INSERT INTO `tb_sys_idioma` (`id`, `descricao`, `sigla`, `label`, `imagem`, `cre
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_sys_idioma_dicionario`
+-- Estrutura para tabela `tb_sys_idioma_dicionario`
 --
 
 CREATE TABLE `tb_sys_idioma_dicionario` (
@@ -1077,20 +1108,20 @@ CREATE TABLE `tb_sys_idioma_dicionario` (
 --
 
 --
--- Índices para tabela `tb_acl_grupo`
+-- Índices de tabela `tb_acl_grupo`
 --
 ALTER TABLE `tb_acl_grupo`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `grupo` (`grupo`);
 
 --
--- Índices para tabela `tb_acl_menu`
+-- Índices de tabela `tb_acl_menu`
 --
 ALTER TABLE `tb_acl_menu`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_acl_menu_descricao`
+-- Índices de tabela `tb_acl_menu_descricao`
 --
 ALTER TABLE `tb_acl_menu_descricao`
   ADD PRIMARY KEY (`id_idioma`,`id_menu`),
@@ -1098,14 +1129,14 @@ ALTER TABLE `tb_acl_menu_descricao`
   ADD KEY `fk_tb_produto_descricao_tb_sys_idioma1_idx` (`id_idioma`);
 
 --
--- Índices para tabela `tb_acl_menu_grupo`
+-- Índices de tabela `tb_acl_menu_grupo`
 --
 ALTER TABLE `tb_acl_menu_grupo`
   ADD PRIMARY KEY (`id_grupo`,`id_menu`),
   ADD KEY `fk_tb_acl_menu_grupo_tb_acl_menu_id_menu` (`id_menu`);
 
 --
--- Índices para tabela `tb_acl_menu_item`
+-- Índices de tabela `tb_acl_menu_item`
 --
 ALTER TABLE `tb_acl_menu_item`
   ADD PRIMARY KEY (`id`),
@@ -1113,7 +1144,7 @@ ALTER TABLE `tb_acl_menu_item`
   ADD KEY `fk_tb_acl_menu_item_id_parent` (`id_parent`);
 
 --
--- Índices para tabela `tb_acl_menu_item_descricao`
+-- Índices de tabela `tb_acl_menu_item_descricao`
 --
 ALTER TABLE `tb_acl_menu_item_descricao`
   ADD PRIMARY KEY (`id_idioma`,`id_item`),
@@ -1121,20 +1152,20 @@ ALTER TABLE `tb_acl_menu_item_descricao`
   ADD KEY `fk_tb_menu_item_descricao_id_idioma` (`id_idioma`);
 
 --
--- Índices para tabela `tb_acl_menu_item_menu`
+-- Índices de tabela `tb_acl_menu_item_menu`
 --
 ALTER TABLE `tb_acl_menu_item_menu`
   ADD PRIMARY KEY (`id_item`,`id_menu`),
   ADD KEY `fk_tb_acl_menu_item_menu_id_menu` (`id_menu`);
 
 --
--- Índices para tabela `tb_acl_menu_secao`
+-- Índices de tabela `tb_acl_menu_secao`
 --
 ALTER TABLE `tb_acl_menu_secao`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_acl_modulo`
+-- Índices de tabela `tb_acl_modulo`
 --
 ALTER TABLE `tb_acl_modulo`
   ADD PRIMARY KEY (`id`),
@@ -1143,7 +1174,7 @@ ALTER TABLE `tb_acl_modulo`
   ADD KEY `fk_tb_acl_modulo_homepage` (`homepage`);
 
 --
--- Índices para tabela `tb_acl_modulo_controller`
+-- Índices de tabela `tb_acl_modulo_controller`
 --
 ALTER TABLE `tb_acl_modulo_controller`
   ADD PRIMARY KEY (`id`),
@@ -1152,14 +1183,14 @@ ALTER TABLE `tb_acl_modulo_controller`
   ADD KEY `fk_tb_acl_modulo_classe_tb_acl_modulo1_idx` (`id_modulo`);
 
 --
--- Índices para tabela `tb_acl_modulo_controller_descricao`
+-- Índices de tabela `tb_acl_modulo_controller_descricao`
 --
 ALTER TABLE `tb_acl_modulo_controller_descricao`
   ADD PRIMARY KEY (`id_idioma`,`id_controller`),
   ADD KEY `fk_tb_acl_modulo_controller_descricao_id_controller_id_item` (`id_controller`,`id_idioma`);
 
 --
--- Índices para tabela `tb_acl_modulo_grupo`
+-- Índices de tabela `tb_acl_modulo_grupo`
 --
 ALTER TABLE `tb_acl_modulo_grupo`
   ADD PRIMARY KEY (`id`),
@@ -1168,7 +1199,7 @@ ALTER TABLE `tb_acl_modulo_grupo`
   ADD KEY `fk_tb_acl_modulo_grupo_tb_acl_modulo1_idx` (`id_modulo`);
 
 --
--- Índices para tabela `tb_acl_modulo_grupo_menu`
+-- Índices de tabela `tb_acl_modulo_grupo_menu`
 --
 ALTER TABLE `tb_acl_modulo_grupo_menu`
   ADD PRIMARY KEY (`id_menu`,`id_modulo_grupo`) USING BTREE,
@@ -1176,7 +1207,7 @@ ALTER TABLE `tb_acl_modulo_grupo_menu`
   ADD KEY `fk_tb_acl_modulo_menu_id_modulo_idx` (`id_modulo_grupo`);
 
 --
--- Índices para tabela `tb_acl_modulo_routes`
+-- Índices de tabela `tb_acl_modulo_routes`
 --
 ALTER TABLE `tb_acl_modulo_routes`
   ADD PRIMARY KEY (`id`),
@@ -1185,14 +1216,14 @@ ALTER TABLE `tb_acl_modulo_routes`
   ADD KEY `fk_tb_acl_modulo_routes_id_parent` (`id_parent`);
 
 --
--- Índices para tabela `tb_acl_pacote`
+-- Índices de tabela `tb_acl_pacote`
 --
 ALTER TABLE `tb_acl_pacote`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `titulo` (`titulo`);
 
 --
--- Índices para tabela `tb_acl_pacote_modulo`
+-- Índices de tabela `tb_acl_pacote_modulo`
 --
 ALTER TABLE `tb_acl_pacote_modulo`
   ADD PRIMARY KEY (`id_pacote`,`id_modulo`),
@@ -1200,7 +1231,7 @@ ALTER TABLE `tb_acl_pacote_modulo`
   ADD KEY `fk_tb_acl_pacote_modulo_id_pacote` (`id_pacote`) USING BTREE;
 
 --
--- Índices para tabela `tb_acl_usuario`
+-- Índices de tabela `tb_acl_usuario`
 --
 ALTER TABLE `tb_acl_usuario`
   ADD PRIMARY KEY (`id`),
@@ -1210,7 +1241,7 @@ ALTER TABLE `tb_acl_usuario`
   ADD KEY `fk_tb_acl_usuario_id_funcionario` (`id_funcionario`);
 
 --
--- Índices para tabela `tb_acl_usuario_config`
+-- Índices de tabela `tb_acl_usuario_config`
 --
 ALTER TABLE `tb_acl_usuario_config`
   ADD PRIMARY KEY (`id_usuario`,`id_config`),
@@ -1218,14 +1249,14 @@ ALTER TABLE `tb_acl_usuario_config`
   ADD KEY `fk_tb_acl_usuario_config_id_modulo` (`id_modulo`);
 
 --
--- Índices para tabela `tb_acl_usuario_imagem`
+-- Índices de tabela `tb_acl_usuario_imagem`
 --
 ALTER TABLE `tb_acl_usuario_imagem`
   ADD PRIMARY KEY (`id`,`id_usuario`),
   ADD KEY `tb_acl_usuario_imagem_id_usuario` (`id_usuario`);
 
 --
--- Índices para tabela `tb_acl_usuario_session`
+-- Índices de tabela `tb_acl_usuario_session`
 --
 ALTER TABLE `tb_acl_usuario_session`
   ADD PRIMARY KEY (`id`),
@@ -1233,7 +1264,7 @@ ALTER TABLE `tb_acl_usuario_session`
   ADD KEY `fk_tb_acl_usuario_session_id_modulo` (`id_modulo`);
 
 --
--- Índices para tabela `tb_sys_config`
+-- Índices de tabela `tb_sys_config`
 --
 ALTER TABLE `tb_sys_config`
   ADD PRIMARY KEY (`id`),
@@ -1241,20 +1272,20 @@ ALTER TABLE `tb_sys_config`
   ADD KEY `fk_tb_sys_config_id_modulo` (`id_modulo`);
 
 --
--- Índices para tabela `tb_sys_dicionario`
+-- Índices de tabela `tb_sys_dicionario`
 --
 ALTER TABLE `tb_sys_dicionario`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tb_sys_idioma`
+-- Índices de tabela `tb_sys_idioma`
 --
 ALTER TABLE `tb_sys_idioma`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `sigla` (`sigla`);
 
 --
--- Índices para tabela `tb_sys_idioma_dicionario`
+-- Índices de tabela `tb_sys_idioma_dicionario`
 --
 ALTER TABLE `tb_sys_idioma_dicionario`
   ADD PRIMARY KEY (`id_idioma`,`id_palavra`),
@@ -1262,7 +1293,7 @@ ALTER TABLE `tb_sys_idioma_dicionario`
   ADD KEY `fk_tb_sys_idioma_id_idioma` (`id_idioma`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -1293,13 +1324,13 @@ ALTER TABLE `tb_acl_menu_secao`
 -- AUTO_INCREMENT de tabela `tb_acl_modulo`
 --
 ALTER TABLE `tb_acl_modulo`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `tb_acl_modulo_controller`
 --
 ALTER TABLE `tb_acl_modulo_controller`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT de tabela `tb_acl_modulo_grupo`
@@ -1311,13 +1342,13 @@ ALTER TABLE `tb_acl_modulo_grupo`
 -- AUTO_INCREMENT de tabela `tb_acl_modulo_routes`
 --
 ALTER TABLE `tb_acl_modulo_routes`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=292;
 
 --
 -- AUTO_INCREMENT de tabela `tb_acl_usuario`
 --
 ALTER TABLE `tb_acl_usuario`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `tb_acl_usuario_config`
@@ -1335,7 +1366,7 @@ ALTER TABLE `tb_acl_usuario_imagem`
 -- AUTO_INCREMENT de tabela `tb_acl_usuario_session`
 --
 ALTER TABLE `tb_acl_usuario_session`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT de tabela `tb_sys_config`
@@ -1356,99 +1387,99 @@ ALTER TABLE `tb_sys_idioma`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `tb_acl_menu_descricao`
+-- Restrições para tabelas `tb_acl_menu_descricao`
 --
 ALTER TABLE `tb_acl_menu_descricao`
   ADD CONSTRAINT `tb_acl_menu_descricao_id_idioma` FOREIGN KEY (`id_idioma`) REFERENCES `tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_acl_menu_descricao_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `tb_acl_menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_menu_grupo`
+-- Restrições para tabelas `tb_acl_menu_grupo`
 --
 ALTER TABLE `tb_acl_menu_grupo`
   ADD CONSTRAINT `fk_tb_acl_menu_grupo_tb_acl_grupo_id_grupo` FOREIGN KEY (`id_grupo`) REFERENCES `tb_acl_grupo` (`id`),
   ADD CONSTRAINT `fk_tb_acl_menu_grupo_tb_acl_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `tb_acl_menu` (`id`);
 
 --
--- Limitadores para a tabela `tb_acl_menu_item`
+-- Restrições para tabelas `tb_acl_menu_item`
 --
 ALTER TABLE `tb_acl_menu_item`
   ADD CONSTRAINT `fk_tb_acl_menu_item_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `tb_acl_menu_item` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `fk_tb_menu_item_id_controller` FOREIGN KEY (`id_controller`) REFERENCES `tb_acl_modulo_controller` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_menu_item_descricao`
+-- Restrições para tabelas `tb_acl_menu_item_descricao`
 --
 ALTER TABLE `tb_acl_menu_item_descricao`
   ADD CONSTRAINT `tb_acl_menu_item_descricao_id_idioma` FOREIGN KEY (`id_idioma`) REFERENCES `tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tb_acl_menu_item_descricao_id_item` FOREIGN KEY (`id_item`) REFERENCES `tb_acl_menu_item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_menu_item_menu`
+-- Restrições para tabelas `tb_acl_menu_item_menu`
 --
 ALTER TABLE `tb_acl_menu_item_menu`
   ADD CONSTRAINT `fk_tb_acl_menu_item_menu_id_item` FOREIGN KEY (`id_item`) REFERENCES `tb_acl_menu_item` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_acl_menu_item_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `tb_acl_menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_modulo`
+-- Restrições para tabelas `tb_acl_modulo`
 --
 ALTER TABLE `tb_acl_modulo`
   ADD CONSTRAINT `fk_tb_acl_modulo_homepage` FOREIGN KEY (`homepage`) REFERENCES `tb_acl_modulo_routes` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
--- Limitadores para a tabela `tb_acl_modulo_controller`
+-- Restrições para tabelas `tb_acl_modulo_controller`
 --
 ALTER TABLE `tb_acl_modulo_controller`
   ADD CONSTRAINT `fk_tb_acl_modulo_classe_tb_acl_modulo1` FOREIGN KEY (`id_modulo`) REFERENCES `tb_acl_modulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_modulo_controller_descricao`
+-- Restrições para tabelas `tb_acl_modulo_controller_descricao`
 --
 ALTER TABLE `tb_acl_modulo_controller_descricao`
   ADD CONSTRAINT `fk_tb_acl_modulo_controller_descricao_id_controller` FOREIGN KEY (`id_controller`) REFERENCES `tb_acl_modulo_controller` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_acl_modulo_controller_descricao_id_idioma` FOREIGN KEY (`id_idioma`) REFERENCES `tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_modulo_grupo`
+-- Restrições para tabelas `tb_acl_modulo_grupo`
 --
 ALTER TABLE `tb_acl_modulo_grupo`
   ADD CONSTRAINT `fk_tb_acl_menu_grupo_id_grupo` FOREIGN KEY (`id_grupo`) REFERENCES `tb_acl_grupo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_acl_modulo_grupo_tb_acl_modulo1` FOREIGN KEY (`id_modulo`) REFERENCES `tb_acl_modulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_modulo_grupo_menu`
+-- Restrições para tabelas `tb_acl_modulo_grupo_menu`
 --
 ALTER TABLE `tb_acl_modulo_grupo_menu`
   ADD CONSTRAINT `fk_tb_acl_modulo_menu_id_menu` FOREIGN KEY (`id_menu`) REFERENCES `tb_acl_menu` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_acl_modulo_menu_id_modulo` FOREIGN KEY (`id_modulo_grupo`) REFERENCES `tb_acl_modulo_grupo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_modulo_routes`
+-- Restrições para tabelas `tb_acl_modulo_routes`
 --
 ALTER TABLE `tb_acl_modulo_routes`
-  ADD CONSTRAINT `fk_tb_acl_modulo_routes_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `tb_acl_modulo_routes` (`id`),
-  ADD CONSTRAINT `fk_tb_acl_rotas_tb_acl_modulo_classe1` FOREIGN KEY (`id_controller`) REFERENCES `tb_acl_modulo_controller` (`id`);
+  ADD CONSTRAINT `fk_tb_acl_modulo_routes_id_parent` FOREIGN KEY (`id_parent`) REFERENCES `tb_acl_modulo_routes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tb_acl_rotas_tb_acl_modulo_classe1` FOREIGN KEY (`id_controller`) REFERENCES `tb_acl_modulo_controller` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_pacote_modulo`
+-- Restrições para tabelas `tb_acl_pacote_modulo`
 --
 ALTER TABLE `tb_acl_pacote_modulo`
   ADD CONSTRAINT `fk_tb_pacote_modulo_id_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `tb_acl_modulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_pacote_modulo_id_pacote` FOREIGN KEY (`id_pacote`) REFERENCES `tb_acl_pacote` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_usuario`
+-- Restrições para tabelas `tb_acl_usuario`
 --
 ALTER TABLE `tb_acl_usuario`
   ADD CONSTRAINT `fk_tb_acl_usuario_id_grupo` FOREIGN KEY (`id_grupo`) REFERENCES `tb_acl_grupo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_usuario_config`
+-- Restrições para tabelas `tb_acl_usuario_config`
 --
 ALTER TABLE `tb_acl_usuario_config`
   ADD CONSTRAINT `fk_tb_acl_usuario_config_id_config` FOREIGN KEY (`id_config`) REFERENCES `tb_sys_config` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -1456,26 +1487,26 @@ ALTER TABLE `tb_acl_usuario_config`
   ADD CONSTRAINT `fk_tb_acl_usuario_config_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_acl_usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_usuario_imagem`
+-- Restrições para tabelas `tb_acl_usuario_imagem`
 --
 ALTER TABLE `tb_acl_usuario_imagem`
   ADD CONSTRAINT `tb_acl_usuario_imagem_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_acl_usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_acl_usuario_session`
+-- Restrições para tabelas `tb_acl_usuario_session`
 --
 ALTER TABLE `tb_acl_usuario_session`
   ADD CONSTRAINT `fk_tb_acl_usuario_session_id_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `tb_acl_modulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tb_acl_usuario_session_id_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `tb_acl_usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_sys_config`
+-- Restrições para tabelas `tb_sys_config`
 --
 ALTER TABLE `tb_sys_config`
   ADD CONSTRAINT `fk_tb_sys_config_id_modulo` FOREIGN KEY (`id_modulo`) REFERENCES `tb_acl_modulo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `tb_sys_idioma_dicionario`
+-- Restrições para tabelas `tb_sys_idioma_dicionario`
 --
 ALTER TABLE `tb_sys_idioma_dicionario`
   ADD CONSTRAINT `fk_tb_sys_idioma_id_idioma` FOREIGN KEY (`id_idioma`) REFERENCES `tb_sys_idioma` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
