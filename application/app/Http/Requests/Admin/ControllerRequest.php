@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Http\Requests\Request;
 use App\Rules\ControllerRule;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ControllerRequest extends FormRequest
+class ControllerRequest extends Request
 {
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -27,11 +27,11 @@ class ControllerRequest extends FormRequest
 	{
 
 		$rules = [
+			'nome'       => 'required',
 			'controller' => [
 				'required',
 				new ControllerRule(),
 			],
-			'filename'   => 'required',
 			'modulo'     => [
 				'required',
 			],

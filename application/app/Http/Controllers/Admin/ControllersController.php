@@ -39,7 +39,7 @@ class ControllersController extends Controller
 			'message'     => 'Controller adicionado com sucesso!',
 			'clean_form'  => true,
 			'close_modal' => true,
-			// 'type'        => 'redirect',
+			'type'        => 'refresh',
 			// 'url'         => url()->route('admin.modulos.edit', $id),
 		]);
 
@@ -67,11 +67,10 @@ class ControllersController extends Controller
 	public function form(Request $request, ModuloModel $modulo, ControllerModel $controller)
 	{
 
-		$dados['modulo']     = $modulo->getModuloById($request->modulo);
-		$dados['controller'] = $controller->getControllerById($request->id);
+		$dados['modulo']     = $modulo->getModuloById($request->id_modulo);
+		$dados['controller'] = $controller->getControllerById($request->id, $request->id_modulo);
 
-		// return response(view('admin.modulos.form.controllers', $dados), 200);
-		return response(view('admin.modulos.form.controllers', $dados), 200);
+		return response(view('admin.modulos.controllers.form', $dados), 200);
 
 	}
 
@@ -96,6 +95,8 @@ class ControllersController extends Controller
 			'message'     => 'Controller editado com sucesso!',
 			'clean_form'  => true,
 			'close_modal' => true,
+			'type'        => 'refresh',
+			// 'url'         => url()->route('clinica.funcionarios.index'),
 		]);
 
 	}

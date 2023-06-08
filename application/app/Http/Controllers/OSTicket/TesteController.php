@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\NewModule;
+namespace App\Http\Controllers\OSTicket;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class TesteController extends Controller
 {
     /**
      * Display a listing of the resource.

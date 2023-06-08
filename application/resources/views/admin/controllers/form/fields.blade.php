@@ -47,7 +47,7 @@
 	<div class="col s12 mb-1">
 		<div class="input-field">
 			<label class="grey-text @if (isset($controller) && isset($controller->use_as)) active @endisset" for="path"> Usar Como </label>
-			<input type="text" name="use_as" value="{{ isset($controller) ? limpa_string($controller->use_as, null, false) : null }}" id="use_as">
+			<input type="text" name="use_as" value="{{ isset($controller) ? $controller->use_as : null }}" id="use_as">
 		</div>
 	</div>
 </div>

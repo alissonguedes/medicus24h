@@ -4,25 +4,17 @@ namespace App\Rules;
 
 use App\Models\ControllerModel;
 use Closure;
-use Illuminate\Contracts\Validation\InvokableRule;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class ControllerRule implements ValidationRule, InvokableRule
+class ControllerRule implements ValidationRule
 {
+
 	/**
 	 * Run the validation rule.
 	 *
-	 * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+	 * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString $fail
 	 */
 	public function validate(string $attribute, mixed $value, Closure $fail): void
-	{
-
-		$this->__invoke($attribute, $value, $fail);
-
-	}
-
-	// public function rules()
-	public function __invoke(string $attribute, mixed $value, Closure $fail): void
 	{
 
 		$controllerModel = new ControllerModel();
@@ -46,4 +38,5 @@ class ControllerRule implements ValidationRule, InvokableRule
 		}
 
 	}
+
 }
