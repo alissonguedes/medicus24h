@@ -1,8 +1,6 @@
-// function formFuncionarios() {
-
 autocomplete($('#clinica'), () => {
 
-	$('#clinica').on('change', function() {
+	$('#clinica').on('change', function () {
 
 		var clinica = $(this).val();
 
@@ -20,10 +18,7 @@ autocomplete($('#departamento'), {
 	'clinica': null
 });
 
-// }
-
-
-$('select[name="funcao"]').on('change', function() {
+$('select[name="funcao"]').on('change', function () {
 
 	if ($(this).val() == 2) {
 		$('#dados_medicos').show().find('[disabled]').attr('disabled', false);

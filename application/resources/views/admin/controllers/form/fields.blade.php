@@ -7,8 +7,8 @@
 <div class="row">
 	<div class="col s12 mb-1">
 		<div class="input-field">
-			<label class="grey-text @if (isset($controller) && isset($controller->nome)) active @endisset" for="nome"> Nome do Controller </label>
-			<input type="text" name="nome" id="nome" value="{{ isset($controller) ? $controller->nome : null }}">
+			<label class="grey-text @if (isset($controller) && isset($controller->nome)) active @endif" for="nome"> Nome do Controller </label>
+			<input type="text" name="nome" id="nome" value="{{ isset($controller) ? $controller->nome : null }}" autofocus="autofocus">
 		</div>
 	</div>
 </div>
@@ -22,9 +22,9 @@
 			<div class="input-group">
 				<span class="input-group-item first">{{ isset($modulo) ? $modulo->namespace : null }}</span>
 				@isset($controller)
-				@php
-				$controller_name = substr($controller->controller, 0, -10);
-				@endphp
+					@php
+						$controller_name = substr($controller->controller, 0, -10);
+					@endphp
 				@endisset
 				<input type="text" class="controller_name" value="{{ isset($controller) ? limpa_string($controller_name, null, false) : null }}" placeholder="">
 				<span class="input-group-item last">Controller.php</span>
@@ -46,7 +46,7 @@
 <div class="row">
 	<div class="col s12 mb-1">
 		<div class="input-field">
-			<label class="grey-text @if (isset($controller) && isset($controller->use_as)) active @endisset" for="path"> Usar Como </label>
+			<label class="grey-text @if (isset($controller) && isset($controller->use_as)) active @endif" for="path"> Usar Como </label>
 			<input type="text" name="use_as" value="{{ isset($controller) ? $controller->use_as : null }}" id="use_as">
 		</div>
 	</div>
@@ -67,7 +67,8 @@
 					@if (isset($modulos))
 						@foreach ($modulos as $m)
 							<option value="{{ $m->id }}" {{ isset($modulo) && $m->id == $modulo->id ? 'selected="selected"' : null }} data-icon=""> {{ $m->modulo }} </option>
-						@endforeach @endif
+						@endforeach
+					@endif
 				</select>
 			@endisset
 		</div>
@@ -77,27 +78,27 @@
 
 <!-- BEGIN Input[Senha] -->
 <div class="row">
-				<div class="col s12 mb-1">
-					<div class="input-field">
-						<label class="grey-text active" for="restrict"> Restrito? </label>
-						<select name="restrict">
-							<option value="inherit" {{ !isset($controller) || (isset($controller) && $controller->restrict == 'inherit') ? 'selected="selected"' : null }} data-icon=""> Herdado </option>
-							<option value="yes" {{ isset($controller) && $controller->restrict == 'yes' ? 'selected="selected"' : null }} data-icon=""> Sim </option>
-							<option value="no" {{ isset($controller) && $controller->restrict == 'no' ? 'selected="selected"' : null }} data-icon=""> Não </option>
-						</select>
-					</div>
-				</div>
+	<div class="col s12 mb-1">
+		<div class="input-field">
+			<label class="grey-text active" for="restrict"> Restrito? </label>
+			<select name="restrict">
+				<option value="inherit" {{ !isset($controller) || (isset($controller) && $controller->restrict == 'inherit') ? 'selected="selected"' : null }} data-icon=""> Herdado </option>
+				<option value="yes" {{ isset($controller) && $controller->restrict == 'yes' ? 'selected="selected"' : null }} data-icon=""> Sim </option>
+				<option value="no" {{ isset($controller) && $controller->restrict == 'no' ? 'selected="selected"' : null }} data-icon=""> Não </option>
+			</select>
 		</div>
-		<!-- END Input[Senha] -->
+	</div>
+</div>
+<!-- END Input[Senha] -->
 
-		<!-- BEGIN Input[Status] -->
-		<div class="row">
-			<div class="col s12 mb-1">
-				<label class="left" style="cursor: pointer; display: flex; align-items: center;">
-					<input type="checkbox" name="status" value="0" {{ isset($controller) && $controller->status === '0' ? 'checked="checked"' : null }}>
-					<i class="material-icons" style="width: auto !important;">lock</i>
-					<span style="font-size: 1rem; margin-left: 20px; color: #000">Bloquear Controller</span>
-				</label>
-			</div>
-		</div>
-		<!-- END Input[Status] -->
+<!-- BEGIN Input[Status] -->
+<div class="row">
+	<div class="col s12 mb-1">
+		<label class="left" style="cursor: pointer; display: flex; align-items: center;">
+			<input type="checkbox" name="status" value="0" {{ isset($controller) && $controller->status === '0' ? 'checked="checked"' : null }}>
+			<i class="material-icons" style="width: auto !important;">lock</i>
+			<span style="font-size: 1rem; margin-left: 20px; color: #000">Bloquear Controller</span>
+		</label>
+	</div>
+</div>
+<!-- END Input[Status] -->

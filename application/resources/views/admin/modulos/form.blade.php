@@ -81,7 +81,7 @@
 									<ul class="tabs">
 										<li class="tab col"><a href="#modulo">Módulo</a></li>
 										<li class="tab col"><a href="#controllers">Controllers</a></li>
-										<li class="tab col"><a href="#views">Views</a></li>
+										{{-- <li class="tab col"><a href="#views">Views</a></li> --}}
 										<li class="tab col"><a href="#menus">Menus</a></li>
 										<li class="tab col"><a href="#rotas">Rotas</a></li>
 									</ul>
@@ -134,7 +134,7 @@
 														<label class="grey-text active" for="path"> Path </label>
 														<div class="input-group">
 															<span class="input-group-item first">/</span>
-															<input type="text" name="path" value="{{ isset($modulo) ? limpa_string($modulo->path) : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
+															<input type="text" name="path" value="{{ isset($modulo) ? limpa_string($modulo->path, '/') : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
 														</div>
 													</div>
 												</div>
@@ -200,7 +200,7 @@
 											<!-- END Controllers -->
 
 											<!-- BEGIN Views -->
-											<div id="views">
+											{{-- <div id="views">
 
 												<div class="row">
 													<div class="col s12 mt-3 mb-3">
@@ -208,15 +208,31 @@
 													</div>
 												</div>
 
-											</div>
+											</div> --}}
 											<!-- END Views -->
 
 											<!-- BEGIN Menus -->
 											<div id="menus">
 
 												<div class="row">
-													<div class="col s12 mt-3 mb-3">
+													<div class="col s12 mb-3">
 														<h6>Menus</h6>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col s12 mb-1">
+
+														<button type="button" class="btn green waves-effect" data-trigger="modal" data-target="modal_menu" data-href="{{ route('admin.modulos.menus.add', $modulo->id) }}" data-disabled="false">
+															Novo Menu
+														</button>
+
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col s12">
+														@include('admin.modulos.menus.table')
 													</div>
 												</div>
 
@@ -270,10 +286,12 @@
 
 			</div>
 
-			@include('admin.modulos.controllers.form')
 
 		</div>
 
 	</div>
+
+	@include('admin.modulos.controllers.form')
+	@include('admin.modulos.menus.form')
 
 @endsection

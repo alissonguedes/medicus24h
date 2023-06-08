@@ -28,5 +28,7 @@ function load_scripts() {
 			console.log(error, status);
 
 		}
+
 	});
+
 }

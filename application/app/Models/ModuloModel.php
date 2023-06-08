@@ -257,7 +257,8 @@ namespace App\Models{
 			$namespace = limpa_string($input['namespace'], '\\', false);
 
 			$input['namespace'] = 'App\Http\Controllers\\' . $namespace . '\\';
-			$input['path']      = '/' . limpa_string($input['path']);
+			// $input['path']      = '/' . limpa_string($input['path']);
+			$input['path'] = '/' . limpa_string($input['path'], '/');
 
 			return $this->fields($input);
 
@@ -416,8 +417,8 @@ namespace App\Models{
 
 			}
 
-			echo $saida_controller . '
-			' . $saida_view;
+			// echo $saida_controller . '
+			// ' . $saida_view;
 
 			// $id_controller     = null;
 			// $create_controller = null;

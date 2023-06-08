@@ -49,7 +49,7 @@ var Http = {
 					progress('out', 0);
 
 					console.log(error);
-					alert('Não foi possível continuar. Erro: ' + error);
+					alert(`Não foi possível continuar. Erro: <br><h3>${error.status} - ${error.statusText}</h3>`);
 
 				}
 
@@ -125,7 +125,7 @@ var Http = {
 
 		var c = callback;
 
-		xhr.onprogress = function(e) {
+		xhr.onprogress = function (e) {
 			// var progressBar = $('.progress').children();
 			// var percent = Math.round((e.loaded / e.total) * 100);
 			// console.log(percent + '%');
@@ -136,7 +136,7 @@ var Http = {
 			// // });
 		}
 
-		xhr.onreadystatechange = function(e) {
+		xhr.onreadystatechange = function (e) {
 
 			// var status = xhr.getResponseHeader('Location');
 			// if (status === 302)
@@ -144,7 +144,7 @@ var Http = {
 
 		}
 
-		xhr.onloadstart = function(e) {
+		xhr.onloadstart = function (e) {
 
 			var s = $('.sidenav'),
 				i;
@@ -155,11 +155,11 @@ var Http = {
 				i.close();
 			}
 
-			progress('in', 'bar');
+			progress('in');
 
 		}
 
-		xhr.onloadend = function(e) {
+		xhr.onloadend = function (e) {
 
 			if (xhr.readyState === 4) {
 
@@ -185,11 +185,11 @@ var Http = {
 
 		}
 
-		xhr.onload = function(e) {
+		xhr.onload = function (e) {
 
 		}
 
-		xhr.noerror = function(e) {
+		xhr.noerror = function (e) {
 
 		}
 

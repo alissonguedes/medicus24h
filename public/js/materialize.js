@@ -293,22 +293,26 @@ var Materialize = {
 
 						form = $(response).find('form').html();
 
-						$modal.find('form').html(form);
+						$modal.find('form').html(form).find('[autofocus]').focus();
 
 						Materialize.tooltip();
 						Materialize.tabs();
 						Materialize.select();
-						Materialize.modal($modal.find('.modal'));
-						Scroller.constructor($modal);
+						// Materialize.modal($modal.find('.modal'));
+						// Scroller.constructor($modal);
 						Mask.init();
 
 						/**
 						 * Obtém todos os departamentos no formulário de funcionários ao selecionar uma clínica
 						 */
 						// formFuncionarios();
-						load_scripts()
+						load_scripts();
 
 					});
+
+					setTimeout(function () {
+						$modal.find('form').find($(texto).remove());
+					}, 200);
 
 				},
 

@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\ControllerRequest;
 use App\Http\Requests\Admin\ModuloRequest;
 use Illuminate\Http\Request;
 use \App\Models\ControllerModel;
+use \App\Models\MenuModel;
 use \App\Models\ModuloModel;
 
 class ModulosController extends Controller
@@ -30,12 +31,13 @@ class ModulosController extends Controller
 
 	}
 
-	public function form(Request $request, ModuloModel $modulo, ControllerModel $controller)
+	public function form(Request $request, ModuloModel $modulo, ControllerModel $controller, MenuModel $menu)
 	{
 
-		$dados             = [];
-		$dados['modulos']  = $modulo->getModulos();
-		$dados['paginate'] = $controller->getControllers(null, $request->id);
+		$dados                = [];
+		$dados['modulos']     = $modulo->getModulos();
+		$dados['controllers'] = $controller->getControllers(null, $request->id);
+		$dados['menus']       = $menu->getMenus(null, $request->id);
 
 		if ($request->id) {
 			$id              = $request->id;
@@ -132,7 +134,7 @@ class ModulosController extends Controller
 	public function list_controller(Request $request, ControllerModel $controller)
 	{
 
-		$dados['paginate'] = $controller->getControllers(null, $request->id_modulo);
+		$dados['controllers'] = $controller->getControllers(null, $request->id_modulo);
 
 		return response(view('admin.modulos.controllers.list', $dados), 200);
 
@@ -186,6 +188,28 @@ class ModulosController extends Controller
 			'type'        => 'refresh',
 			'url'         => url()->route('admin.modulos.controller.index', $request->modulo),
 		]);
+
+	}
+
+	public function list_menu(Request $request, MenuModel $menu)
+	{
+
+		$dados['menus'] = $menu->getMenus(null, $request->id_modulo);
+
+		return response(view('admin.modulos.menus.list', $dados), 200);
+
+	}
+
+	/**
+	 * Display the specified resource.
+	 */
+	public function form_menu(Request $request, MenuModel $menu, ModuloModel $modulo)
+	{
+
+		$dados['modulo'] = $modulo->getModuloById($request->id_modulo);
+		$dados['menus']  = $menu->getMenuById($request->id_menu, $request->id_modulo);
+
+		return response(view('admin.modulos.menus.form', $dados), 200);
 
 	}
 

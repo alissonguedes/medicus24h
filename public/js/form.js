@@ -10,7 +10,7 @@ var Form = {
 
 	constructor: () => {
 
-		$('body').find('form').each(function() {
+		$('body').find('form').each(function () {
 
 			var autoinitialize = typeof $(this).data('autoinitialize') === 'undefined' || $(this).data('autoinitialize') === true;
 
@@ -26,7 +26,7 @@ var Form = {
 
 		if (typeof form === 'undefined') return false;
 
-		form.on('submit', function(e) {
+		form.on('submit', function (e) {
 
 			e.preventDefault();
 
@@ -123,7 +123,7 @@ var Form = {
 
 		switch (data.type) {
 			case 'refresh':
-				Datatable.reload();
+				Datatable.reload(data.url);
 				break;
 			case 'redirect':
 				Http.get(data.url);

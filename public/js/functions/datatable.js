@@ -21,23 +21,31 @@ var Datatable = {
 		Datatable.order = 1;
 		Datatable.direction = 'asc';
 
-		Datatable.table = element ? element : $('table.dataTable');
-		Datatable.url = Datatable.table.data('url') ? Datatable.table.data('url') : window.location.href;
+		// Datatable.table = element ? element : $('table.dataTable');
+		// Datatable.url = Datatable.table.data('url') ? Datatable.table.data('url') : window.location.href;
 
-		if (!Datatable.table || (typeof Datatable.table.data('ajax') !== 'undefined' && !Datatable.table.data('ajax'))) {
-			return false;
-		}
+		$('.table.grid').each(function () {
 
-		Datatable.create();
-		Datatable.request();
-		Datatable.checkbox();
-		Datatable.delete();
+			Datatable.table = $(this);
+
+			if (!Datatable.table || (typeof Datatable.table.data('ajax') !== 'undefined' && !Datatable.table.data('ajax'))) {
+				return false;
+			}
+
+			Datatable.url = Datatable.table.data('url') ? Datatable.table.data('url') : window.location.href;
+
+			Datatable.create();
+			Datatable.request();
+			Datatable.checkbox(Datatable.table);
+			Datatable.delete();
+
+		});
 
 	},
 
-	reload: () => {
-		if ($('.table.grid').length) {
-			Datatable.ajax();
+	reload: (url) => {
+		if (Datatable.table.length) {
+			Datatable.ajax({ url: url });
 		} else {
 			Datatable.datatable.draw();
 		}
@@ -47,11 +55,11 @@ var Datatable = {
 
 		var columns = [];
 
-		$('.table.grid')
+		Datatable.table
 			.find('.grid-head')
 			.find('.grid-row')
 			.find('.grid-col')
-			.each(function(e, i) {
+			.each(function (e, i) {
 
 				var column = $(this);
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
@@ -62,13 +70,13 @@ var Datatable = {
 						.parents('.table.grid')
 						.find('.grid-body')
 						.find('.grid-row')
-						.each(function() {
+						.each(function () {
 
-							$(this).find('.grid-col').each(function() {
+							$(this).find('.grid-col').each(function () {
 
 								if ($(this).index() === column.index()) {
 
-									$(this).on('click', function(e) {
+									$(this).on('click', function (e) {
 
 										e.preventDefault();
 
@@ -77,7 +85,7 @@ var Datatable = {
 
 										if (is_modal) {
 											var mod = '#' + $(this).parent().data('target');
-											var url = $(this).parent().data('url');
+											var url = parent.data('url') || parent.data('href') || Datatable.url;
 											var m = Materialize.modal(mod, url);
 											var m = M.Modal.getInstance(m);
 											m.open();
@@ -98,8 +106,8 @@ var Datatable = {
 						.parents('.table.grid')
 						.find('.grid-body')
 						.find('.grid-row')
-						.each(function() {
-							$(this).find('.grid-col').each(function() {
+						.each(function () {
+							$(this).find('.grid-col').each(function () {
 								if ($(this).index() === column.index()) {
 									$(this).attr('data-disabled', true);
 								}
@@ -127,17 +135,17 @@ var Datatable = {
 
 		if (w.length > 0) {
 
-			var $width = !$('.table.grid')
+			var $width = !Datatable.table
 				.find('.grid-body')
 				.find('.grid-row')
 				.hasClass('no-results') ? w.join(' ') : '100%';
 
-			$('.table.grid')
+			Datatable.table
 				.find('.grid-head,.grid-body')
 				.find('.grid-row')
 				.attr('style', 'grid-template-columns: ' + w.join(' ') + ' !important');
 
-			$('.table.grid')
+			Datatable.table
 				.find('.grid-body')
 				.find('.grid-row')
 				.attr('style', 'grid-template-columns: ' + $width + ' !important');
@@ -146,9 +154,9 @@ var Datatable = {
 
 	},
 
-	checkbox: () => {
+	checkbox: (table) => {
 
-		$('.table.grid').find('.grid-head').find(':input:checkbox').on('change', function() {
+		table.find('.grid-head').find(':input:checkbox').on('change', function () {
 
 			if ($(this).prop('checked')) {
 				$(this).parents('.table.grid').find('.grid-body').find(':checkbox:not(:disabled)').prop('checked', true).change();
@@ -158,12 +166,12 @@ var Datatable = {
 
 		});
 
-		$('.table.grid').find(':input:checkbox').on('change', function() {
+		table.find(':input:checkbox').on('change', function () {
 
 			var checked;
 			var checkeds = $(this).parents('.table.grid').find('.grid-body').find(':checkbox:checked:not(:disabled)').length;
 			var count_checkboxes = $(this).parents('.table.grid').find('.grid-body').find(':checkbox:not(:disabled)').length;
-			var indeterminateCheckbox = document.getElementById($('.table.grid').find('.grid-head').find(':input:checkbox').attr('id'));
+			var indeterminateCheckbox = document.getElementById($(this).parents('.table.grid').find('.grid-head').find(':input:checkbox').attr('id'));
 
 			if ($(this).is(':checked')) {
 
@@ -229,6 +237,10 @@ var Datatable = {
 
 	ajax: (data) => {
 
+		var LOCATION = data.url || (Datatable.url != null ? Datatable.url : window.location.href);
+
+		console.log(LOCATION);
+
 		var data = !data ? {
 			'order': Datatable.order,
 			'direction': Datatable.direction,
@@ -236,12 +248,16 @@ var Datatable = {
 			'selecteds': Datatable.selecteds
 		} : data;
 
-		Http.get(window.location.href, {
+		Http.get(LOCATION, {
 			datatype: 'html',
 			data
 		}, (response) => {
 
-			$('.grid-body').find('.scroller').html(response);
+			if (data.url)
+				Datatable.table = $('.table.grid[data-url="' + data.url + '"]');
+
+			// $('.grid-body').find('.scroller').html(response);
+			Datatable.table.find('.scroller').html(response);
 
 			if (Datatable.selecteds.length) {
 				for (var i in Datatable.selecteds) {
@@ -251,13 +267,15 @@ var Datatable = {
 				}
 			}
 
-			Datatable.request();
-			Datatable.checkbox();
+			// Datatable.table = $(response).find('.')
 
-			Materialize.constructor();
-			Request.constructor();
-			// Scroller.constructor();
+			Datatable.request();
+			Datatable.checkbox(Datatable.table);
+
 			Mask.init();
+			Request.constructor();
+			// Materialize.constructor();
+			// Scroller.constructor();
 			progress('out');
 
 		});
@@ -267,9 +285,9 @@ var Datatable = {
 	create: () => {
 
 		// -----------------------------------------------
-		$('.table.grid').each(function() {
+		Datatable.table.each(function () {
 
-			$(this).find('.grid-head').find('.grid-col').each(function() {
+			$(this).find('.grid-head').find('.grid-col').each(function () {
 
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
 				var isOrderable = (typeof $(this).data('orderable') !== 'undefined' && $(this).data('orderable') != '' && $(this).data('orderable') === true) || typeof $(this).data('orderable') === 'undefined';
@@ -284,7 +302,7 @@ var Datatable = {
 
 				}
 
-			}).on('click', function(e) {
+			}).on('click', function (e) {
 
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
 				var isOrderable = (typeof $(this).data('orderable') !== 'undefined' && $(this).data('orderable') != '' && $(this).data('orderable') === true) || typeof $(this).data('orderable') === 'undefined';
@@ -297,10 +315,11 @@ var Datatable = {
 
 				progress('in', 'bar');
 
+				Datatable.url = typeof $(this).parents('.table.grid').data('url') !== 'undefined' ? $(this).parents('.table.grid').data('url') : window.location.href;
 				Datatable.order = $(this).index();
 				Datatable.direction = $(this).data('order');
 
-				$(this).parent().find('[data-order]').each(function() {
+				$(this).parent().find('[data-order]').each(function () {
 					if (Datatable.order != $(this).index())
 						$(this).removeAttr('data-order');
 				});
@@ -321,191 +340,191 @@ var Datatable = {
 
 		// -----------------------------------------------
 
-		if (typeof Datatable.table.data('ajax') !== 'undefined' && !Datatable.table.data('ajax')) {
-			return false;
-		}
+		// if (typeof Datatable.table.data('ajax') !== 'undefined' && !Datatable.table.data('ajax')) {
+		// 	return false;
+		// }
 
-		Datatable.datatable = Datatable.table.DataTable({
-			retrieve: true,
-			serverSide: true,
-			processing: true,
-			scrollCollapse: true,
-			displayLength: 50,
-			ajax: {
-				type: 'get',
-				dataType: 'html',
-				url: Datatable.url,
-				beforeSend: () => {
-					progress('in', 'bar');
-				},
-				success: (response) => {
+		// Datatable.datatable = Datatable.table.DataTable({
+		// 	retrieve: true,
+		// 	serverSide: true,
+		// 	processing: true,
+		// 	scrollCollapse: true,
+		// 	displayLength: 50,
+		// 	ajax: {
+		// 		type: 'get',
+		// 		dataType: 'html',
+		// 		url: Datatable.url,
+		// 		beforeSend: () => {
+		// 			progress('in', 'bar');
+		// 		},
+		// 		success: (response) => {
 
-					var parser = new DOMParser();
-					var content = parser.parseFromString(response, 'text/html');
-					var tr;
+		// 			var parser = new DOMParser();
+		// 			var content = parser.parseFromString(response, 'text/html');
+		// 			var tr;
 
-					Datatable.table.find('tbody').html(response).find('#pagination, #info').remove();
+		// 			Datatable.table.find('tbody').html(response).find('#pagination, #info').remove();
 
-					Datatable.table.find('tr').each(function() {
+		// 			Datatable.table.find('tr').each(function() {
 
-						tr = $(this);
+		// 				tr = $(this);
 
-						var modal = tr.data('target');
-						var is_modal = /^modal_[a-z]+/i.test(modal);
-						var disabled = false;
+		// 				var modal = tr.data('target');
+		// 				var is_modal = /^modal_[a-z]+/i.test(modal);
+		// 				var disabled = false;
 
-						// Aqui, verifico se a coluna clicada é desabilitada
-						$(this).find('td').on('click', function() {
-							if ($(this).data('disabled')) {
-								disabled = true;
-							} else {
-								disabled = false;
-							}
-						});
+		// 				// Aqui, verifico se a coluna clicada é desabilitada
+		// 				$(this).find('td').on('click', function() {
+		// 					if ($(this).data('disabled')) {
+		// 						disabled = true;
+		// 					} else {
+		// 						disabled = false;
+		// 					}
+		// 				});
 
-						// Aqui, modifico a forma como cursor é apresentado,
-						// de acordo com a propriedade "disabled"
-						if ($(this).data('disabled')) {
-							$(this).addClass('disabled').find('td').css({
-								'cursor': 'text !important'
-							});
-						}
+		// 				// Aqui, modifico a forma como cursor é apresentado,
+		// 				// de acordo com a propriedade "disabled"
+		// 				if ($(this).data('disabled')) {
+		// 					$(this).addClass('disabled').find('td').css({
+		// 						'cursor': 'text !important'
+		// 					});
+		// 				}
 
-						// Aqui, verifico se o evento modal deve ser acionado,
-						// ao clicar na linha da tabela
-						$(this).on('click', function() {
-							if (!disabled && tr.data('target') && is_modal) {
-								var mod = '#' + $(this).data('target');
-								var url = $(this).data('url');
-								var m = Materialize.modal(mod, url);
-								var m = M.Modal.getInstance(m);
-								m.open();
-							}
-						});
+		// 				// Aqui, verifico se o evento modal deve ser acionado,
+		// 				// ao clicar na linha da tabela
+		// 				$(this).on('click', function() {
+		// 					if (!disabled && tr.data('target') && is_modal) {
+		// 						var mod = '#' + $(this).data('target');
+		// 						var url = Datatable.url;
+		// 						var m = Materialize.modal(mod, url);
+		// 						var m = M.Modal.getInstance(m);
+		// 						m.open();
+		// 					}
+		// 				});
 
-						if (!tr.data('target') && !is_modal) {
-							if (!$(this).data('disabled') && !disabled) {
-								// Adiciona eventos de click a botões de ação
-								Request.constructor($(this));
-							}
-						}
+		// 				if (!tr.data('target') && !is_modal) {
+		// 					if (!$(this).data('disabled') && !disabled) {
+		// 						// Adiciona eventos de click a botões de ação
+		// 						Request.constructor($(this));
+		// 					}
+		// 				}
 
-						// if (!disabled && tr.data('trigger') == 'sidenav') {
-						// 	Buttons.sidenav(tr);
-						// }
+		// 				// if (!disabled && tr.data('trigger') == 'sidenav') {
+		// 				// 	Buttons.sidenav(tr);
+		// 				// }
 
-						// Ativa o botão de edição na modal.
-						Materialize.btn_modal($(this).find('[data-trigger="modal"]'));
+		// 				// Ativa o botão de edição na modal.
+		// 				Materialize.btn_modal($(this).find('[data-trigger="modal"]'));
 
-					}).find('td').each(function(e) {
+		// 			}).find('td').each(function(e) {
 
-						var disabled = false;
+		// 				var disabled = false;
 
-						$(this).bind('click', function(e) {
+		// 				$(this).bind('click', function(e) {
 
-							if (!$(this).data('disabled')) {
+		// 					if (!$(this).data('disabled')) {
 
-								e.preventDefault();
-								Request.createElement($(this).parent('tr'));
+		// 						e.preventDefault();
+		// 						Request.createElement($(this).parent('tr'));
 
-								var id = $(this).parent('tr').attr('id');
+		// 						var id = $(this).parent('tr').attr('id');
 
-								if ($(this).parent('tr').hasClass('form-sidenav-trigger') && $('.form-sidenav').length) {
+		// 						if ($(this).parent('tr').hasClass('form-sidenav-trigger') && $('.form-sidenav').length) {
 
-									var data = {
-										'url': BASE_URL + 'agendamentos/id/' + id,
-										'modal': 'agendamento',
-										// 'data': {
-										// 	'data': date,
-										// 	'hora': hour
-										// }
-									}
+		// 							var data = {
+		// 								'url': BASE_URL + 'agendamentos/id/' + id,
+		// 								'modal': 'agendamento',
+		// 								// 'data': {
+		// 								// 	'data': date,
+		// 								// 	'hora': hour
+		// 								// }
+		// 							}
 
-									formSidenav(data);
+		// 							formSidenav(data);
 
-								} else {
+		// 						} else {
 
-								}
+		// 						}
 
-							} else {
-								disabled = true;
-							}
+		// 					} else {
+		// 						disabled = true;
+		// 					}
 
-						});
+		// 				});
 
-						if ($(this).parent('tr').data('trigger') != 'modal') {
+		// 				if ($(this).parent('tr').data('trigger') != 'modal') {
 
-							if (!$(this).data('disabled')) {
+		// 					if (!$(this).data('disabled')) {
 
-								var params = {
-									url: $(this).parent('tr').data('url'),
-									target: $(this).parent('tr').data('target'),
-								}
+		// 						var params = {
+		// 							url: $(this).parent('tr').data('url'),
+		// 							target: $(this).parent('tr').data('target'),
+		// 						}
 
-								Buttons.sidenav($(this), params);
+		// 						Buttons.sidenav($(this), params);
 
-							} else {
+		// 					} else {
 
-								var btn = $(this).find('[data-trigger="sidenav"]');
-								var params = {
-									url: btn.data('url'),
-									target: btn.data('target'),
-								}
+		// 						var btn = $(this).find('[data-trigger="sidenav"]');
+		// 						var params = {
+		// 							url: btn.data('url'),
+		// 							target: btn.data('target'),
+		// 						}
 
-								Buttons.sidenav(btn, params);
-							}
-						}
+		// 						Buttons.sidenav(btn, params);
+		// 					}
+		// 				}
 
-					});
+		// 			});
 
-					var pagination = $(content).find('#pagination').html();
-					var info = $(content).find('#info').html();
+		// 			var pagination = $(content).find('#pagination').html();
+		// 			var info = $(content).find('#info').html();
 
-					Datatable.table.parents('.dataTables_wrapper').find('.dataTables_info').html(info);
-					Datatable.table.parents('.dataTables_wrapper').find('.dataTables_paginate').html(pagination).each(function() {
-						Request.constructor($(this));
-					});
+		// 			Datatable.table.parents('.dataTables_wrapper').find('.dataTables_info').html(info);
+		// 			Datatable.table.parents('.dataTables_wrapper').find('.dataTables_paginate').html(pagination).each(function() {
+		// 				Request.constructor($(this));
+		// 			});
 
-					Datatable.table.parents('.dataTables_wrapper').find('.dataTables_processing').hide();
-					progress('out');
+		// 			Datatable.table.parents('.dataTables_wrapper').find('.dataTables_processing').hide();
+		// 			progress('out');
 
-				},
+		// 		},
 
-				error: (error) => {
-					var parser = new DOMParser();
-					var response = parser.parseFromString(error.responseText, 'text/html');
-					alert('Abra o console do navegador para analisar os erros.', 'Existem erros!!!', 'error');
-					console.log(response);
-					progress('out');
-				}
+		// 		error: (error) => {
+		// 			var parser = new DOMParser();
+		// 			var response = parser.parseFromString(error.responseText, 'text/html');
+		// 			alert('Abra o console do navegador para analisar os erros.', 'Existem erros!!!', 'error');
+		// 			console.log(response);
+		// 			progress('out');
+		// 		}
 
-			},
-			// sPaginationType: 'materialize',
-			oLanguage: {
-				sEmptyTable: 'Nenhum dado encontrado.',
-				sInfo: '_START_ - _END_ / _TOTAL_',
-				sInfoEmpty: 'Nenhum dado encontrado.',
-				sInfoFiltered: '_COUNT_ registro(s) encontrado(s).',
-				sInfoPostFix: null,
-				sInfoThousands: '.',
-				sLengthMenu: '_MENU_',
-				sLoadingRecords: 'Carregando...',
-				sProcessing: '<div class="progress"></div class="indeterminate"></div></div>',
-				sZeroRecords: '',
-				sSearch: Datatable.table.data('label') || '',
-				sSearchPlaceholder: Datatable.table.data('placeholder') || '',
-				oPaginate: {
-					sNext: 'Próximo',
-					sPrevious: 'Anterior',
-					sFirst: 'Primeiro',
-					sLast: 'Último',
-				},
-				order: [Datatable.order, Datatable.direction],
-				columnDefs: [{
+		// 	},
+		// 	// sPaginationType: 'materialize',
+		// 	oLanguage: {
+		// 		sEmptyTable: 'Nenhum dado encontrado.',
+		// 		sInfo: '_START_ - _END_ / _TOTAL_',
+		// 		sInfoEmpty: 'Nenhum dado encontrado.',
+		// 		sInfoFiltered: '_COUNT_ registro(s) encontrado(s).',
+		// 		sInfoPostFix: null,
+		// 		sInfoThousands: '.',
+		// 		sLengthMenu: '_MENU_',
+		// 		sLoadingRecords: 'Carregando...',
+		// 		sProcessing: '<div class="progress"></div class="indeterminate"></div></div>',
+		// 		sZeroRecords: '',
+		// 		sSearch: Datatable.table.data('label') || '',
+		// 		sSearchPlaceholder: Datatable.table.data('placeholder') || '',
+		// 		oPaginate: {
+		// 			sNext: 'Próximo',
+		// 			sPrevious: 'Anterior',
+		// 			sFirst: 'Primeiro',
+		// 			sLast: 'Último',
+		// 		},
+		// 		order: [Datatable.order, Datatable.direction],
+		// 		columnDefs: [{
 
-				}]
-			}
-		});
+		// 		}]
+		// 	}
+		// });
 
 		Datatable.search();
 
@@ -519,9 +538,9 @@ var Datatable = {
 
 		} else {
 
-			$('.table.grid').each(function() {
+			Datatable.table.each(function () {
 
-				var url = $(this).data('url') || window.location.href;
+				var url = Datatable.url;
 
 				Datatable.query = value ? value : null;
 				Datatable.ajax();
@@ -540,7 +559,7 @@ var Datatable = {
 
 		if (search) {
 
-			search.bind('keyup paste', delay(function() {
+			search.bind('keyup paste', delay(function () {
 				Datatable.draw(this.value);
 			}, 200));
 
@@ -554,7 +573,7 @@ var Datatable = {
 
 	delete: (input) => {
 
-		$('#dropdown-actions').find('#btn-delete').bind('click', function() {
+		$('#dropdown-actions').find('#btn-delete').bind('click', function () {
 
 			var btn = $(this);
 			var selecteds = Datatable.selecteds;
@@ -568,7 +587,7 @@ var Datatable = {
 					method: 'delete'
 				}, (response) => {
 
-					var indeterminateCheckbox = document.getElementById($('.table.grid').find('.grid-head').find(':input:checkbox').attr('id'));
+					var indeterminateCheckbox = document.getElementById(Datatable.table.find('.grid-head').find(':input:checkbox').attr('id'));
 					$(indeterminateCheckbox).removeClass('indeterminate');
 					Datatable.draw();
 					message(response.message);

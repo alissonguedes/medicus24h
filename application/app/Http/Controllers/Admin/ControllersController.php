@@ -16,7 +16,7 @@ class ControllersController extends Controller
 	public function index(Request $request, ControllerModel $controller)
 	{
 
-		$dados['paginate'] = $controller->getControllers(null, $request->modulo);
+		$dados['controllers'] = $controller->getControllers(null, $request->modulo);
 
 		if ($request->ajax()) {
 			return response(view('admin.controllers.list', $dados), 200);

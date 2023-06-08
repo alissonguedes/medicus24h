@@ -1,4 +1,4 @@
-<div id="table_controllers" class="table grid bordered" data-url="{{ route('admin.modulos.controller.index', $modulo->id) }}">
+<div id="table_menus" class="table grid bordered" data-url="{{ route('admin.modulos.menus.index', $modulo->id) }}">
 	<div class="grid-head">
 		<div class="grid grid-row">
 			<div class="grid-col" data-disabled="true" data-width="20fr" data-orderable="false">
@@ -11,7 +11,7 @@
 				<span class="direction">Nome</span>
 			</div>
 			<div class="grid-col" data-width="50fr" data-orderable="false">
-				<span class="direction">Controller</span>
+				<span class="direction">Menu</span>
 			</div>
 			<div class="grid-col" data-width="50fr" data-orderable="false">
 				<span class="direction">Descrição</span>
@@ -29,7 +29,7 @@
 	</div>
 	<div class="grid grid-body">
 		<div class="scroller" style="height: calc(100vh - 680px)" data-propagation="true">
-			@include('admin.modulos.controllers.list')
+			@include('admin.modulos.menus.list')
 		</div>
 	</div>
 </div>
