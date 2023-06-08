@@ -1,22 +1,22 @@
-<div id="table_controllers" class="table grid bordered">
+<div id="table_controllers" class="table grid bordered" data-url="{{ go('admin.controllers.index') }}">
 	<div class="grid-head">
 		<div class="grid grid-row">
-			<div class="grid-col" data-disabled="true" data-width="20fr">
+			<div class="grid-col" data-disabled="true" data-width="20fr" data-orderable="false">
 				<label class="grey-text text-darken-2 font-14 left">
 					<input type="checkbox" name="check-all" id="check-all" class="filled-in">
 					<span></span>
 				</label>
 			</div>
-			<div class="grid-col" data-disabled="true" data-width="100fr">
+			<div class="grid-col" data-width="100fr">
 				<span class="direction">Name</span>
 			</div>
-			<div class="grid-col" data-disabled="true" data-width="150fr">
+			<div class="grid-col" data-width="150fr">
 				<span class="direction">Descrição</span>
 			</div>
-			<div class="grid-col" data-disabled="true" data-width="50fr">
+			<div class="grid-col" data-width="50fr">
 				<span class="direction">Restrito</span>
 			</div>
-			<div class="grid-col" data-disabled="true" data-width="50fr">
+			<div class="grid-col" data-width="50fr">
 				<span class="direction">Status</span>
 			</div>
 			<div class="grid-col center-align" data-disabled="true" data-width="50fr">

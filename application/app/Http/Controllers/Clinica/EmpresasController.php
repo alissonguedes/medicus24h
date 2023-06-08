@@ -125,8 +125,8 @@ namespace App\Http\Controllers\Clinica{
 			$id = $this->empresa_model->cadastraEmpresa($request);
 
 			$status = 'success';
-			$url    = url()->route('clinica.clinicas.index');
-			$type   = 'send';
+			$url    = url()->route('clinica.clinicas.edit', $id);
+			$type   = 'redirect';
 
 			return response()->json([
 				'status'  => $status,
@@ -147,14 +147,15 @@ namespace App\Http\Controllers\Clinica{
 			if ($this->empresa_model->editaEmpresa($request, $id)) {
 				$status     = 'success';
 				$statusCode = 200;
-				$message    = 'Cadastro alterado com sucesso!';
 				$title      = 'Sucesso!';
+				$message    = 'Cadastro alterado com sucesso!<br>';
+				$message .= $this->empresa_model->getMessage() ? $this->empresa_model->getMessage() : null;
 			} else {
 				$status     = 'error';
 				$statusCode = 401;
-				// $message = 'Não foi possível atualizar os dados.';
-				$message = $this->empresa_model->getErros();
-				$title   = 'Erro!';
+				$message    = 'Não foi possível atualizar os dados.<br>';
+				$title      = 'Erro!';
+				$message .= $this->empresa_model->getErros() ? $this->empresa_model->getErros() : null;
 			}
 
 			$data['status']      = $status;

@@ -2,25 +2,26 @@
 
 @section('prev-url', go('admin.modulos.index'))
 
-@if (!isset($row))
+@if (!isset($modulo))
 	{? $disabled = 'disabled="disabled"'; ?}
 @endif
 
 @section('topbar-options')
 	<ul class="flex flex-auto flex-start flex-center">
 		<li>
-			<form @if (isset($row)) action="{{ go('admin.modulos.{id}.redefinir', $row->id) }}" @endif>
+			<form @if (isset($modulo)) action="{{ go('admin.modulos.{id}.redefinir', $modulo->id) }}" @endif>
 				<button type="submit" {{ $disabled ?? null }} class="btn grey lighten-3 z-depth-1 waves-effect waves-light">Redefinir senha</button>
 			</form>
 		</li>
-		@if (isset($row))
+		@if (isset($modulo))
 			<li>
-				{{-- <button type="button" class="btn grey lighten-3 z-depth-1 waves-effect waves-light" data-href="{{ go('admin.modulos.estrutura', $row->id) }}">Redefinir senha</button> --}}
-				<form @if (isset($row)) action="{{ go('admin.modulos.estrutura', $row->id) }}" @endif>
+				{{-- <button type="button" class="btn grey lighten-3 z-depth-1 waves-effect waves-light" data-href="{{ go('admin.modulos.estrutura', $modulo->id) }}">Redefinir senha</button> --}}
+				<form @if (isset($modulo)) action="{{ go('admin.modulos.estrutura', $modulo->id) }}" @endif>
 					<button type="submit" {{ $disabled ?? null }} class="btn grey lighten-3 z-depth-1 waves-effect waves-light">Gerar Estrutura</button>
-					<input type="hidden" name="path" value="{{ $row->path }}">
-					<input type="hidden" name="modulo" value="{{ $row->modulo }}">
-					<input type="hidden" name="namespace" value="{{ $row->namespace }}">
+					<input type="hidden" name="id" value="{{ $modulo->id }}">
+					<input type="hidden" name="path" value="{{ $modulo->path }}">
+					<input type="hidden" name="modulo" value="{{ $modulo->modulo }}">
+					<input type="hidden" name="namespace" value="{{ $modulo->namespace }}">
 				</form>
 			</li>
 		@endif
@@ -35,22 +36,22 @@
 
 @if (session()->get('userdata')[session()->get('app_session')]['id_grupo'] > 1)
 
-	{? $disabled = isset($row) && $row->editavel === '0' ? 'disabled="disabled"' : false; ?}
+	{? $disabled = isset($modulo) && $modulo->editavel === '0' ? 'disabled="disabled"' : false; ?}
 
 	@if ($disabled)
-		{? $input_label_hidden = $row -> label; ?}
-		{? $editavel = $row->editavel; ?}
+		{? $input_label_hidden = $modulo -> label; ?}
+		{? $editavel = $modulo->editavel; ?}
 	@else
 		{? $editavel = 1; ?}
 	@endif
 
 @endif
 
-@section('title', (isset($row) ? 'Editar' : 'Novo') . ' módulo')
+@section('title', (isset($modulo) ? 'Editar' : 'Novo') . ' módulo')
 
 @section('buttons')
-	@if (isset($row))
-		<button class="btn btn-large excluir waves-effect" value="{{ isset($row) ? $row->id : null }}" data-tooltip="Excluir" data-link="{{ route('admin.modulos.delete') }}" style="border: none">
+	@if (isset($modulo))
+		<button class="btn btn-large excluir waves-effect" value="{{ isset($modulo) ? $modulo->id : null }}" data-tooltip="Excluir" data-link="{{ route('admin.modulos.delete') }}" style="border: none">
 			<i class="material-icons">delete_forever</i>
 		</button>
 	@endif
@@ -75,7 +76,7 @@
 								Informações do módulo
 							</div>
 
-							@if (isset($row))
+							@if (isset($modulo))
 								<div id="tabs">
 									<ul class="tabs">
 										<li class="tab col"><a href="#modulo">Módulo</a></li>
@@ -105,7 +106,7 @@
 											<div class="row">
 												<div class="col s12 mb-1">
 													<div class="input-field">
-														<input type="text" name="modulo" id="modulo" value="{{ isset($row) ? $row->modulo : null }}" autofocus="autofocus">
+														<input type="text" name="modulo" id="modulo" value="{{ isset($modulo) ? $modulo->modulo : null }}" autofocus="autofocus">
 														<label class="grey-text" for="modulo"> Nome do módulo </label>
 													</div>
 												</div>
@@ -119,7 +120,7 @@
 														<label class="grey-text active" for="namespace"> Namespace </label>
 														<div class="input-group">
 															<span class="input-group-item first">App\Http\Controllers\</span>
-															<input type="text" name="namespace" id="namespace" value="{{ isset($row) ? str_replace('App\Http\Controllers\\', '', $row->namespace) : null }}" placeholder="Namespace">
+															<input type="text" name="namespace" id="namespace" value="{{ isset($modulo) ? str_replace('App\Http\Controllers\\', '', $modulo->namespace) : null }}" placeholder="Namespace">
 														</div>
 													</div>
 												</div>
@@ -133,7 +134,7 @@
 														<label class="grey-text active" for="path"> Path </label>
 														<div class="input-group">
 															<span class="input-group-item first">/</span>
-															<input type="text" name="path" value="{{ isset($row) ? limpa_string($row->path) : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
+															<input type="text" name="path" value="{{ isset($modulo) ? limpa_string($modulo->path) : null }}" id="email" style="margin-top: 10px; padding-left: 10px;" placeholder="Path">
 														</div>
 													</div>
 												</div>
@@ -146,9 +147,9 @@
 													<div class="input-field">
 														<label class="grey-text" for="restrict"> Restrito? </label>
 														<select name="restrict">
-															<option value="" disabled="disabled" {{ !isset($row) ? 'selected="selected"' : null }}> Selecione um tipo </option>
-															<option value="yes" {{ isset($row) && $row->restrict == 'yes' ? 'selected="selected"' : null }} data-icon=""> Sim </option>
-															<option value="no" {{ isset($row) && $row->restrict == 'no' ? 'selected="selected"' : null }} data-icon=""> Não </option>
+															<option value="" disabled="disabled" {{ !isset($modulo) ? 'selected="selected"' : null }}> Selecione um tipo </option>
+															<option value="yes" {{ isset($modulo) && $modulo->restrict == 'yes' ? 'selected="selected"' : null }} data-icon=""> Sim </option>
+															<option value="no" {{ isset($modulo) && $modulo->restrict == 'no' ? 'selected="selected"' : null }} data-icon=""> Não </option>
 														</select>
 													</div>
 												</div>
@@ -159,7 +160,7 @@
 											<div class="row">
 												<div class="col s12 mb-1">
 													<label class="left" style="cursor: pointer; display: flex; align-items: center;">
-														<input type="checkbox" name="status" value="0" {{ isset($row) && $row->status === '0' ? 'checked="checked"' : null }}>
+														<input type="checkbox" name="status" value="0" {{ isset($modulo) && $modulo->status === '0' ? 'checked="checked"' : null }}>
 														<i class="material-icons" style="width: auto !important;">lock</i>
 														<span style="font-size: 1rem; margin-left: 20px; color: #000">Bloquear módulo</span>
 													</label>
@@ -169,69 +170,71 @@
 
 										</div>
 
-										<!-- BEGIN Controllers -->
-										<div id="controllers">
+										@isset($modulo)
+											<!-- BEGIN Controllers -->
+											<div id="controllers">
 
-											<div class="row">
-												<div class="col s12 mb-3">
-													<h6>Controllers</h6>
+												<div class="row">
+													<div class="col s12 mb-3">
+														<h6>Controllers</h6>
+													</div>
 												</div>
-											</div>
 
-											<div class="row">
-												<div class="col s12 mb-1">
+												<div class="row">
+													<div class="col s12 mb-1">
 
-													<button type="button" class="btn green waves-effect" data-trigger="modal" data-target="modal_controller" data-href="{{ route('admin.modulos.add.controller') }}">
-														Novo Controller
-													</button>
+														<button type="button" class="btn green waves-effect" data-trigger="modal" data-target="modal_controller" data-href="{{ route('admin.modulos.controller.add', $modulo->id) }}" data-disabled="false">
+															Novo Controller
+														</button>
 
+													</div>
 												</div>
-											</div>
 
-											<div class="row">
-												<div class="col s12">
-													@include('admin.controllers.table')
+												<div class="row">
+													<div class="col s12">
+														@include('admin.modulos.controllers.table')
+													</div>
 												</div>
+
 											</div>
+											<!-- END Controllers -->
 
-										</div>
-										<!-- END Controllers -->
+											<!-- BEGIN Views -->
+											<div id="views">
 
-										<!-- BEGIN Views -->
-										<div id="views">
-
-											<div class="row">
-												<div class="col s12 mt-3 mb-3">
-													<h6>Views</h6>
+												<div class="row">
+													<div class="col s12 mt-3 mb-3">
+														<h6>Views</h6>
+													</div>
 												</div>
+
 											</div>
+											<!-- END Views -->
 
-										</div>
-										<!-- END Views -->
+											<!-- BEGIN Menus -->
+											<div id="menus">
 
-										<!-- BEGIN Menus -->
-										<div id="menus">
-
-											<div class="row">
-												<div class="col s12 mt-3 mb-3">
-													<h6>Menus</h6>
+												<div class="row">
+													<div class="col s12 mt-3 mb-3">
+														<h6>Menus</h6>
+													</div>
 												</div>
+
 											</div>
+											<!-- END Menus -->
 
-										</div>
-										<!-- END Menus -->
+											<!-- BEGIN Rotas -->
+											<div id="rotas">
 
-										<!-- BEGIN Rotas -->
-										<div id="rotas">
-
-											<div class="row">
-												<div class="col s12 mt-3 mb-3">
-													<h6>Rotas</h6>
+												<div class="row">
+													<div class="col s12 mt-3 mb-3">
+														<h6>Rotas</h6>
+													</div>
 												</div>
-											</div>
 
-										</div>
-										<!-- END Rotas -->
+											</div>
+											<!-- END Rotas -->
+										@endisset
 
 									</div>
 
@@ -249,8 +252,10 @@
 									<i class="material-icons-outlined">save</i>
 								</button>
 
-								<input type="hidden" name="id" value="{{ isset($row) ? $row->id : null }}">
-								<input type="hidden" name="_method" value="{{ isset($row) ? 'put' : 'post' }}">
+								@isset($modulo)
+									<input type="hidden" name="id" value="{{ isset($modulo) ? $modulo->id : null }}">
+									<input type="hidden" name="_method" value="{{ isset($modulo) ? 'put' : 'post' }}">
+								@endisset
 
 								{{ $input_label_hidden }}
 
@@ -265,18 +270,7 @@
 
 			</div>
 
-			@if (isset($row))
-				<div id="modal_controller" class="modal modal-fixed-footer" data-dismissible="true">
-					<div class="modal-content">
-						@include('admin.controllers.form.fields')
-					</div>
-					<div class="modal-footer">
-						<button class="btn green waves-effect" data-tooltip="Adicionar Controller">
-							<span>Adicionar</span>
-						</button>
-					</div>
-				</div>
-			@endif
+			@include('admin.modulos.controllers.form')
 
 		</div>
 

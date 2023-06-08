@@ -12,11 +12,17 @@ use Illuminate\Database\Eloquent\Model;
 class AppModel extends Model
 {
 
-	protected $error = [];
+	protected $error   = [];
+	protected $message = [];
 
 	public function getErros()
 	{
 		return implode('<br>', $this->error);
+	}
+
+	public function getMessage()
+	{
+		return implode('<br>', $this->message);
 	}
 
 }
