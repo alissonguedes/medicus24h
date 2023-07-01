@@ -86,13 +86,13 @@ class FuncionarioModel extends Model
 		];
 
 		// Order By
-		if (isset($data->order) && $data->direction) {
+		if (isset($data->order) && isset($data->direction)) {
 			$get->orderBy($this->order[$data->order], $data->direction);
 		} else {
 			$get->orderBy($this->order[1], 'asc');
 		}
 
-		return $get->paginate(isset($_GET['length']) ? $_GET['length'] : 50);
+		return $get->paginate(isset($data->length) ? $data->length : 50);
 
 	}
 

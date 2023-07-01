@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Clinica{
+namespace App\Http\Controllers\Clinica {
 
 	use App\Models\AtendimentoModel;
 	use App\Models\ConvenioModel;
@@ -31,13 +31,14 @@ namespace App\Http\Controllers\Clinica{
 		public function index(Request $request)
 		{
 
+			$dados['paginate'] = $this->empresa_model->getEmpresas($request);
+
 			// Pesquisar empresas
 			if ($request->ajax()) {
-				$dados['paginate'] = $this->empresa_model->getEmpresas($request);
 				return response(view('clinica.empresas.list', $dados), 200);
 			}
 
-			return response(view('clinica.empresas.index'), 200);
+			return response(view('clinica.empresas.index', $dados), 200);
 
 		}
 
