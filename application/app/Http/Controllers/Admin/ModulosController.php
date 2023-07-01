@@ -37,7 +37,7 @@ class ModulosController extends Controller
 		$dados                = [];
 		$dados['modulos']     = $modulo->getModulos();
 		$dados['controllers'] = $controller->getControllers(null, $request->id);
-		$dados['menus']       = $menu->getMenus(null, $request->id);
+		$dados['menus']       = $menu->getMenuByModulo($request->id);
 
 		if ($request->id) {
 			$id              = $request->id;

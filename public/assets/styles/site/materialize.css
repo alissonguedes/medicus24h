@@ -1548,20 +1548,24 @@ span.badge.pill {
 }
 
 .navbar .notification-badge {
-	font-family: Muli, sans-serif;
+	font-family: 'Open-sans', sans-serif;
 	position: relative;
-	top: -20px;
-	right: 5px;
-	margin: 0 -.8em;
+	top: -50px;
+	right: -10px;
+	margin: 3px;
 	padding: 2px 5px;
 	color: #fff;
 	border-radius: 50%;
-	background-color: #ff4081;
-	box-shadow: 0 0 10px 0 #ff4081
+	background-color: var(--green-lighten-5);
+	box-shadow: 0 0 10px 0 #ff4081;
+	font-size: 12px;
+	/* font-weight: bold; */
+	/** border: 1px solid #fff; */
+	outline: 1px solid #ccc;
 }
 
 .navbar #notifications-dropdown {
-	width: 400px
+	width: auto !important;
 }
 
 .navbar #notifications-dropdown h5 {
@@ -4344,3 +4348,72 @@ tr.group:hover {
 		top: 0
 	}
 }
+
+.toast .toast-action {
+	color: #eeff41;
+	font-weight: 500;
+	margin-right: -25px;
+	margin-left: 3rem;
+}
+
+
+/** Toast **/
+
+#toast-container {
+	display: block;
+	position: fixed;
+	z-index: 999999999;
+}
+
+.toast {
+	border-radius: 4px;
+	top: 35px;
+	width: auto;
+	margin-top: 10px;
+	position: relative;
+	max-width: 100%;
+	height: auto;
+	min-height: 48px;
+	line-height: 1.5em;
+	word-break: break-all;
+	background-color: #323232;
+	padding: 10px 24px;
+	padding-right: 52px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: default;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+}
+
+.toast button i {
+	color: #42a5f5 !important;
+}
+
+.toast.error {
+	background-color: #f44336 !important;
+	color: #fff;
+}
+
+.toast.warn {
+	background-color: #ff9800 !important;
+	color: #fff;
+}
+
+.toast.error button i,
+.toast.warn button i {
+	color: #fff !important;
+}
+
+.toast .toast-action {
+	color: #eeff41;
+	font-weight: 700 !important;
+	margin-right: -25px;
+	margin-left: 3rem;
+	text-transform: uppercase;
+}
+
+.toast.mail-alerts {}

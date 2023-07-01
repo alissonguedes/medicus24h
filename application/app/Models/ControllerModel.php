@@ -28,6 +28,7 @@ namespace App\Models{
 			$get = $this->select(
 				'C.id',
 				'C.id_modulo',
+				DB::raw('(SELECT modulo FROM tb_acl_modulo WHERE id = id_modulo) AS modulo'),
 				'C.nome',
 				'C.descricao',
 				'C.controller',

@@ -25,6 +25,7 @@ select {
 .dropdown-content {
 	min-width: 120px;
 	height: auto;
+	width: auto !important;
 }
 
 .dropdown-content li.disabled,
@@ -444,6 +445,15 @@ small {
 	color: #fff !important;
 }
 
+.toast .toast-action {
+	color: #eeff41;
+	font-weight: 500;
+	margin-right: -25px;
+	margin-left: 3rem;
+}
+
+.toast.mail-alerts {}
+
 .sidenav {
 	width: 260px;
 }
@@ -528,8 +538,9 @@ nav a.sidenav-trigger {
 	font-size: 1rem;
 }
 
-.sidenav-main.nav-collapsed .sidenav li.menu-description {
-	display: none;
+.sidenav-main.nav-collapsed .sidenav li.menu-description h6 {
+	/* display: none; */
+	content: '···';
 }
 
 .sidenav.rightside-navigation {

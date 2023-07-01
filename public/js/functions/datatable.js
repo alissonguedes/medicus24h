@@ -237,9 +237,7 @@ var Datatable = {
 
 	ajax: (data) => {
 
-		var LOCATION = data.url || (Datatable.url != null ? Datatable.url : window.location.href);
-
-		console.log(LOCATION);
+		var LOCATION = data ? data.url : (Datatable.url != null ? Datatable.url : window.location.href);
 
 		var data = !data ? {
 			'order': Datatable.order,
@@ -263,7 +261,7 @@ var Datatable = {
 				for (var i in Datatable.selecteds) {
 					$('.grid-body').find(':checkbox[value="' + Datatable.selecteds[i] + '"]').attr('checked', true)
 						.parents('.grid-row').addClass('selected');
-					console.log(i, Datatable.selecteds[i]);
+					// console.log(i, Datatable.selecteds[i]);
 				}
 			}
 
@@ -292,7 +290,7 @@ var Datatable = {
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
 				var isOrderable = (typeof $(this).data('orderable') !== 'undefined' && $(this).data('orderable') != '' && $(this).data('orderable') === true) || typeof $(this).data('orderable') === 'undefined';
 
-				console.log(isOrderable);
+				// console.log(isOrderable);
 
 				if (!isDisabled && isOrderable) {
 
@@ -307,7 +305,7 @@ var Datatable = {
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
 				var isOrderable = (typeof $(this).data('orderable') !== 'undefined' && $(this).data('orderable') != '' && $(this).data('orderable') === true) || typeof $(this).data('orderable') === 'undefined';
 
-				console.log(isOrderable, $(this).data('orderable'));
+				// console.log(isOrderable, $(this).data('orderable'));
 
 				if (isDisabled || !isOrderable) {
 					return;

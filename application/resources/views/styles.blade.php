@@ -11,6 +11,7 @@
 <link rel="stylesheet" media="screen" href="{{ asset('assets/plugins/select2/select2.min.css') }}" />
 <link rel="stylesheet" media="screen" href="{{ asset('assets/plugins/select2/select2.min.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('assets/plugins/select2/select2-materialize.css') }}">
+<link rel="stylesheet" media="screen" href="{{ asset('assets/plugins/nestable/nestable.css') }}">
 
 <!-- default -->
 <link rel="stylesheet" media="screen" href="{{ asset('css/select.css') }}">

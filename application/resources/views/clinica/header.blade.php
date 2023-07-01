@@ -1,8 +1,27 @@
 @if (session()->has('userdata'))
 	<header id="header" class="page-topbar">
+
 		<div class="navbar navbar-fixed">
 			<nav class="navbar-main navbar-color navbar-collapsible blue lighten-1">
+
 				<div class="nav-wrapper">
+
+					{{-- <div class="brand-sidebar" style="display: block !important">
+
+						<a class="navbar-toggler btn-floating btn-flat transparent grey-text text-darken-1 waves-effect">
+							<i class="material-icons">menu</i>
+						</a>
+
+						<h1 class="logo-wrapper">
+
+							<div class="text-logo">
+								<h5>Clinic</h5>
+								<h2>Cloud</h2>
+							</div>
+
+						</h1>
+
+					</div> --}}
 
 					@section('header')
 						<div class="page-title" style="display: inline-block;">
@@ -59,6 +78,63 @@
 						</ul>
 						</li>
 						@endif --}}
+						{{-- <li class="hide-on-med-and-down">
+							<a class="waves-effect waves-block waves-light" href="javascript:void(0);" data-url="{{ route('tickets.notificacoes.index') }}" data-trigger="right-sidebar" data-target="notificacoes" data-tooltip="Notificações">
+								<i class="material-symbols-outlined">notifications</i>
+								<span class="badge">1</span>
+							</a>
+						</li> --}}
+						<li>
+							<a class="waves-effect waves-block waves-light dropdown-trigger" href="javascript:void(0);" data-target="notifications-dropdown" data-tooltip="Notificações" data-cover-trigger="true" data-align="right">
+								<i class="material-icons">notifications_none
+									<small class="notification-badge">5</small>
+								</i>
+							</a>
+							<ul class="dropdown-content" id="notifications-dropdown" tabindex="0">
+								<li tabindex="0">
+									<h6>
+										NOTIFICAÇÕES
+										<span class="new badge">5</span>
+									</h6>
+								</li>
+								<li class="divider" tabindex="0"></li>
+								<li tabindex="0">
+									<a class="black-text" href="#!">
+										<span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span>
+										A new order has been placed!
+									</a>
+									<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">2 hours ago</time>
+								</li>
+								<li tabindex="0">
+									<a class="black-text" href="#!">
+										<span class="material-icons icon-bg-circle red small">stars</span>
+										Completed the task
+									</a>
+									<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">3 days ago</time>
+								</li>
+								<li tabindex="0">
+									<a class="black-text" href="#!">
+										<span class="material-icons icon-bg-circle teal small">settings</span>
+										Settings updated
+									</a>
+									<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">4 days ago</time>
+								</li>
+								<li tabindex="0">
+									<a class="black-text" href="#!">
+										<span class="material-icons icon-bg-circle deep-orange small">today</span>
+										Director meeting started
+									</a>
+									<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">6 days ago</time>
+								</li>
+								<li tabindex="0">
+									<a class="black-text" href="#!">
+										<span class="material-icons icon-bg-circle amber small">trending_up</span>
+										Generate monthly report
+									</a>
+									<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">1 week ago</time>
+								</li>
+							</ul>
+						</li>
 						<li class="hide-on-med-and-down">
 							<a class="waves-effect waves-block waves-light" href="javascript:void(0);" data-url="{{ route('clinica.recursosmedicos.agenda.calendario') }}" data-trigger="right-sidebar" data-target="agenda_medica" data-tooltip="Calendário" data-function="calendar_mini">
 								<i class="material-symbols-outlined">calendar_month</i>
@@ -74,56 +150,6 @@
 								<i class="material-icons">search</i>
 							</a>
 						</li>
-						{{-- <li>
-								<a class="waves-effect waves-block waves-light notification-button" href="javascript:void(0);" data-target="notifications-dropdown">
-									<i class="material-icons">
-										notifications_none
-										<small class="notification-badge">5</small>
-									</i>
-								</a>
-								<ul class="dropdown-content" id="notifications-dropdown" tabindex="0">
-									<li tabindex="0">
-										<h6>NOTIFICATIONS<span class="new badge">5</span></h6>
-									</li>
-									<li class="divider" tabindex="0"></li>
-									<li tabindex="0"><a class="black-text" href="#!"><span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span>
-											A
-											new
-											order has been placed!</a>
-										<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">2
-											hours
-											ago</time>
-									</li>
-									<li tabindex="0"><a class="black-text" href="#!"><span class="material-icons icon-bg-circle red small">stars</span> Completed
-											the
-											task</a>
-										<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">3
-											days
-											ago</time>
-									</li>
-									<li tabindex="0"><a class="black-text" href="#!"><span class="material-icons icon-bg-circle teal small">settings</span>
-											Settings
-											updated</a>
-										<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">4
-											days
-											ago</time>
-									</li>
-									<li tabindex="0"><a class="black-text" href="#!"><span class="material-icons icon-bg-circle deep-orange small">today</span>
-											Director
-											meeting started</a>
-										<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">6
-											days
-											ago</time>
-									</li>
-									<li tabindex="0"><a class="black-text" href="#!"><span class="material-icons icon-bg-circle amber small">trending_up</span>
-											Generate
-											monthly report</a>
-										<time class="media-meta grey-text darken-2" datetime="2015-06-12T20:50:48+08:00">1
-											week
-											ago</time>
-									</li>
-								</ul>
-							</li> --}}
 						<li>
 							<a href="javascript:void(0);" class="waves-effect waves-block waves-light dropdown-trigger" data-cover-trigger="true" data-align="right" data-target="profile-dropdown">
 								<span class="avatar-status avatar-online">

@@ -77,7 +77,9 @@ var login = () => {
 						Form.showMessages(self, response.message, response.status);
 					}
 
-					Http.get(response.url);
+					Http.get(response.url, null, () => {
+						setTimeout(checkMail, 2000);
+					});
 
 				}
 

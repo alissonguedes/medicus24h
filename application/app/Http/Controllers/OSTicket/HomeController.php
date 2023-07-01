@@ -12,8 +12,16 @@ class HomeController extends Controller
 	 */
 	public function index()
 	{
-		//
-		echo 'ticket2';
+
+		return view('tickets.home.index');
+
+	}
+
+	public function form()
+	{
+
+		echo '=> ';
+
 	}
 
 	/**

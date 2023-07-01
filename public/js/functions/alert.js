@@ -47,13 +47,13 @@ var alert = (message, title, type) => {
 
 }
 
-var message = (info, status, title) => {
+var message = (info, status, title, classes) => {
 
 	if (typeof message === 'object') {
 		var info = info.message;
 	}
 
-	var classes = 'z-depth-2';
+	classes += ' z-depth-2 ';
 
 	M.Toast.dismissAll();
 	M.toast({
@@ -121,3 +121,34 @@ var confirm = (message, ...func) => {
 	});
 
 }
+
+function checkMail() {
+
+	$.ajax({
+		url: BASE_URL + 'api/mail/check',
+		dataType: 'json',
+		success: (response) => {
+
+			if (response.mail_exists) {
+				M.toast({
+					classes: 'mail-alerts',
+					html: `<span>${response.message}</span>
+							<button class="btn-flat toast-action" data-href="${response.url}">ir para mensagens</button>`
+				});
+
+				Request.constructor();
+
+			}
+
+		}
+	});
+
+}
+
+setTimeout(checkMail, 2000);
+
+// setInterval(function() {
+
+// 	message('Teste', 'error', 'Teste3', 'right')
+
+// }, 5000);

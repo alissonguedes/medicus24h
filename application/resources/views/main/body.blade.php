@@ -12,7 +12,7 @@
 		</a>
 	</li>
 	<li>
-		<a class="dropdown-menu" href="{{ route('main.services.medicos') }}" data-target="services">
+		<a class="dropdown-menu dropdown-trigger" href="{{ route('main.services.medicos') }}" data-target="services" data-cover-trigger="true" data-align="left" data-hover="true">
 			<span class="menu-title dropdown-title">Serviços</span>
 		</a>
 		<ul class="dropdown-content dropdown-horizontal-list" id="services">

@@ -13,14 +13,15 @@
 <div class="row">
 	<div class="col s12 mb-1">
 		<div class="input-field">
-			<input type="text" name="path" id="path" value="{{ isset($row) ? $row->path : null }}">
+			{{-- <input type="text" name="path" id="path" value="{{ isset($row) ? $row->path : null }}"> --}}
+			<textarea name="descricao" id="descricao" class="materialize-textarea"></textarea>
 			<label class="grey-text" for="path"> Diretório </label>
 		</div>
 	</div>
 </div>
 <!-- END Input[Login] -->
 
-<!-- BEGIN Input[Email] -->
+{{-- <!-- BEGIN Input[Email] -->
 <div class="row">
 	<div class="col s12 mb-1">
 		<div class="input-field">
@@ -29,9 +30,9 @@
 		</div>
 	</div>
 </div>
-<!-- END Input[Email] -->
+<!-- END Input[Email] --> --}}
 
-<!-- BEGIN Input[Senha] -->
+{{-- <!-- BEGIN Input[Senha] -->
 <div class="row">
 	<div class="col s12 mb-1">
 		<div class="input-field">
@@ -44,9 +45,9 @@
 		</div>
 	</div>
 </div>
-<!-- END Input[Senha] -->
+<!-- END Input[Senha] --> --}}
 
-<!-- BEGIN Input[Status] -->
+{{-- <!-- BEGIN Input[Status] -->
 <div class="row">
 	<div class="col s12 mb-1">
 		<label class="left" style="cursor: pointer; display: flex; align-items: center;">
@@ -56,4 +57,4 @@
 		</label>
 	</div>
 </div>
-<!-- END Input[Status] -->
+<!-- END Input[Status] --> --}}

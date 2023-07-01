@@ -28,7 +28,7 @@
 		</div>
 	</div>
 	<div class="grid grid-body">
-		<div class="scroller" style="height: calc(100vh - 680px)" data-propagation="true">
+		<div class="scroller" style="height: calc(100vh - 320px)" data-propagation="true">
 			@include('admin.modulos.controllers.list')
 		</div>
 	</div>

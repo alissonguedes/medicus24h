@@ -31,7 +31,7 @@ class ModuloRequest extends Request
 
 		$id        = isset($_POST['id']) ? $_POST['id'] : null;
 		$path      = '/' . limpa_string($_POST['path']);
-		$namespace = 'App\Http\Controllers\\' . $_POST['modulo'] . '\\';
+		$namespace = 'App\Http\Controllers\\' . $_POST['namespace'] . '\\';
 
 		$exists = $model->from('tb_acl_modulo')
 			->where(function ($query) use ($namespace, $path) {

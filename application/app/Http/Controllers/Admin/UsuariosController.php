@@ -24,7 +24,7 @@
 // 			if ($request->ajax()) {
 // 				return abort(403);
 // 			} else {
-// 				return redirect()->route('admin.usuarios.login');
+// 				return redirect()->route('clinica.usuarios.login');
 // 			}
 
 // 		}
@@ -45,7 +45,7 @@
 // 			if ($request->ajax()) {
 // 				return abort(403);
 // 			} else {
-// 				return redirect()->route('admin.usuarios.login');
+// 				return redirect()->route('clinica.usuarios.login');
 // 			}
 
 // 		}
@@ -69,7 +69,7 @@
 // 			if ($request->ajax()) {
 // 				return abort(403);
 // 			} else {
-// 				return redirect()->route('admin.usuarios.login');
+// 				return redirect()->route('clinica.usuarios.login');
 // 			}
 
 // 		}
@@ -102,7 +102,7 @@
 // 			if ($request->ajax()) {
 // 				return abort(403);
 // 			} else {
-// 				return redirect()->route('admin.usuarios.login');
+// 				return redirect()->route('clinica.usuarios.login');
 // 			}
 
 // 		}
@@ -141,7 +141,7 @@
 // 			if ($request->ajax()) {
 // 				return abort(403);
 // 			} else {
-// 				return redirect()->route('admin.usuarios.login');
+// 				return redirect()->route('clinica.usuarios.login');
 // 			}
 
 // 		}
@@ -167,7 +167,7 @@
 // 			if ($request->ajax()) {
 // 				return abort(403);
 // 			} else {
-// 				return redirect()->route('admin.usuarios.login');
+// 				return redirect()->route('clinica.usuarios.login');
 // 			}
 
 // 		}
@@ -212,7 +212,7 @@ class UsuariosController extends Controller
 			if ($request->ajax()) {
 				return abort(403);
 			} else {
-				return redirect()->route('admin.usuarios.login');
+				return redirect()->route('clinica.usuarios.login');
 			}
 
 		}
@@ -233,7 +233,7 @@ class UsuariosController extends Controller
 			if ($request->ajax()) {
 				return abort(403);
 			} else {
-				return redirect()->route('admin.usuarios.login');
+				return redirect()->route('clinica.usuarios.login');
 			}
 
 		}
@@ -257,7 +257,7 @@ class UsuariosController extends Controller
 			if ($request->ajax()) {
 				return abort(403);
 			} else {
-				return redirect()->route('admin.usuarios.login');
+				return redirect()->route('clinica.usuarios.login');
 			}
 
 		}
@@ -269,7 +269,7 @@ class UsuariosController extends Controller
 			'email' => ['required', 'unique:mysql2.tb_acl_usuario,email'],
 		]);
 
-		$url  = route('admin.usuarios.index');
+		$url  = route('clinica.usuarios.index');
 		$type = 'redirect';
 
 		if ($this->usuario_model->create($request)) {
@@ -291,7 +291,7 @@ class UsuariosController extends Controller
 			if ($request->ajax()) {
 				return abort(403);
 			} else {
-				return redirect()->route('admin.usuarios.login');
+				return redirect()->route('clinica.usuarios.login');
 			}
 
 		}
@@ -309,7 +309,7 @@ class UsuariosController extends Controller
 			],
 		]);
 
-		$url  = route('admin.usuarios.index');
+		$url  = route('clinica.usuarios.index');
 		$type = 'redirect';
 
 		if ($this->usuario_model->edit($request)) {
@@ -330,11 +330,11 @@ class UsuariosController extends Controller
 			if ($request->ajax()) {
 				return abort(403);
 			} else {
-				return redirect()->route('admin.usuarios.login');
+				return redirect()->route('clinica.usuarios.login');
 			}
 		}
 
-		$url  = route('admin.usuarios.index');
+		$url  = route('clinica.usuarios.index');
 		$type = 'redirect';
 
 		if ($this->usuario_model->edit($request, $field)) {
@@ -355,11 +355,11 @@ class UsuariosController extends Controller
 			if ($request->ajax()) {
 				return abort(403);
 			} else {
-				return redirect()->route('admin.usuarios.login');
+				return redirect()->route('clinica.usuarios.login');
 			}
 		}
 
-		$url  = route('admin.usuarios.index');
+		$url  = route('clinica.usuarios.index');
 		$type = 'redirect';
 
 		if ($this->usuario_model->remove($request)) {

@@ -102,8 +102,93 @@ class MenuModel extends Model
 
 	}
 
-	public function getMenuModulo()
+	public function getMenusItens($id_menu, $id_parent = null): array
 	{
+
+		$list = [];
+
+		$items = $this->select(
+			'Item.id',
+			'Item.id_controller',
+			'Item.id_parent',
+			'Item.id_route',
+			'Item.icon',
+			'Item.divider',
+			'Item.item_type',
+			DB::raw('(SELECT titulo FROM tb_acl_menu_item_descricao WHERE id_item = Item.id AND id_idioma = ' . lang(true) . ') AS titulo'),
+			DB::raw('(SELECT descricao FROM tb_acl_menu_item_descricao WHERE id_item = Item.id AND id_idioma = ' . lang(true) . ') AS descricao'),
+		)
+			->from('tb_acl_menu_item AS Item')
+			->whereIn('Item.id', function ($query) use ($id_menu, $id_parent) {
+				$query->select('I.id_item')
+					->from('tb_acl_menu_item_menu AS I')
+					->whereColumn('I.id_item', 'Item.id')
+					->where('I.status', '1')
+					->where('I.id_menu', $id_menu);
+			})
+			->where('id_parent', $id_parent)
+			->where('status', '1')
+			->orderBy('ordem', 'asc')
+			->orderBy('descricao', 'asc')
+			->get();
+
+		if ($items->count() > 0) {
+
+			foreach ($items as $item) {
+
+				$submenus = $this->from('tb_acl_menu_item')
+					->where('id_parent', $item->id)
+					->where('status', '1')
+					->whereIn('id', function ($query) use ($id_menu) {
+						$query->select('id_item')
+							->from('tb_acl_menu_item_menu')
+							->whereColumn('id_item', 'id')
+							->where('status', '1')
+							->where('id_menu', $id_menu);
+					})
+					->first();
+
+				$list[$item->id] = ['id' => $item->id, 'item' => $item->titulo];
+
+				if (isset($submenus)) {
+					$list[$item->id]['children'][] = $this->getMenusItens($id_menu, $item->id);
+				}
+
+			}
+
+		}
+
+		return $list;
+
+	}
+
+	public function getMenuByModulo($id_modulo)
+	{
+
+		$get = $this->select(
+			'M.id',
+			DB::raw('(SELECT titulo FROM tb_acl_menu_descricao WHERE id_menu = M.id AND id_idioma = (SELECT id FROM tb_sys_idioma WHERE sigla = "' . ($_COOKIE['idioma'] ?? get_config('language')) . '")) AS titulo'),
+			DB::raw('(SELECT descricao FROM tb_acl_menu_descricao WHERE id_menu = M.id AND id_idioma = (SELECT id FROM tb_sys_idioma WHERE sigla = "' . ($_COOKIE['idioma'] ?? get_config('language')) . '")) AS slug'),
+			'M.created_at',
+			'M.updated_at',
+			DB::raw('IF(M.status = "1", "Ativo", "Inativo") AS status'),
+		);
+
+		$get->from('tb_acl_menu AS M');
+		$get->join('tb_acl_modulo_grupo_menu AS GM', 'GM.id_menu', '=', 'M.id', 'left');
+
+		// Left join aqui
+
+		$get->where('GM.id_modulo_grupo', function ($query) use ($id_modulo) {
+			$query->select('id')
+				->from('tb_acl_modulo_grupo')
+				->whereColumn('id', 'id_modulo_grupo')
+				->where('id_modulo', $id_modulo);
+		});
+
+		$menus = $get->paginate();
+
+		return $menus;
 
 	}
 
@@ -135,10 +220,6 @@ class MenuModel extends Model
 	private function sanitize(array $input = array())
 	{
 
-		// if (!isset($input['status'])) {
-		// $input['status'] = '1';
-		// }
-
 		$input['descricao'] = limpa_string($input['titulo'], '-');
 
 		return $this->fields($input);
@@ -156,6 +237,11 @@ class MenuModel extends Model
 
 		$data = $this->sanitize($input);
 
+		if (isset($data['estrutura'])) {
+			$estrutura = $data['estrutura'];
+			unset($data['estrutura']);
+		}
+
 		$idioma = $this->select('id')
 			->from('tb_sys_idioma')
 			->where('sigla', $_COOKIE['idioma'] ?? get_config('language'))
@@ -168,7 +254,19 @@ class MenuModel extends Model
 		$this->from('tb_acl_menu_descricao')
 			->updateOrInsert($where, $data);
 
+		if (isset($estrutura)) {
+			// Ajusta Itens do Menu
+			$this->itens_menu($id, $estrutura);
+		}
+
 		return $id;
+
+	}
+
+	public function itens_menu($id_menu, $itens)
+	{
+
+		dump($id_menu, $itens);
 
 	}
 

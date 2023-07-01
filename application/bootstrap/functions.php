@@ -540,18 +540,66 @@ if (!function_exists('site_url')) {
 	}
 }
 
+/** Função para gerar lista de menus editáveis com NestableJS */
+if (!function_exists('Nestable')) {
+
+	function Nestable($list, $children = true)
+	{
+
+		$ol = '';
+
+		if ($children) {
+			$ol = '<div class="dd" id="nestable">';
+		}
+
+		$ol .= '<ol class="dd-list">';
+
+		foreach ($list as $l) {
+
+			$ol .= '<li class="dd-item" data-id="' . $l['id'] . '">';
+			$ol .= '<div class="dd-handle dd3-handle"></div>';
+
+			$ol .= '<div class="dd3-content">' . $l['item'] . '
+						<a href="#" class="red-text right remove-menu">Excluir</a>
+						<div style="display: none;">Teste</div>
+					</div>';
+
+			if (isset($l['children'])) {
+
+				foreach ($l['children'] as $c) {
+					$ol .= Nestable($c, false);
+				}
+
+			}
+
+			$ol .= '</li>';
+
+		}
+
+		if ($children) {
+			$ol .= '</div>';
+		}
+
+		$ol .= '</ol>';
+
+		return $ol;
+
+	}
+
+}
+
 /*
  * Fução para obter os menus da página
  */
 if (!function_exists('getMenus')) {
 
-	function getMenus($local, $id, $attributes = [])
+	function getMenus($local, $id, $attributes = [], $path = null)
 	{
 
 		$menuModel   = new MenuModel();
 		$moduloModel = new ModuloModel();
 		$modulo      = explode('/', request()->path());
-		$path        = '/' . $modulo[0];
+		$path        = '/' . (!is_null($path) ? $path : $modulo[0]);
 
 		$idModulo = $moduloModel->select('id')
 			->from('tb_acl_modulo')
@@ -574,6 +622,7 @@ if (!function_exists('getMenus')) {
 			->whereIn('MG_Menu.id_modulo_grupo', function ($query) use ($idModulo, $moduloModel, $path) {
 				$q = $query->select('id')
 					->from('tb_acl_modulo_grupo')
+					->whereColumn('id_modulo_grupo', 'id')
 					->where('id_modulo', $idModulo);
 
 				if ($moduloModel->getIsRestrictModulo($path)) {
@@ -583,7 +632,8 @@ if (!function_exists('getMenus')) {
 					}
 				}
 
-			});
+			})
+			->whereColumn('MG_Menu.id_menu', 'Menu.id');
 
 		$getMenus = $menus->where('Menu.status', '1')
 			->where('MG_Menu.status', '1')
@@ -630,6 +680,7 @@ if (!function_exists('getMenus')) {
 									->where('id_modulo_grupo', function ($query) use ($menu, $path, $idModulo, $moduloModel) {
 										$query = $query->select('id')
 											->from('tb_acl_modulo_grupo')
+											->whereColumn('id', 'id_modulo_grupo')
 											->where('id_modulo', $idModulo);
 										if ($moduloModel->getIsRestrictModulo($path)) {
 											if (session()->exists('userdata') && session()->exists('app_session')) {
@@ -654,7 +705,16 @@ if (!function_exists('getMenus')) {
 
 					foreach ($items as $item) {
 
-						$ul .= '<li class="menu-description"><h6>' . $item->item_type . '</h6></li>';
+						// $ul .= '<li class="menu-description"><h6>' . $item->item_type . '</h6></li>';
+
+						if (isset($item->item_type)) {
+							$ul .= '<li class="navigation-header">
+									<span class="navigation-header-text" style="font-weight: 600; color: var(--grey-lighten-1)">
+										' . $item->item_type . '
+									</span>
+									<i class="navigation-header-icon material-icons-outlined">more_horiz</i>
+								</li>';
+						}
 
 						$submenus = $menuModel->from('tb_acl_menu_item')
 							->where('id_parent', $item->id)

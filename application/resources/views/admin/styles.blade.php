@@ -6,6 +6,7 @@
 <link rel="stylesheet" media="screen" href="{{ asset('assets/plugins/fullcalendar/main.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('assets/plugins/fullcalendar/daygrid.min.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('assets/plugins/fullcalendar/timegrid.min.css') }}">
+<link rel="stylesheet" media="screen" href="{{ asset('assets/plugins/nestable/nestable.css') }}">
 
 <link rel="stylesheet" media="screen" href="{{ asset('assets/styles/style.css') }}">
 

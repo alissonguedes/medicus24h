@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\MenuRequest;
 use Illuminate\Http\Request;
+use \App\Models\ControllerModel;
 use \App\Models\MenuModel;
 use \App\Models\ModuloModel;
 
@@ -29,6 +30,35 @@ class MenusController extends Controller
 
 	}
 
+	public function criar_menus(Request $request, MenuModel $menu, ControllerModel $controller)
+	{
+
+		$dados       = [];
+		$controllers = [];
+
+		if ($request->id) {
+
+			foreach ($request->id as $id) {
+
+				$c             = $controller->getControllerById($id);
+				$controllers[] = [
+					'id_item'       => $c->id,
+					'id_controller' => $c->id,
+					'modulo'        => $c->modulo,
+					'titulo'        => $c->nome,
+					'descricao'     => $c->descricao,
+				];
+
+			}
+
+			$dados['controllers'] = $controllers;
+
+		}
+
+		return view('admin.menus.gera_menu', $dados);
+
+	}
+
 	public function form(Request $request, MenuModel $menu, ModuloModel $modulo)
 	{
 
@@ -39,6 +69,7 @@ class MenusController extends Controller
 			$dados['row'] = $menu->getMenuById($id);
 		}
 
+		// $dados['controllers'] = $this->criar_menus();
 		$dados['modulos'] = $modulo->getModulos();
 
 		return response(view('admin.menus.grupos.form', $dados), 200);

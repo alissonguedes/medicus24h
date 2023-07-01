@@ -1,8 +1,18 @@
 'use strict';
 
+function removeIndex(arr, index, position = 1) {
+
+	var index = arr.indexOf(index);
+
+	if (index > -1) {
+		arr.splice(index, 1);
+	}
+
+}
+
 function toCamelCase(text) {
 
-	var camelcase = text.replace(/\b[a-z]/g, function (txt) {
+	var camelcase = text.replace(/\b[a-z]/g, function(txt) {
 		return txt.toUpperCase();
 	});
 
@@ -50,14 +60,14 @@ moment.locale('pt_br', {
 		yy: '%d anos'
 	},
 	dayOfMonthOrdinalParse: /\d{1,2}(er|e)/,
-	ordinal: function (number) {
+	ordinal: function(number) {
 		return number + (number === 1 ? 'er' : 'e');
 	},
 	meridiemParse: /PD|MD/,
-	isPM: function (input) {
+	isPM: function(input) {
 		return input.charAt(0) === 'M';
 	},
-	meridiem: function (hours, minutes, isLower) {
+	meridiem: function(hours, minutes, isLower) {
 		return hours < 12 ? 'PD' : 'MD';
 	},
 	week: {
@@ -81,7 +91,7 @@ var QuillEditor = (e) => {
 
 	var e = e ? e : '.editor';
 
-	$(e).each(function () {
+	$(e).each(function() {
 
 		var editor = this;
 		var placeholder = $(editor).data('placeholder') || null;
@@ -131,7 +141,7 @@ var QuillEditor = (e) => {
 		if ($(editor).find('.ql-editor').text())
 			quill.root.innerHTML = quill.getText();
 
-		$(this).on('keyup keypress keydown', function () {
+		$(this).on('keyup keypress keydown', function() {
 
 			var is_blank = $(this).text().trim() == '';
 			var p = $(this).find('.ql-editor').find('p');
@@ -146,7 +156,7 @@ var QuillEditor = (e) => {
 
 		});
 
-		$(this).on('keyup', delay(function () {
+		$(this).on('keyup', delay(function() {
 			QuillGetText(editor);
 
 			var p = $(this).find('.ql-editor').find('p');
@@ -186,7 +196,7 @@ var Sidenav = (callback = {
 	// Detalhes de Atendimento
 	var s = callback.sidenav || $('.sidenav:not(.sidenav-main)');
 
-	$(".sidenav").each(function () {
+	$(".sidenav").each(function() {
 
 		$(this).sidenav({
 
@@ -214,7 +224,7 @@ var Buttons = {
 	Map: () => {
 
 
-		$('[data-trigger="right-sidebar"]').on('click', function () {
+		$('[data-trigger="right-sidebar"]').on('click', function() {
 
 			var sidebar = $('#' + $(this).data('trigger'));
 			var target = $(this).data('target');
@@ -299,7 +309,7 @@ var Buttons = {
 
 		var button = button || $('[data-trigger="sidenav"]');
 
-		$(button).on('click', function () {
+		$(button).on('click', function() {
 
 			if (!$(this).data('disabled')) {
 
@@ -351,7 +361,7 @@ var Buttons = {
 
 					},
 
-					onOpenEnd: () => { },
+					onOpenEnd: () => {},
 
 					onCloseStart: () => {
 						if ($('[data-trigger="cronometro"]').length) {

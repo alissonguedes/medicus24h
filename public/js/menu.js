@@ -211,7 +211,7 @@ var Menu = {
 
 						);
 
-					M.Toast.dismissAll();
+					// M.Toast.dismissAll();
 
 					var data = {
 						'method': 'patch',
