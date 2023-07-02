@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Clinica{
+namespace App\Http\Controllers\Clinica {
 
 	use App\Http\Requests\Clinica\ExameRequest;
 	use App\Models\ExameModel;
@@ -54,7 +54,6 @@ namespace App\Http\Controllers\Clinica{
 				'message'     => 'Exame cadastrado com sucesso!',
 				'clean_form'  => true,
 				'close_modal' => true,
-				'url'         => url()->route('clinica.funcionarios.index'),
 				'type'        => 'refresh',
 			]);
 

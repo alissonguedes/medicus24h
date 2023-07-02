@@ -1,52 +1,65 @@
 @extends('clinica.layouts.index')
 
-@section('title', 'Medicos')
+@section('title', 'Médicos')
 
-@section('search')
-<div class="input-field search bordered border-round z-depth-1">
-	<label for="">Pesquisar medicos</label>
-	<input type="search" id="search-on-page" class="dataTable_search">
-</div>
-@endsection
+@section('search-label', 'Pesquisar Médico')
+@section('data-search', 'medicos')
+@section('json-datatable', 'true')
 
-@section('btn-add-title','Adicionar medico')
-@section('btn-add')
-<button class="btn btn-floating waves-effect waves-light z-depth-3" disabled="disabled">
-	<i class="material-icons bolder">add</i>
-</button>
-@endsection
+@section('btn-add', '')
+@section('btn-add-title', 'Adicionar Médico')
+@section('btn-add-icon', 'add')
+@section('btn-add-route', go('clinica.medicos.add'))
+@section('btn-add-data-trigger', 'modal')
+@section('btn-add-data-target', 'modal_medico')
+
+@section('btn-delete-route', go('clinica.medicos.delete'))
 
 @section('container')
 
-<div class="row">
-	<div class="col s12">
-		<div class="card">
-			<div class="card-content scroller">
-				<div class="card-body responsive-table">
-					<table class="table dataTable no-footer dataTable-fixed" data-link="{{ go('clinica.medicos.index') }}">
-						<thead>
-							<tr>
-								<th data-orderable="false">
-									<label class="grey-text text-darken-2 font-14 left">
-										<input type="checkbox" name="check-all" id="check-all" class="filled-in">
-										<span></span>
-									</label>
-								</th>
-								<th width="15%" class="">Medico</th>
-								<th class="">Especialidade</th>
-								<th class="center-align">CRM</th>
-								<th class="center-align">Data de cadastro</th>
-								<th class="center-align">status</th>
-								<th width="15%" class="center-align" class="center-align" data-orderable="false">Ações</th>
-							</tr>
-						</thead>
-					</table>
+	<div class="row">
+		<div class="col s12">
+			<div class="card">
+				<div class="card-content">
+					<div class="card-body">
+						<div class="table grid bordered">
+							<div class="grid-head">
+								<div class="grid grid-row">
+									<div class="grid-col" data-disabled="true" data-orderable="false" data-width="15fr">
+										<label class="grey-text text-darken-2 font-14 left">
+											<input type="checkbox" name="check-all" id="check-all" class="filled-in">
+											<span></span>
+										</label>
+									</div>
+									<div class="grid-col left-align" data-order="asc" data-width="100fr">
+										<span class="direction">Medico</span>
+									</div>
+									<div class="grid-col center-align" data-width="100fr">
+										<span class="direction">Especialidade</span>
+									</div>
+									<div class="grid-col center-align" data-width="50fr">
+										<span class="direction">CRM</span>
+									</div>
+									<div class="grid-col center-align" data-width="50fr">
+										<span class="direction">Status</span>
+									</div>
+									<div class="grid-col center-align" data-disabled="true" data-orderable="false" data-width="50fr">
+										<span>Ação</span>
+									</div>
+								</div>
+							</div>
+							<div class="grid grid-body">
+								<div class="scroller" style="height: calc(100vh - 290px)">
+									@include('clinica.medicos.list')
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-@include('clinica.medicos.form')
+	@include('clinica.medicos.form')
 
 @endsection

@@ -73,7 +73,7 @@ class MedicoModel extends Model
 			'crm',
 			'status',
 			DB::raw('(SELECT id_especialidade FROM tb_medico_especialidade WHERE tb_medico_especialidade.id_funcionario = tb_medico.id_funcionario) AS id_especialidade'),
-			DB::raw('(SELECT especialidade FROM tb_especialidade WHERE id = id_especialidade) AS especialidade'),
+			DB::raw('(SELECT especialidade FROM tb_especialidade WHERE id = (SELECT id_especialidade FROM tb_medico_especialidade WHERE tb_medico_especialidade.id_funcionario = tb_medico.id_funcionario) ) AS especialidade'),
 			DB::raw('(SELECT nome FROM tb_funcionario WHERE id = id_funcionario) AS nome'),
 			DB::raw('(SELECT cpf FROM tb_funcionario WHERE id = id_funcionario) AS cpf'),
 			DB::raw('(SELECT rg FROM tb_funcionario WHERE id = id_funcionario) AS rg'),
@@ -81,7 +81,7 @@ class MedicoModel extends Model
 			DB::raw('DATE_FORMAT(updated_at, "%d/%m/%Y") AS data_atualizacao')
 		);
 
-		if (isset($data) && $search = $data['search']['value']) {
+		if (isset($data) && $search = $data->search) {
 			$get->where(function ($query) use ($search) {
 				$query
 					->orWhere('id_funcionario', 'like', $search . '%')
@@ -108,20 +108,21 @@ class MedicoModel extends Model
 		$this->order = [
 			null,
 			DB::raw('(SELECT nome FROM tb_funcionario WHERE id = id_funcionario)'),
-			DB::raw('(SELECT especialidade FROM tb_especialidade WHERE id = id_especialidade)'),
+			// DB::raw('(SELECT especialidade FROM tb_especialidade WHERE id = id_especialidade)'),
+			DB::raw('(SELECT especialidade FROM tb_especialidade WHERE id = (SELECT id_especialidade FROM tb_medico_especialidade WHERE tb_medico_especialidade.id_funcionario = tb_medico.id_funcionario))'),
 			'crm',
 			'created_at',
 			'status',
 		];
 
 		// Order By
-		if (isset($_GET['order']) && $_GET['order'][0]['column'] != 0) {
-			$get->orderBy($this->order[$_GET['order'][0]['column']], $_GET['order'][0]['dir']);
+		if (isset($data->order) && isset($data->direction)) {
+			$get->orderBy($this->order[$data->order], $data->direction);
 		} else {
 			$get->orderBy($this->order[1], 'asc');
 		}
 
-		return $get->paginate(isset($_GET['length']) ? $_GET['length'] : 50);
+		return $get->paginate(isset($data->length) ? $data->length : 50);
 
 	}
 

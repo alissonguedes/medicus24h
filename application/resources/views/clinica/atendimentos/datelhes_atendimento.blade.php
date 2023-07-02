@@ -4,7 +4,23 @@
 
 		<div class="col s9 l3 ">
 
-			<div id="atendimento" class="slide-out-right-sidenav sidenav rightside-navigation grey lighten-3" data-position="right">
+			{{-- <div style="display: flex; align-items: center;">
+				<div class="preloader-wrapper small active" style="margin-right: 20px;">
+					<div class="spinner-layer spinner-green-only">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div>
+						<div class="gap-patch">
+							<div class="circle"></div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+				</div>
+			</div> --}}
+
+			<div id="atendimento" class="sidenav rightside-navigation grey lighten-3" data-edge="right">
 
 				<div class="animated slow fadeIn">
 
@@ -16,8 +32,7 @@
 						</div>
 					</div>
 
-					@if(isset($row))
-
+					@if (isset($row))
 						@php
 							$paciente_model = new \App\Models\PacienteModel();
 							$paciente = $paciente_model->getPacienteById($row->id_paciente);
@@ -35,7 +50,7 @@
 
 										<div class="preview z-depth-3">
 
-											<img src="{{ asset($row->imagem ?? 'img/avatar/icon.png') }}" alt="" @if(isset($row) && empty($row->imagem) ) style="opacity: 0.4; filter: greyscale(1);" @endif>
+											<img src="{{ asset($row->imagem ?? 'img/avatar/icon.png') }}" alt="" @if (isset($row) && empty($row->imagem)) style="opacity: 0.4; filter: greyscale(1);" @endif>
 
 										</div>
 
@@ -43,7 +58,7 @@
 
 									<div class="row">
 										<div class="col s12">
-											<h6 class="title" class="mb-0" @if(isset($paciente) && strlen($paciente->nome) > 20) data-tooltip="{{ $paciente->nome }}" @endif>{{ $paciente->nome }}</h6>
+											<h6 class="title" class="mb-0" @if (isset($paciente) && strlen($paciente->nome) > 20) data-tooltip="{{ $paciente->nome }}" @endif>{{ $paciente->nome }}</h6>
 										</div>
 									</div>
 
@@ -68,7 +83,7 @@
 
 								<div class="row">
 									<div class="col s12">
-										<button type="button" class="btn flex green darken-3 mt-10 play" data-href="{{ go('clinica.atendimentos.edit', $row-> id) }}">
+										<button type="button" class="btn flex green darken-3 mt-10 play" data-href="{{ go('clinica.atendimentos.edit', $row->id) }}">
 											<span class="material-icons play left">
 												play_arrow
 											</span>
@@ -88,7 +103,6 @@
 							</div>
 
 						</div>
-
 					@endif
 
 				</div>

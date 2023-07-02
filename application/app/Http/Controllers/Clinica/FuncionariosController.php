@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Clinica{
+namespace App\Http\Controllers\Clinica {
 
 	use App\Models\DepartamentoModel;
 	use App\Models\EmpresaModel;
@@ -127,8 +127,7 @@ namespace App\Http\Controllers\Clinica{
 			$data['type']        = 'refresh';
 			$data['clean_form']  = true;
 			$data['close_modal'] = true;
-			$data['url']         = url()->route('clinica.funcionarios.index');
-			$data['message']     = 'Funcoe cadastrada com sucesso!';
+			$data['message']     = 'Funcionário cadastrado com sucesso!';
 
 			return response()->json($data);
 
@@ -146,8 +145,7 @@ namespace App\Http\Controllers\Clinica{
 			$data['type']        = 'refresh';
 			$data['clean_form']  = true;
 			$data['close_modal'] = true;
-			$data['url']         = url()->route('clinica.funcionarios.index');
-			$data['message']     = 'Registro atualizado com sucesso!';
+			$data['message']     = 'Funcionário editado com sucesso!';
 
 			return response()->json($data);
 
@@ -159,7 +157,7 @@ namespace App\Http\Controllers\Clinica{
 			$this->funcionario_model->updateColumn($request);
 
 			return response()->json([
-				'message' => 'Médico atualizado com sucesso!',
+				'message' => 'Funcionário atualizado com sucesso!',
 			]);
 
 		}

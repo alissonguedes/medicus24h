@@ -35,7 +35,8 @@ class EspecialidadeModel extends Model
 			'status'
 		);
 
-		if (isset($data) && $search = $data['search']['value']) {
+		if (isset($data->search)) {
+			$search = $data->search;
 			$get->where(function ($query) use ($search) {
 				$query
 					->orWhere('id', 'like', $search . '%')
@@ -45,13 +46,13 @@ class EspecialidadeModel extends Model
 		}
 
 		// Order By
-		if (isset($_GET['order']) && $_GET['order'][0]['column'] != 0) {
-			$get->orderBy($this->order[$_GET['order'][0]['column']], $_GET['order'][0]['dir']);
+		if (isset($data->order) && isset($data->direction)) {
+			$get->orderBy($this->order[$data->order], $data->direction);
 		} else {
 			$get->orderBy($this->order[1], 'asc');
 		}
 
-		return $get->paginate(isset($_GET['length']) ? $_GET['length'] : 50);
+		return $get->paginate(isset($data->length) ? $data->length : 50);
 
 	}
 

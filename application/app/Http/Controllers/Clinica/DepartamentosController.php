@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Clinica{
+namespace App\Http\Controllers\Clinica {
 
 	use App\Models\DepartamentoModel;
 	use App\Models\EmpresaModel;
@@ -21,12 +21,12 @@ namespace App\Http\Controllers\Clinica{
 		public function index(Request $request)
 		{
 
+			$dados['paginate'] = $this->departamento_model->getDepartamentos($request);
+
 			if ($request->ajax()) {
-				$dados['paginate'] = $this->departamento_model->getDepartamentos($request);
 				return response(view('clinica.departamentos.list', $dados), 200);
 			}
 
-			$dados['departamentos'] = $this->departamento_model->getDepartamentos();
 			return view('clinica.departamentos.index', $dados);
 
 		}

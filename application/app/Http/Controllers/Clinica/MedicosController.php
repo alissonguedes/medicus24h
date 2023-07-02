@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Clinica{
+namespace App\Http\Controllers\Clinica {
 
 	use App\Models\ConvenioModel;
 	use App\Models\DepartamentoModel;
@@ -29,26 +29,33 @@ namespace App\Http\Controllers\Clinica{
 		public function index(Request $request)
 		{
 
+			$dados['paginate'] = $this->medico_model->getMedicos($request);
+
 			if ($request->ajax()) {
-				$dados['paginate'] = $this->medico_model->getMedicos($request);
 				return response(view('clinica.medicos.list', $dados), 200);
 			}
 
-			return view('clinica.medicos.index');
+			return view('clinica.medicos.index', $dados);
 
 		}
 
 		public function form(Request $request, $id = null)
 		{
 
-			$medico                      = $this->medico_model->getMedicoById($id);
-			$dados['row']                = $medico;
-			$dados['issetMedicoClinica'] = $this->medico_model;
-			$dados['convenios']          = $this->convenio_model->getConvenio();
-			$dados['estado_civil']       = $this->estadoCivil_model->getEstadoCivil();
-			$dados['especialidades']     = $this->especialidade_model->getEspecialidades();
-			$dados['departamentos']      = $this->departamento_model->getDepartamentos();
-			$dados['empresas']           = $this->empresa_model->getEmpresasByDepartamentos($medico->id_departamento);
+			$dados = [];
+
+			if (isset($id)) {
+
+				$medico                      = $this->medico_model->getMedicoById($id);
+				$dados['row']                = $medico;
+				$dados['issetMedicoClinica'] = $this->medico_model;
+				$dados['convenios']          = $this->convenio_model->getConvenio();
+				$dados['estado_civil']       = $this->estadoCivil_model->getEstadoCivil();
+				$dados['especialidades']     = $this->especialidade_model->getEspecialidades();
+				$dados['departamentos']      = $this->departamento_model->getDepartamentos();
+				$dados['empresas']           = $this->empresa_model->getEmpresasByDepartamentos($medico->id_departamento);
+
+			}
 
 			return view('clinica.medicos.form', $dados);
 

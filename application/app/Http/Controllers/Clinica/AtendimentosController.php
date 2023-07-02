@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Clinica{
+namespace App\Http\Controllers\Clinica {
 
 	use App\Models\AtendimentoModel;
 	use App\Models\ConvenioModel;
@@ -25,13 +25,14 @@ namespace App\Http\Controllers\Clinica{
 		public function index(Request $request, $tipo = null)
 		{
 
+			$dados['paginate'] = $this->atendimento_model->getAtendimentos($request);
+
 			// Pesquisar atendimentos
 			if ($request->ajax()) {
-				$dados['paginate'] = $this->atendimento_model->getAtendimentos($request);
 				return response(view('clinica.atendimentos.list', $dados), 200);
 			}
 
-			return response(view('clinica.atendimentos.index'), 200);
+			return response(view('clinica.atendimentos.index', $dados), 200);
 
 		}
 

@@ -11,7 +11,7 @@
 					<div class="col s12">
 						<div class="input-field">
 							<label for="titulo" class="{{ isset($row) && $row->titulo ? 'active' : null }}">Título</label>
-							<input type="text" name="titulo" id="titulo" value="{{ $row->titulo ?? null }}">
+							<input type="text" name="titulo" id="titulo" value="{{ $row->titulo ?? null }}" autofocus="autofocus">
 						</div>
 					</div>
 				</div>

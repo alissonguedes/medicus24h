@@ -24,7 +24,7 @@ var Datatable = {
 		// Datatable.table = element ? element : $('table.dataTable');
 		// Datatable.url = Datatable.table.data('url') ? Datatable.table.data('url') : window.location.href;
 
-		$('.table.grid').each(function () {
+		$('.table.grid').each(function() {
 
 			Datatable.table = $(this);
 
@@ -44,11 +44,13 @@ var Datatable = {
 	},
 
 	reload: (url) => {
-		if (Datatable.table.length) {
-			Datatable.ajax({ url: url });
-		} else {
-			Datatable.datatable.draw();
-		}
+		// if (Datatable.table.length) {
+		Datatable.ajax({
+			url: url
+		});
+		// } else {
+		// 	Datatable.datatable.draw();
+		// }
 	},
 
 	request: () => {
@@ -59,7 +61,7 @@ var Datatable = {
 			.find('.grid-head')
 			.find('.grid-row')
 			.find('.grid-col')
-			.each(function (e, i) {
+			.each(function(e, i) {
 
 				var column = $(this);
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
@@ -70,13 +72,13 @@ var Datatable = {
 						.parents('.table.grid')
 						.find('.grid-body')
 						.find('.grid-row')
-						.each(function () {
+						.each(function() {
 
-							$(this).find('.grid-col').each(function () {
+							$(this).find('.grid-col').each(function() {
 
 								if ($(this).index() === column.index()) {
 
-									$(this).on('click', function (e) {
+									$(this).on('click', function(e) {
 
 										e.preventDefault();
 
@@ -89,8 +91,15 @@ var Datatable = {
 											var m = Materialize.modal(mod, url);
 											var m = M.Modal.getInstance(m);
 											m.open();
-										} else {
+										}
+										if (parent.hasClass('sidenav-trigger')) {
+
+											alert('teste')
+
+										} else if (parent.data('href')) {
+
 											Http.get($(this).parent('.grid-row').data('href'));
+
 										}
 
 									});
@@ -106,8 +115,8 @@ var Datatable = {
 						.parents('.table.grid')
 						.find('.grid-body')
 						.find('.grid-row')
-						.each(function () {
-							$(this).find('.grid-col').each(function () {
+						.each(function() {
+							$(this).find('.grid-col').each(function() {
 								if ($(this).index() === column.index()) {
 									$(this).attr('data-disabled', true);
 								}
@@ -156,7 +165,7 @@ var Datatable = {
 
 	checkbox: (table) => {
 
-		table.find('.grid-head').find(':input:checkbox').on('change', function () {
+		table.find('.grid-head').find(':input:checkbox').on('change', function() {
 
 			if ($(this).prop('checked')) {
 				$(this).parents('.table.grid').find('.grid-body').find(':checkbox:not(:disabled)').prop('checked', true).change();
@@ -166,7 +175,7 @@ var Datatable = {
 
 		});
 
-		table.find(':input:checkbox').on('change', function () {
+		table.find(':input:checkbox').on('change', function() {
 
 			var checked;
 			var checkeds = $(this).parents('.table.grid').find('.grid-body').find(':checkbox:checked:not(:disabled)').length;
@@ -276,6 +285,9 @@ var Datatable = {
 			// Scroller.constructor();
 			progress('out');
 
+			Materialize.btn_modal(!$('[data-disabled="true"]'));
+			Materialize.sidenav();
+
 		});
 
 	},
@@ -283,9 +295,9 @@ var Datatable = {
 	create: () => {
 
 		// -----------------------------------------------
-		Datatable.table.each(function () {
+		Datatable.table.each(function() {
 
-			$(this).find('.grid-head').find('.grid-col').each(function () {
+			$(this).find('.grid-head').find('.grid-col').each(function() {
 
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
 				var isOrderable = (typeof $(this).data('orderable') !== 'undefined' && $(this).data('orderable') != '' && $(this).data('orderable') === true) || typeof $(this).data('orderable') === 'undefined';
@@ -300,7 +312,8 @@ var Datatable = {
 
 				}
 
-			}).on('click', function (e) {
+
+			}).on('click', function(e) {
 
 				var isDisabled = $(this).data('disabled') == '' || $(this).data('disabled') === true;
 				var isOrderable = (typeof $(this).data('orderable') !== 'undefined' && $(this).data('orderable') != '' && $(this).data('orderable') === true) || typeof $(this).data('orderable') === 'undefined';
@@ -317,7 +330,7 @@ var Datatable = {
 				Datatable.order = $(this).index();
 				Datatable.direction = $(this).data('order');
 
-				$(this).parent().find('[data-order]').each(function () {
+				$(this).parent().find('[data-order]').each(function() {
 					if (Datatable.order != $(this).index())
 						$(this).removeAttr('data-order');
 				});
@@ -536,7 +549,7 @@ var Datatable = {
 
 		} else {
 
-			Datatable.table.each(function () {
+			Datatable.table.each(function() {
 
 				var url = Datatable.url;
 
@@ -557,7 +570,7 @@ var Datatable = {
 
 		if (search) {
 
-			search.bind('keyup paste', delay(function () {
+			search.bind('keyup paste', delay(function() {
 				Datatable.draw(this.value);
 			}, 200));
 
@@ -571,7 +584,7 @@ var Datatable = {
 
 	delete: (input) => {
 
-		$('#dropdown-actions').find('#btn-delete').bind('click', function () {
+		$('#dropdown-actions').find('#btn-delete').bind('click', function() {
 
 			var btn = $(this);
 			var selecteds = Datatable.selecteds;

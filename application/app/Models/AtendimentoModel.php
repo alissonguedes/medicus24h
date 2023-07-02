@@ -98,7 +98,7 @@ class AtendimentoModel extends AppModel
 			'id_paciente',
 			'id_categoria',
 			'id_medico',
-			DB::raw('(SELECT id_especialidade FROM tb_medico_especialidade WHERE tb_medico_especialidade.id_funcionario = id_funcionario) AS id_especialidade'),
+			DB::raw('(SELECT id_especialidade FROM tb_medico_especialidade WHERE tb_medico_especialidade.id_funcionario = id_medico) AS id_especialidade'),
 			DB::raw('(SELECT especialidade FROM tb_especialidade WHERE id = (SELECT id_especialidade FROM tb_medico_especialidade WHERE id_funcionario = id_medico) ) AS especialidade'),
 			DB::raw('(SELECT nome FROM tb_paciente WHERE id = id_paciente) AS paciente'),
 			DB::raw('(SELECT `titulo` FROM `tb_empresa` AS `C` WHERE `C`.`id` = `id_clinica`) AS `clinica`'),
@@ -118,7 +118,15 @@ class AtendimentoModel extends AppModel
 			'observacao',
 			DB::raw('DATE_FORMAT(created_at, "%d/%m/%Y") AS data_cadastro'),
 			DB::raw('DATE_FORMAT(updated_at, "%d/%m/%Y") AS data_atualizacao'),
-			'status'
+			DB::raw('(CASE
+						WHEN status = "0" THEN "Não compareceu"
+						WHEN status = "1" THEN "Agendado"
+						WHEN status = "A" THEN "Em Espera"
+						WHEN status = "C" THEN "Cancelado"
+						WHEN status = "I" THEN "Iniciado"
+						WHEN status = "F" THEN "Concluído"
+						WHEN status = "R" THEN "Remarcado"
+					END) AS status')
 		)
 			->from('tb_atendimento AS A');
 
@@ -134,8 +142,8 @@ class AtendimentoModel extends AppModel
 		];
 
 		// Order By
-		if (isset($_GET['order']) && $_GET['order'][0]['column'] != 0) {
-			$get->orderBy($this->order[$_GET['order'][0]['column']], $_GET['order'][0]['dir']);
+		if (isset($data->order) && isset($data->direction)) {
+			$get->orderBy($this->order[$data->order], $data->direction);
 		} else {
 			$get->orderBy($this->order[1], 'asc');
 		}
