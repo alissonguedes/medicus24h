@@ -164,7 +164,7 @@ header nav ul {
 	line-height: 95px;
 	height: 95px;
 	align-items: center;
-	font-weight: bold;
+	font-weight: 600;
 	font-size: 16px;
 	color: var(--red-darken-4);
 }

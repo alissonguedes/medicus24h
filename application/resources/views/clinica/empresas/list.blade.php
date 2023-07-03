@@ -24,7 +24,7 @@
 			<div class="grid-col left-align"> {{ $row->cnpj }} </div>
 			<div class="grid-col left-align"> {{ $row->cidade }} </div>
 			<div class="grid-col left-align"> {{ $row->uf }} </div>
-			<div class="grid-col left-align"> {{ $row->status === '0' ? 'Inativo' : 'Ativo' }} </div>
+			<div class="grid-col left-align"> {{ $row->status }} </div>
 			<div class="grid-col center-align">
 				<button data-href="{{ route('clinica.clinicas.edit', $row->id) }}" class="btn btn-small btn-edit btn-floating waves-effect blue-text transparent">
 					<i class="material-symbols-outlined">edit</i>

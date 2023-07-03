@@ -80,7 +80,7 @@
 	<div class="row">
 		<div class="col s12 mb-4">
 
-			<h5 class="mb-5">Outros serviços</h5>
+			<h4 class="mb-5">Outros serviços</h4>
 
 			{{-- <ul class="list-style-dotted">
 				<li>Venda e aluguéis de produtos</li>

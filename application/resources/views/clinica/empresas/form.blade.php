@@ -314,7 +314,7 @@
 													<div class="switch mt-3" id="status">
 														<label>
 															Off
-															<input type="checkbox" name="status" id="status" value="1" {{ !$row || ($row && $row->status == '1') ? 'checked=checked' : null }}>
+															<input type="checkbox" name="status" id="status" value="1" {{ !$row || ($row && ($row->status == '1' || $row->status == 'Ativo')) ? 'checked=checked' : null }}>
 															<span class="lever"></span>
 															On
 														</label>
