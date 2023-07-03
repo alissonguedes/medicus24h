@@ -107,6 +107,30 @@
 	padding: 3px 8px 8px 52px;
 }
 
+.navbar #profile-dropdown li#user-profile {
+	/* height: 80px; */
+	width: 260px;
+}
+
+.navbar #profile-dropdown {
+	width: auto !important;
+}
+
+.navbar #profile-dropdown li a i {
+	margin-right: 10px;
+	height: 25px;
+	display: block;
+}
+
+.navbar #profile-dropdown li#user-profile span {
+	display: block;
+}
+
+.navbar #profile-dropdown li#user-profile span.funcao {
+	color: var(--grey);
+	font-size: 12px;
+}
+
 .card-content.fixed-height {
 	height: calc(100vh - 185px);
 }

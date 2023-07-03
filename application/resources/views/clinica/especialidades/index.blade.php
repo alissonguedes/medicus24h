@@ -36,9 +36,6 @@
 									<div class="grid-col left-align" data-order="asc" data-width="100fr">
 										<span class="direction">Descrição</span>
 									</div>
-									<div class="grid-col center-align" data-width="100fr">
-										<span class="direction">Data de cadastro</span>
-									</div>
 									<div class="grid-col center-align" data-width="50fr">
 										<span class="direction">Status</span>
 									</div>

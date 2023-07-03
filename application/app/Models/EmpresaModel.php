@@ -77,7 +77,7 @@ class EmpresaModel extends AppModel
 			'matriz',
 			DB::raw('DATE_FORMAT(created_at, "%d/%m/%Y") AS data_cadastro'),
 			DB::raw('DATE_FORMAT(updated_at, "%d/%m/%Y") AS data_atualizacao'),
-			'status'
+			DB::raw('IF(status = "1", "Ativo", "Inativo") AS status'),
 		);
 
 		if (isset($data->search) && $search = $data->search) {

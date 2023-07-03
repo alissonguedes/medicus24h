@@ -16,13 +16,7 @@ class DepartamentoModel extends AppModel
 	private $path = 'assets/clinica/img/departamentos/';
 
 	protected $table = 'tb_departamento';
-	protected $order = [
-		null,
-		'titulo',
-		'descricao',
-		'created_at',
-		'status',
-	];
+	protected $order = [];
 
 	public function __construct()
 	{
@@ -40,7 +34,7 @@ class DepartamentoModel extends AppModel
 			'descricao',
 			DB::raw('DATE_FORMAT(created_at, "%d/%m/%Y") AS data_cadastro'),
 			DB::raw('DATE_FORMAT(updated_at, "%d/%m/%Y") AS data_atualizacao'),
-			'status'
+			DB::raw('IF(status = "1", "Ativo", "Inativo") AS status'),
 		);
 
 		if (isset($data)) {
@@ -52,6 +46,14 @@ class DepartamentoModel extends AppModel
 					->orWhere('descricao', 'like', $search . '%');
 			});
 		}
+
+		$this->order = [
+			null,
+			'titulo',
+			'descricao',
+			'created_at',
+			DB::raw('IF(status = "1", "Ativo", "Inativo") AS status'),
+		];
 
 		// Order By
 		if (isset($data->order) && isset($data->direction)) {

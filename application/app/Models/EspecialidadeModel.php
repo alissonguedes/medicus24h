@@ -13,13 +13,7 @@ class EspecialidadeModel extends Model
 	use HasFactory;
 
 	protected $table = 'tb_especialidade';
-	protected $order = [
-		null,
-		'especialidade',
-		'descricao',
-		'created_at',
-		'updated_at',
-	];
+	protected $order = [];
 
 	private $path = 'assets/clinica/img/especialidades/';
 
@@ -32,7 +26,7 @@ class EspecialidadeModel extends Model
 			'descricao',
 			DB::raw('DATE_FORMAT(created_at, "%d/%m/%Y") AS data_cadastro'),
 			DB::raw('DATE_FORMAT(updated_at, "%d/%m/%Y") AS data_atualizacao'),
-			'status'
+			DB::raw('IF(status = "1", "Ativo", "Inativo") AS status'),
 		);
 
 		if (isset($data->search)) {
@@ -44,6 +38,13 @@ class EspecialidadeModel extends Model
 					->orWhere('descricao', 'like', $search . '%');
 			});
 		}
+
+		$this->order = [
+			null,
+			'especialidade',
+			'descricao',
+			DB::raw('IF(status = "1", "Ativo", "Inativo") AS status'),
+		];
 
 		// Order By
 		if (isset($data->order) && isset($data->direction)) {

@@ -118,7 +118,6 @@
 			</div>
 			<div class="grid-col left-align"> {{ $row->especialidade }} </div>
 			<div class="grid-col left-align"> {{ $row->descricao }} </div>
-			<div class="grid-col left-align"> {{ $row->data_cadastro }} </div>
 			<div class="grid-col left-align"> {{ $row->status === '0' ? 'Inativo' : 'Ativo' }} </div>
 			<div class="grid-col center-align">
 				<button type="button" class="btn-small grey lighten-4 btn-floating float-none waves-effect" name="edit" value="{{ $row->id }}" data-url="{{ go('clinica.especialidades.edit', $row->id) }}" data-trigger="modal" data-target="modal_especialidade" data-tooltip="Editar">

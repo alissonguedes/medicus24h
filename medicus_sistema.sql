@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 01/07/2023 às 03:58
+-- Tempo de geração: 03/07/2023 às 01:46
 -- Versão do servidor: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- Versão do PHP: 8.1.18
 
@@ -198,7 +198,7 @@ INSERT INTO `tb_acl_menu_item` (`id`, `id_controller`, `id_parent`, `id_route`, 
 (36, 49, NULL, 0, 'Site Admin Dashboard', 'Menu Principal', NULL, 'dashboard', NULL, 1, 0001, '2022-08-21 08:14:27', NULL, 0, '1', '1'),
 (37, 47, NULL, 0, 'Tickets dashboard', NULL, NULL, NULL, NULL, 0, 1111, '2023-06-30 05:14:30', NULL, 0, '1', '1'),
 (38, 47, NULL, 0, NULL, NULL, NULL, NULL, NULL, 0, 1111, '2023-06-30 05:22:46', NULL, 0, '1', '1'),
-(39, 54, NULL, 0, 'Tickets', 'Tickets', NULL, 'mail', NULL, 10, 1111, '2023-06-30 05:22:46', NULL, 0, '1', '1');
+(39, 54, NULL, 0, 'Tickets', 'Tickets', NULL, 'stacked_inbox', NULL, 10, 1111, '2023-06-30 05:22:46', NULL, 0, '1', '1');
 
 -- --------------------------------------------------------
 
@@ -355,7 +355,8 @@ INSERT INTO `tb_acl_menu_item_menu` (`id_menu`, `id_item`, `created_at`, `update
 (24, 36, '2023-02-13 21:56:10', NULL, '1'),
 (26, 37, '2023-06-30 05:16:19', NULL, '1'),
 (1, 38, '2023-06-30 05:20:08', NULL, '1'),
-(2, 39, '2023-07-01 01:16:02', NULL, '1');
+(2, 39, '2023-07-01 01:16:02', NULL, '1'),
+(3, 39, '2023-07-03 04:28:49', NULL, '1');
 
 -- --------------------------------------------------------
 
@@ -541,7 +542,7 @@ CREATE TABLE `tb_acl_modulo_grupo_menu` (
 INSERT INTO `tb_acl_modulo_grupo_menu` (`id_modulo_grupo`, `id_menu`, `status`) VALUES
 (2, 1, '1'),
 (3, 2, '1'),
-(5, 3, '0'),
+(5, 3, '1'),
 (10, 24, '1'),
 (11, 26, '1');
 
@@ -952,10 +953,10 @@ CREATE TABLE `tb_acl_usuario` (
 --
 
 INSERT INTO `tb_acl_usuario` (`id`, `id_grupo`, `id_funcionario`, `id_gestor`, `nome`, `email`, `login`, `senha`, `salt`, `token`, `permissao`, `ultimo_login`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, NULL, 0, 'Alisson Guedes', 'alissonguedes87@gmail.com', 'alisson', '6b2a792a47f194d7574a86218ca5f082446d9b4198c658e66d2ec98c5f034905788848e5b38a7', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODU2MTMzNDYsImV4cGlyZXMiOjE2ODU2MjA1NDYsIm1vZHVsbyI6Mn0=', 1111, '2023-07-01 01:23:48', '2022-06-24 05:43:09', '2023-06-01 09:55:46', '1'),
+(1, 1, NULL, 0, 'Alisson Guedes', 'alissonguedes87@gmail.com', 'alisson', '6b2a792a47f194d7574a86218ca5f082446d9b4198c658e66d2ec98c5f034905788848e5b38a7', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODU2MTMzNDYsImV4cGlyZXMiOjE2ODU2MjA1NDYsIm1vZHVsbyI6Mn0=', 1111, '2023-07-02 21:10:18', '2022-06-24 05:43:09', '2023-06-01 09:55:46', '1'),
 (2, 2, NULL, 0, 'Déborah Chianca', 'deborahchianca@medicus24h.com.br', 'deborahchianca@medicus24h.com.br', '3ffbf99945de7a986ed29db1701b54a3a9973de76912a954ae45f9014059cfae97ea90ddc437d', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODQ5NTQ5NzAsImV4cGlyZXMiOjE2ODQ5NjIxNzAsIm1vZHVsbyI6NX0=', 1111, '2023-05-25 14:02:07', '2023-01-28 19:12:58', '2023-05-24 19:25:19', '1'),
-(3, 2, NULL, 0, 'Tatiana', 'gestao@medicus24h.com.br', 'tatiana', '1d4aa2e76b81177494333f8c4d05b75f492faae23c3b7658231aa61b42f5bd00988ea64dcf960', NULL, NULL, 1111, '2023-05-30 11:22:27', '2023-01-28 19:52:08', NULL, '1'),
-(6, 2, NULL, 0, 'Edinilton', 'edinilton.souza@medicus24h.com.br', 'edinilton', '4b0073f96547546b699c59f16c77c603a46c28e5e0ad787fda2b8015f0e3dd232306cf076e262', NULL, NULL, 1111, '2023-03-06 16:00:12', '2023-03-04 23:19:06', '2023-03-07 01:00:22', '1'),
+(3, 2, NULL, 0, 'Tatiana', 'gestao@medicus24h.com.br', 'tatiana', '1d4aa2e76b81177494333f8c4d05b75f492faae23c3b7658231aa61b42f5bd00988ea64dcf960', NULL, NULL, 1111, '2023-07-03 01:25:47', '2023-01-28 19:52:08', NULL, '1'),
+(6, 2, NULL, 0, 'Edinilton', 'edinilton.souza@medicus24h.com.br', 'edinilton', '4b0073f96547546b699c59f16c77c603a46c28e5e0ad787fda2b8015f0e3dd232306cf076e262', NULL, NULL, 1111, '2023-07-03 01:32:16', '2023-03-04 23:19:06', '2023-03-07 01:00:22', '1'),
 (7, 2, NULL, 0, 'Gleizer', 'gleizermedicus24h@gmail.com', 'gleizermedicus24h@gmail.com', '0cce35184a2bbfd4d97536f7df2b5c89456429485e6934b3dd279cbbfe889bc51122a4036f5e3', NULL, NULL, 1111, '2023-04-12 09:57:58', '2023-03-28 19:35:02', '2023-03-28 23:55:16', '1'),
 (9, 2, NULL, 0, 'Teste', 'desenvolvimentowebmin@gmail.com', 'teste', '3c702e76fdd1a5c46f902ccd2287e2eabaea8f673497350ea105511d27573b3bf199433c3037d', NULL, NULL, 1111, '2023-06-19 22:20:38', '2023-06-20 01:16:56', '2023-06-20 01:17:35', '1');
 
@@ -979,7 +980,8 @@ CREATE TABLE `tb_acl_usuario_config` (
 --
 
 INSERT INTO `tb_acl_usuario_config` (`id_usuario`, `id_modulo`, `id_config`, `value`, `created_at`, `updated_at`) VALUES
-(1, 5, 6, 'collapsed', '2023-02-13 19:48:21', '2023-07-01 04:34:32');
+(1, 5, 6, 'expanded', '2023-02-13 19:48:21', '2023-07-03 02:02:44'),
+(3, 5, 6, 'expanded', '2023-07-03 04:26:11', '2023-07-03 04:28:08');
 
 -- --------------------------------------------------------
 
@@ -1096,7 +1098,10 @@ INSERT INTO `tb_acl_usuario_session` (`id`, `id_usuario`, `id_modulo`, `token`, 
 (93, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-01 00:07:57', '2023-07-01 00:08:12'),
 (94, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-01 00:08:14', '2023-07-01 00:12:41'),
 (95, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-01 04:07:18', '2023-07-01 04:23:42'),
-(96, 1, 5, '85fd9f150556558ffb2899a74f3d3837649faa51867b8', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-01 04:23:45', NULL);
+(96, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 00:10:15', '2023-07-03 04:25:10'),
+(97, 6, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 04:25:14', '2023-07-03 04:25:25'),
+(98, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 04:25:45', '2023-07-03 04:32:08'),
+(99, 6, 5, 'e186c1143987bcfbe2cbee018a805ac764a24f4c1e499', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 04:32:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -1440,7 +1445,7 @@ ALTER TABLE `tb_acl_usuario_imagem`
 -- AUTO_INCREMENT de tabela `tb_acl_usuario_session`
 --
 ALTER TABLE `tb_acl_usuario_session`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT de tabela `tb_sys_config`

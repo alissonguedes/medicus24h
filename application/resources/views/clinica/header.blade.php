@@ -153,30 +153,24 @@
 						<li>
 							<a href="javascript:void(0);" class="waves-effect waves-block waves-light dropdown-trigger" data-cover-trigger="true" data-align="right" data-target="profile-dropdown">
 								<span class="avatar-status avatar-online">
-									<img src="{{ asset('assets/images/perfil/foto.jpg') }}" alt="avatar">
+									<img src="{{ asset('img/avatar/icon.png') }}" alt="avatar">
 									<i></i>
 								</span>
 							</a>
-							<style>
-								.navbar #profile-dropdown {
-									width: auto !important;
-								}
-							</style>
 							<ul class="dropdown-content" id="profile-dropdown" tabindex="0">
-								<li>
+								<li id="user-profile">
 									<a href="#" class="black-text">
 										<i class="material-icons">person_outline</i>
-										{{ session()->get('userdata')[session()->get('app_session')]['nome'] }}
-										<br>
-										{{ session()->get('userdata')[session()->get('app_session')]['grupo'] }}
+										<span class="nome">{{ session()->get('userdata')[session()->get('app_session')]['nome'] }}</span>
+										<span class="funcao">Perfil: {{ session()->get('userdata')[session()->get('app_session')]['grupo'] }}</span>
 									</a>
 								</li>
-								<li tabindex="0">
+								{{-- <li tabindex="0">
 									<a class="grey-text text-darken-1" href="user-profile-page.html">
 										<i class="material-icons">person_outline</i>
 										Profile
 									</a>
-								</li>
+								</li> --}}
 								{{-- <li tabindex="0">
 										<a class="grey-text text-darken-1" href="app-chat.html">
 											<i class="material-icons">chat_bubble_outline</i>
@@ -196,7 +190,7 @@
 									</li> --}}
 								<li tabindex="0">
 									<a href="{{ go('logout') }}" class="grey-text text-darken-1">
-										<i class="material-icons">keyboard_tab</i>
+										<i class="material-icons">logout</i>
 										Logout
 									</a>
 								</li>

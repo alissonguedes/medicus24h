@@ -39,14 +39,13 @@ select {
 .dropdown-content li>button {
 	font-size: 16px;
 	line-height: 22px;
-	height: 22px;
 	display: block;
 	padding: 14px 16px;
 	color: inherit;
-	min-height: inherit;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
+	/* min-height: inherit; */
+	/* text-overflow: ellipsis; */
+	/* overflow: hidden; */
+	/* white-space: nowrap; */
 }
 
 .select-wrapper:not(.browser-default) input.select-dropdown {

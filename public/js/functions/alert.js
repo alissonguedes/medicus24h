@@ -55,7 +55,10 @@ var message = (info, status, title, classes) => {
 
 	classes += ' z-depth-2 ';
 
-	M.Toast.dismissAll();
+	if ($('#toast-container').length) {
+		M.Toast.dismissAll();
+	}
+
 	M.toast({
 		classes: classes + ' ' + (typeof status !== null ? status : ''),
 		html: info

@@ -39,29 +39,29 @@
 
 						<label style="font-size: inherit;">Anamnese:</label>
 						<br>
-						<div id="queixa_principal" class="editor materialize-textarea" data-placeholder="Anamnese">{{ $row->notas_clinicas ?? null }}</div>
+						<div id="anamnase" class="editor" data-placeholder="Anamnese">{{ $row->notas_clinicas ?? null }}</div>
 
 						<div class="row mt-1 mb-1"></div>
 
 						<label style="font-size: inherit;">Sintomas:</label>
 						<br>
-						<div id="queixa_principal" class="editor materialize-textarea" data-placeholder="Sintomas">{{ $row->notas_clinicas ?? null }}</div>
+						<div id="sintomas" class="editor" data-placeholder="Sintomas">{{ $row->notas_clinicas ?? null }}</div>
 
 						<label style="font-size: inherit;">Histórico e antecedentes:</label>
 						<br>
-						<div id="queixa_principal" class="editor materialize-textarea" data-placeholder="Histórico e antecedentes">{{ $row->notas_clinicas ?? null }}</div>
+						<div id="historico" class="editor" data-placeholder="Histórico e antecedentes">{{ $row->notas_clinicas ?? null }}</div>
 
 						<div class="row mt-1 mb-1"></div>
 
 						<label style="font-size: inherit;">Exame físico:</label>
 						<br>
-						<div id="queixa_principal" class="editor materialize-textarea" data-placeholder="Diagnóstico">{{ $row->notas_clinicas ?? null }}</div>
+						<div id="exame_fisico" class="editor" data-placeholder="Diagnóstico">{{ $row->notas_clinicas ?? null }}</div>
 
 						<div class="row mt-1 mb-1"></div>
 
 						<label style="font-size: inherit;">Diagnóstico:</label>
 						<br>
-						<div id="queixa_principal" class="editor materialize-textarea" data-placeholder="Diagnóstico">{{ $row->notas_clinicas ?? null }}</div>
+						<div id="diagnostico" class="editor" data-placeholder="Diagnóstico">{{ $row->notas_clinicas ?? null }}</div>
 
 					</div>
 
