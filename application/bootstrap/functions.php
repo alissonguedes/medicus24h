@@ -614,8 +614,8 @@ if (!function_exists('getMenus')) {
 		$menus = $menuModel->select(
 			'Menu.id',
 			'Menu.status',
-			DB::raw('(SELECT titulo FROM tb_acl_menu_descricao WHERE id_menu = Menu.id AND id_idioma = ' . lang(true) . ') AS titulo'),
-			DB::raw('(SELECT descricao FROM tb_acl_menu_descricao WHERE id_menu = Menu.id AND id_idioma = ' . lang(true) . ') AS descricao')
+			DB::raw('(SELECT titulo FROM tb_acl_menu_descricao WHERE id_menu = Menu.id AND id_idioma = "' . lang(true) . '") AS titulo'),
+			DB::raw('(SELECT descricao FROM tb_acl_menu_descricao WHERE id_menu = Menu.id AND id_idioma = "' . lang(true) . '") AS descricao')
 		)
 			->from('tb_acl_menu AS Menu')
 			->join('tb_acl_modulo_grupo_menu AS MG_Menu', 'MG_Menu.id_menu', 'Menu.id')
@@ -662,8 +662,8 @@ if (!function_exists('getMenus')) {
 					'Item.icon',
 					'Item.divider',
 					'Item.item_type',
-					DB::raw('(SELECT titulo FROM tb_acl_menu_item_descricao WHERE id_item = Item.id AND id_idioma = ' . lang(true) . ') AS titulo'),
-					DB::raw('(SELECT descricao FROM tb_acl_menu_item_descricao WHERE id_item = Item.id AND id_idioma = ' . lang(true) . ') AS descricao'),
+					DB::raw('(SELECT titulo FROM tb_acl_menu_item_descricao WHERE id_item = Item.id AND id_idioma = "' . lang(true) . '") AS titulo'),
+					DB::raw('(SELECT descricao FROM tb_acl_menu_item_descricao WHERE id_item = Item.id AND id_idioma = "' . lang(true) . '") AS descricao'),
 				)
 					->from('tb_acl_menu_item AS Item')
 					->whereIn('Item.id', function ($query) use ($menu, $path, $idModulo, $moduloModel) {
