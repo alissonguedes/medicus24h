@@ -26,16 +26,16 @@
 						$controller_name = substr($controller->controller, 0, -10);
 					@endphp
 				@endisset
-				<input type="text" class="controller_name" value="{{ isset($controller) ? limpa_string($controller_name, null, false) : null }}" placeholder="">
+				<input type="text" class="controller_name" value="{{ isset($controller) ? $controller_name : null }}" placeholder="">
 				<span class="input-group-item last">Controller.php</span>
-				<input type="hidden" name="controller" value="{{ isset($controller) ? limpa_string($controller->controller, null, false) : null }}">
+				<input type="hidden" name="controller" value="{{ isset($controller) ? $controller->controller : null }}">
 				<input type="hidden" name="filename" value="{{ isset($controller) ? $controller->filename : null }}">
 			</div>
 		</div>
 		<small class="left-align">
 			<small class="left" style="padding: 3px 0 3px; margin-right: 5px;">Arquivo:</small>
 			<small id="filename" class="badge grey lighten-2 left black-text border-radius" style="padding: 3px; border-radius: 3px;">
-				{{ isset($modulo) ? $modulo->namespace : null }}<span class="controller_name">{{ isset($controller) ? limpa_string($controller_name, null, false) . 'Controller.php' : null }}</span>
+				{{ isset($modulo) ? $modulo->namespace : null }}<span class="controller_name">{{ isset($controller) ? $controller_name . 'Controller.php' : null }}</span>
 			</small>
 		</small>
 	</div>

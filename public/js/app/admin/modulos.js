@@ -1,7 +1,7 @@
 $('input.controller_name').bind('keyup', function(e) {
 
 	var text = $(this).val();
-	var value = toCamelCase(text).split(/\W/).join('');
+	var value = toCamelCase(text).split(/\s|\-/).join('');
 	var controller = text.length > 0 ? value + 'Controller' : text;
 	var filename = $('#filename').text()
 

@@ -3,7 +3,7 @@
 @if ($controllers->total() > 0)
 
 	@foreach ($controllers as $row)
-		<div class="grid-row" data-trigger="modal" data-target="modal_controller" data-id="{{ $row->id }}" data-href="{{ route('admin.modulos.controller.edit', ['id_modulo' => $row->id_modulo, 'id_controller' => $row->id]) }}" data-disabled="true">
+		<div class="grid-row" data-trigger="modal" data-target="modal_controller" data-id="{{ $row->id }}" data-url="{{ route('admin.modulos.controller.edit', ['id_modulo' => $row->id_modulo, 'id_controller' => $row->id]) }}" data-disabled="true">
 			<div class="grid-col">
 				<label>
 					<input type="checkbox" name="id[]" class="filled-in" value="{{ $row->id }}" data-status="{{ $row->status }}">

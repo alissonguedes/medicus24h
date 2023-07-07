@@ -1,13 +1,8 @@
-@if(session()->has('userdata'))
-
+@if (session()->has('userdata'))
 	{? $menu_type = (get_config('main-menu-type') ? 'nav-' . get_config('main-menu-type') : null) ?}
 	{? $nav_lock = (get_config('main-menu-type') == 'expanded') ? 'nav-lock': null ?}
 
 	<aside class="{{ $menu_type }} {{ $nav_lock }} sidenav-main nav-collapsible sidenav-light sidenav-active-rounded scrollbar">
-
-		<a href="#" data-target="slide-out" class="sidenav-trigger btn-sidenav-toggle btn-floating blue lighten-1 btn-medium waves-effect waves-light hide-on-large-only">
-			<i class="material-icons">menu</i>
-		</a>
 
 		<div class="brand-sidebar">
 
@@ -28,11 +23,15 @@
 
 		@php
 			echo getMenus('main-menu', null, [
-			'id' => 'slide-out',
-			'class' => 'sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow scroller',
+			    'id' => 'slide-out',
+			    'class' => 'sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow scroller',
+			    'data-position' => 'left',
 			]);
 		@endphp
 
-	</aside>
+		<a href="#" data-target="slide-out" class="btn-sidenav-toggle mt-1 ml-1 btn-floating blue lighten-1 btn-medium waves-effect waves-light hide-on-large-only">
+			<i class="material-icons">menu</i>
+		</a>
 
+	</aside>
 @endif

@@ -48,7 +48,7 @@ var Materialize = {
 			var sidebar = $(target);
 			var url = sidebar.data('href') || $(this).data('url');
 
-			var options = {
+			var options = typeof url !== 'undefined' ? {
 				edge: sidebar.data('edge') || 'left',
 				draggable: sidebar.data('draggable') || true,
 				onOpenStart: () => {
@@ -78,7 +78,8 @@ var Materialize = {
 
 				}
 
-			}
+			} : null;
+
 			var sidenav = sidebar.sidenav(options);
 
 			sidenav = M.Sidenav.getInstance(sidenav);

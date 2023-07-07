@@ -239,7 +239,7 @@ textarea {
 }
 
 .sidenav-main {
-	width: 260px;
+	width: 230px;
 	z-index: 999;
 }
 
@@ -782,7 +782,7 @@ nav .nav-wrapper .btn:hover i {
 	position: relative;
 	line-height: 35px;
 	color: inherit;
-	padding-left: 270px;
+	padding-left: 235px;
 	transition: 200ms;
 	display: inline-block;
 	height: inherit;
@@ -1268,7 +1268,7 @@ input.no-border,
 .input-group .input-group-item {
 	margin-top: 10px;
 	width: auto;
-	font-size: 16px;
+	font-size: 13px;
 	padding: 0 10px;
 	background-color: var(--grey-lighten-2);
 	text-align: center;

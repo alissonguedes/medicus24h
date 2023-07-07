@@ -7609,7 +7609,7 @@ input[type=range]::-ms-thumb {
 .sidenav li>a {
 	color: rgba(0, 0, 0, 0.87);
 	display: block;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 500;
 	height: 48px;
 	line-height: 48px;

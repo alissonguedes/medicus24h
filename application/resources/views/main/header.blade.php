@@ -18,8 +18,8 @@
 
 							@php
 								echo getMenus('main-menu', null, [
-								'id' => 'slide-out',
-								'class' => 'sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow scroller',
+								    'id' => 'slide-out',
+								    'class' => 'sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow scroller',
 								]);
 							@endphp
 						</ul>
@@ -32,7 +32,7 @@
 						</button>
 					</div>
 
-					<a href="#" data-target="slide-out" class="sidenav-trigger">
+					<a href="#" data-target="slide-out" class="hide-on-large-only sidenav-trigger">
 						<i class="material-icons">menu</i>
 					</a>
 

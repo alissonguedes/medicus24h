@@ -100,7 +100,7 @@ select {
 	}
 
 	#main {
-		padding-left: 260px
+		padding-left: 230px
 	}
 
 	#main.main-full {
@@ -981,19 +981,19 @@ ul.list-type-bullet {
 
 @media only screen and (min-width:0) {
 	html {
-		font-size: 14px
+		font-size: 13px
 	}
 }
 
 @media only screen and (min-width:992px) {
 	html {
-		font-size: 14.5px
+		font-size: 13px
 	}
 }
 
 @media only screen and (min-width:1200px) {
 	html {
-		font-size: 15px
+		font-size: 13px
 	}
 }
 

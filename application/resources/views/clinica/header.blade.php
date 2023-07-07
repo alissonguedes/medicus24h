@@ -2,6 +2,7 @@
 	<header id="header" class="page-topbar">
 
 		<div class="navbar navbar-fixed">
+
 			<nav class="navbar-main navbar-color navbar-collapsible blue lighten-1">
 
 				<div class="nav-wrapper">
@@ -205,7 +206,10 @@
 				@show
 
 			</div>
+
 		</nav>
+
 	</div>
+
 </header>
 @endif
