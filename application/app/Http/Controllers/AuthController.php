@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers{
+namespace App\Http\Controllers {
 
 	// use App\Models\BannerModel;
 	// use App\Models\LinkModel;
@@ -46,14 +46,23 @@ namespace App\Http\Controllers{
 
 		}
 
-		public function index(Request $request)
+		public function index()
 		{
 
-			return view('authentication.login');
+			return redirect('/');
 
 		}
 
-		public function login_validate(Request $request)
+		public function login(Request $request, $panel = null)
+		{
+
+			$dados['url'] = $panel;
+
+			return view('authentication.login', $dados);
+
+		}
+
+		public function login_validate(Request $request, $panel = null)
 		{
 
 			if (isset($_POST['login'])) {
@@ -95,6 +104,7 @@ namespace App\Http\Controllers{
 
 			if (Session::has('userdata')) {
 
+				$modulo = Session::get('userdata')[Session::get('app_session')]['modulo'];
 				$this->user_model->from('tb_acl_usuario_session')
 					->where('token', Session::get('app_session'))
 					->update(['expired_at' => date('Y-m-d H:i:s'), 'token' => null]);
@@ -103,10 +113,9 @@ namespace App\Http\Controllers{
 
 			}
 
-			$current_url = url()->previous();
-			Session::put('curl', $current_url);
+			$url = isset($modulo) ? limpa_string($modulo, '-') : null;
 
-			return redirect()->route('account.auth.login')->with('url', $current_url);
+			return redirect()->route('account.auth.login', $url);
 
 		}
 

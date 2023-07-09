@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models{
+namespace App\Models {
 
 	use Illuminate\Database\Eloquent\Factories\HasFactory;
 	// use Illuminate\Database\Eloquent\Model;
@@ -381,7 +381,7 @@ namespace App\Models{
 							['name' => limpa_string($modulo->path, '.') . '.index', 'id_controller' => $c->id, 'id_parent' => null, 'type' => 'any', 'route' => '/', 'action' => 'index', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
 							['name' => $view . '.index', 'id_controller' => $c->id, 'id_parent' => null, 'type' => 'any', 'route' => '/' . limpa_string(substr($c->controller, 0, -10)), 'action' => 'index', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
 							['name' => $view . '.index', 'id_controller' => $c->id, 'id_parent' => $id_view, 'type' => 'any', 'route' => '/', 'action' => 'index', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
-							['name' => $view . '.add', 'id_controller' => $c->id, 'id_parent' => $id_view, 'type' => 'any', 'route' => '/cadastro', 'action' => 'form', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
+							['name' => $view . '.add', 'id_controller' => $c->id, 'id_parent' => $id_view, 'type' => 'any', 'route' => '/new', 'action' => 'form', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
 							['name' => $view . '.show', 'id_controller' => $c->id, 'id_parent' => $id_view, 'type' => 'get', 'route' => '/{id}', 'action' => 'show', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
 							['name' => $view . '.autocomplete', 'id_controller' => $c->id, 'id_parent' => $id_view, 'type' => 'get', 'route' => '/json/autocomplete', 'action' => 'autocomplete', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],
 							['name' => $view . '.post', 'id_controller' => $c->id, 'id_parent' => $id_view, 'type' => 'post', 'route' => '/', 'action' => 'store', 'filter' => null, 'permissao' => '1111', 'restrict' => 'inherit', 'status' => '1'],

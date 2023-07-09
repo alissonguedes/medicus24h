@@ -50,4 +50,23 @@ class Model extends ModelCore
 
 	}
 
+	public function uploadImage(Request $image)
+	{
+		$imagem = null;
+
+		if ($image->file('imagem')) {
+			$file     = $image->imagem;
+			$fileName = sha1($file->getClientOriginalName());
+			$fileExt  = $file->getClientOriginalExtension();
+			$imgName  = explode('.', $file->getClientOriginalName());
+			$origName = limpa_string($imgName[count($imgName) - 2], '-') . '.' . $fileExt;
+			$imagem   = limpa_string($fileName) . '.' . $fileExt;
+			$file->storeAs($this->path, $imagem);
+			$imagem = $this->path . $imagem;
+		}
+
+		return $imagem;
+
+	}
+
 }

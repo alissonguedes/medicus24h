@@ -24,7 +24,7 @@
 				<img src="{{ asset('img/site/logo/logo.png') }}" alt="" class="responsive-img">
 			</div>
 
-			<form novalidate="" id="frm-login" class="" action="{{ route('account.auth.login') }}" method="post" enctype="multipart/form-data" autocomplete="off" data-autoinitialize="false">
+			<form novalidate="" id="frm-login" class="" action="{{ route('account.auth.post') }}" method="post" enctype="multipart/form-data" autocomplete="off" data-autoinitialize="false">
 
 				<div class="card-panel border-radius-6 z-depth-0 bg-opacity-2 white col s8 m6 l12 offset-s2 offset-m3 pb-5">
 
@@ -72,16 +72,8 @@
 
 				</div>
 
-				@php
-					if (session('url')) {
-					    $url = session('url');
-					} else {
-					    $url = session()->get('curl');
-					}
-				@endphp
-
 				<input type="hidden" name="acao" value="login">
-				<input type="hidden" name="url" id="url" value="{{ url($url) }}">
+				<input type="hidden" name="url" id="url" value="{{ url(limpa_string($url, '/')) }}">
 				<input type="hidden" name="_method" value="post">
 				@csrf
 

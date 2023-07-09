@@ -91,6 +91,13 @@ var Request = {
 
 		return !isAnchor && !isLink;
 
-	}
+	},
+
+	refreshUrl: (url) => {
+
+		if (BASE_URL + url !== window.location.href)
+			window.history.pushState('', '', url);
+
+	},
 
 }

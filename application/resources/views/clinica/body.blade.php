@@ -25,15 +25,4 @@
 
 	</div>
 
-
-	<aside id="right-sidebar" class="sidenav rightside-navigation grey lighten-3">
-
-		<a href="#" class="sidenav-close right black-text" style="position: fixed; top: 0px; right: 7px; z-index: 10">
-			<span class="material-symbols-outlined">close</span>
-		</a>
-
-		<div id="right-sidebar-content"></div>
-
-	</aside>
-
 @endsection

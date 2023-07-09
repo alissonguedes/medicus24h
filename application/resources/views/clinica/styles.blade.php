@@ -14,6 +14,7 @@
 
 <!-- admin -->
 <link rel="stylesheet" media="screen" href="{{ asset('assets/styles/style.css') }}">
+<link rel="stylesheet" media="screen" href="{{ asset('css/tables.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('css/admin.css') }}">
 
 <!-- default -->

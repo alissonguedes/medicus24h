@@ -72,7 +72,7 @@ var Materialize = {
 
 				},
 
-				onCloseEnd:() => {
+				onCloseEnd: () => {
 
 					sidebar.empty();
 
@@ -169,9 +169,38 @@ var Materialize = {
 
 		$('.tabs').tabs({
 			swipeable: false,
-			onShow: () => {
+			onShow: (el) => {
+
 				Scroller.toTop();
+
+				var tab = $(el);
+				var id = tab.attr('id');
+				var target = '#' + (tab.data('target') || tab.children().attr('class').split(' ').join('.'));
+				var url = window.location.href.split('#');
+				var new_url = url.length > 1 ? url[0] : url;
+
+				progress('in');
+
+				if (tab.data('url')) {
+
+					tab.find(target).empty()
+					var href = tab.data('url');
+
+					Http.get(href, {
+						datatype: 'html'
+					}, (response) => {
+						setTimeout(function() {
+							tab.find(target).html(response);
+							progress('out');
+						}, 1000);
+					});
+
+				}
+
+				Request.refreshUrl(new_url + '#' + id);
+
 			}
+
 		});
 
 	},

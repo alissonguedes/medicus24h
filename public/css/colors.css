@@ -149,6 +149,8 @@
 	--green-darken-3: #2e7d32 !important;
 	--green-darken-4: #1b5e20 !important;
 
+	/** Orange */
+	--orange: #ff9800 !important;
 
 }
 
@@ -1752,11 +1754,11 @@
 }
 
 .orange {
-	background-color: #ff9800 !important
+	background-color: var(--orange);
 }
 
 .orange-text {
-	color: #ff9800 !important
+	color: var(--orange);
 }
 
 .orange.lighten-5 {

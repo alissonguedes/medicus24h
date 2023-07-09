@@ -190,7 +190,7 @@
 										</a>
 									</li> --}}
 								<li tabindex="0">
-									<a href="{{ go('logout') }}" class="grey-text text-darken-1">
+									<a href="{{ go('account.auth.logout') }}" class="grey-text text-darken-1">
 										<i class="material-icons">logout</i>
 										Logout
 									</a>
