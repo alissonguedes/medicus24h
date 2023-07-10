@@ -20,6 +20,23 @@ function toCamelCase(text) {
 
 }
 
+function getDataTabs(tab) {
+
+	progress('in');
+
+	var target = '#' + (tab.data('target') || tab.children().attr('class').split(' ').join('.'));
+	tab.find(target).html('<p>Carregando...</p>')
+	var href = tab.data('url');
+
+	Http.get(href, {
+		datatype: 'html'
+	}, (response) => {
+		tab.find(target).html(response);
+		progress('out');
+		Request.constructor();
+	});
+}
+
 moment.locale('pt_br', {
 	months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
 	monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],

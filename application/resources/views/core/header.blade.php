@@ -8,7 +8,7 @@
 
 				@php
 					$name = Route::currentRouteName();
-					$current_route = route($name);
+					$current_route = $name;
 				@endphp
 
 				<a href="{{ route('core.index') }}" class="brand-logo ml-2">HelpDesk</a>
@@ -16,7 +16,7 @@
 				<ul id="nav-mobile" class="navbar-list right hide-on-med-and-down">
 
 					<li>
-						@if ($current_route != route('core.tickets.add'))
+						@if ($current_route != 'core.tickets.add' && $current_route != 'core.tickets.edit')
 							<a href="{{ route('core.tickets.add') }}">Novo Ticket</a>
 						@else
 							{{-- <a href="{{ route('core.tickets.index') }}">Cancelar</a> --}}
@@ -65,8 +65,9 @@
 				@foreach ($breadcrumb as $ind => $b)
 					@php
 						$url .= '/' . $b;
+						$limit = $current_route == 'core.tickets.edit' ? 2 : 1;
 					@endphp
-					@if ($ind < count($breadcrumb) - 1)
+					@if ($ind < count($breadcrumb) - $limit)
 						<a href="{{ url($url) }}" class="breadcrumb">{{ $b }}</a>
 					@else
 						<span class="breadcrumb grey-text lighten-3">{{ $b }}</span>

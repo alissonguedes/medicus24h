@@ -11,10 +11,10 @@ class TicketsController extends Controller
 	/**
 	 * Display a listing of the resource.
 	 */
-	public function index(Request $request, TicketModel $ticket, $status = null)
+	public function index(Request $request, TicketModel $ticket, $status = 'open')
 	{
 
-		$dados['paginate'] = $ticket->getTickets($request, $status);
+		$dados['paginate'] = $ticket->getTickets($request, null, $status);
 
 		if ($request->ajax()) {
 			return view('core.tickets.list', $dados);
@@ -51,17 +51,23 @@ class TicketsController extends Controller
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(string $id)
+	public function show(Request $request, TicketModel $ticket, $id, $status = 'open')
 	{
-		//
+
+		$dados['ticket']  = $ticket->getTickets($request, $id);
+		$dados['content'] = $ticket->getTicketContent($request, $id);
+
+		return view('core.tickets.details', $dados);
+
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 */
-	public function edit(string $id)
+	public function edit(Request $request, string $id)
 	{
-		//
+
+		return view('core.tickets.details');
 	}
 
 	/**

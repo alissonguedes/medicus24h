@@ -167,6 +167,17 @@ var Materialize = {
 
 	tabs: () => {
 
+		if ($('.tabs').length === 0) return;
+
+		var url = window.location.href.split('#');
+		url = url.length > 1 ? url.splice(1).join('') : undefined;
+
+		var tab_active = url !== undefined ? $('a[href="#' + url + '"]') : $('.tabs').find('.tab a');
+
+		tab_active.addClass('active')
+
+		getDataTabs($($('.tabs').find('a.active').attr('href')));
+
 		$('.tabs').tabs({
 			swipeable: false,
 			onShow: (el) => {
@@ -175,25 +186,12 @@ var Materialize = {
 
 				var tab = $(el);
 				var id = tab.attr('id');
-				var target = '#' + (tab.data('target') || tab.children().attr('class').split(' ').join('.'));
 				var url = window.location.href.split('#');
 				var new_url = url.length > 1 ? url[0] : url;
 
-				progress('in');
-
 				if (tab.data('url')) {
 
-					tab.find(target).empty()
-					var href = tab.data('url');
-
-					Http.get(href, {
-						datatype: 'html'
-					}, (response) => {
-						setTimeout(function() {
-							tab.find(target).html(response);
-							progress('out');
-						}, 1000);
-					});
+					getDataTabs(tab)
 
 				}
 
