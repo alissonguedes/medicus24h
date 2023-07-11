@@ -473,7 +473,8 @@ print {
 	}
 }
 
-.animated.bounce {
+.animated.bounce,
+.animate.bounce {
 	-webkit-animation-name: bounce;
 	animation-name: bounce;
 	-webkit-transform-origin: center bottom;
@@ -508,7 +509,8 @@ print {
 	}
 }
 
-.animated.flash {
+.animated.flash,
+.animate.flash {
 	-webkit-animation-name: flash;
 	animation-name: flash
 }
@@ -547,7 +549,8 @@ print {
 	}
 }
 
-.animated.pulse {
+.animated.pulse,
+.animate.pulse {
 	-webkit-animation-name: pulse;
 	animation-name: pulse;
 	-webkit-animation-timing-function: ease-in-out;
@@ -628,7 +631,8 @@ print {
 	}
 }
 
-.animated.rubberBand {
+.animated.rubberBand,
+.animate.rubberBand {
 	-webkit-animation-name: rubberBand;
 	animation-name: rubberBand
 }
@@ -685,7 +689,8 @@ print {
 	}
 }
 
-.animated.shakeX {
+.animated.shakeX,
+.animate.shakeX {
 	-webkit-animation-name: shakeX;
 	animation-name: shakeX
 }
@@ -795,12 +800,14 @@ print {
 	}
 }
 
-.animated.shakeY {
+.animated.shakeY,
+.animate.shakeY {
 	-webkit-animation-name: shakeY;
 	animation-name: shakeY;
 }
 
-.animated.shakeY-2 {
+.animated.shakeY-2,
+.animate.shakeY-2 {
 	-webkit-animation-name: shakeY-2;
 	animation-name: shakeY-2;
 }
@@ -873,7 +880,7 @@ print {
 	-webkit-animation-timing-function: ease-in-out;
 	animation-timing-function: ease-in-out;
 	-webkit-animation-name: headShake;
-	animation-name: headShake
+	animation-name: headShake;
 }
 
 @-webkit-keyframes swing {
@@ -930,7 +937,8 @@ print {
 	}
 }
 
-.animated.swing {
+.animated.swing,
+.animate.swing {
 	-webkit-transform-origin: top center;
 	transform-origin: top center;
 	-webkit-animation-name: swing;

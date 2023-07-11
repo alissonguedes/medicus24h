@@ -57,7 +57,17 @@ var Http = {
 
 		} else {
 
-			Http.open('GET', url, ...callback);
+
+			if (typeof params === 'function') {
+				// for (var i in params) {
+				// 	if (typeof params[i] === 'function') {
+				// 		params[i](response);
+				// 	}
+				// }
+				params(params);
+			}
+
+			Http.open('GET', url, callback);
 
 		}
 
@@ -125,7 +135,7 @@ var Http = {
 
 		var c = callback;
 
-		xhr.onprogress = function (e) {
+		xhr.onprogress = function(e) {
 			// var progressBar = $('.progress').children();
 			// var percent = Math.round((e.loaded / e.total) * 100);
 			// console.log(percent + '%');
@@ -136,7 +146,7 @@ var Http = {
 			// // });
 		}
 
-		xhr.onreadystatechange = function (e) {
+		xhr.onreadystatechange = function(e) {
 
 			// var status = xhr.getResponseHeader('Location');
 			// if (status === 302)
@@ -144,7 +154,7 @@ var Http = {
 
 		}
 
-		xhr.onloadstart = function (e) {
+		xhr.onloadstart = function(e) {
 
 			var s = $('.sidenav'),
 				i;
@@ -156,40 +166,47 @@ var Http = {
 			}
 
 			progress('in');
+			$('.animated').addClass('fadeOutRight');
 
 		}
 
-		xhr.onloadend = function (e) {
+		xhr.onloadend = function(e) {
 
-			if (xhr.readyState === 4) {
+			// setTimeout(function() {
 
-				if (xhr.status === 0 || xhr.status >= 200 && xhr.status < 400) {
-					view(xhr);
-				} else {
-					alert('Ocorreu algum problema na requisição.');
-				}
+				if (xhr.readyState === 4) {
 
-				for (var i = 0; i < c.length; i++) {
-					for (var j = 0; j <= i; j++) {
-						if (typeof c[i][j] === 'function') {
-							c[i][j](c[i][j]);
+					if (xhr.status === 0 || xhr.status >= 200 && xhr.status < 400) {
+
+						view(xhr);
+
+					} else {
+						alert('Ocorreu algum problema na requisição.');
+					}
+
+					for (var i = 0; i < c.length; i++) {
+						for (var j = 0; j <= i; j++) {
+							if (typeof c[i][j] === 'function') {
+								c[i][j](c[i][j]);
+							}
 						}
 					}
+
 				}
 
-			}
+				constructor();
+				load_scripts();
+				progress('out');
 
-			constructor();
-			load_scripts();
-			progress('out');
-
-		}
-
-		xhr.onload = function (e) {
+			// }, 200);
 
 		}
 
-		xhr.noerror = function (e) {
+		xhr.onload = function(e) {
+
+		}
+
+		xhr.noerror = function(e) {
 
 		}
 

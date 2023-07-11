@@ -3,7 +3,7 @@
 @section('main')
 	<div class="row">
 		<div class="col s12">
-			<div class="card mt-0 mb-3 animated delay-10 fadeIn">
+			<div class="card mt-0 mb-3 animated fadeInUp">
 				<div class="card-content no-padding">
 					<div class="card-title border-bottom padding-1 pb-0 no-margin">
 						<button class="btn left mr-2 btn-flat btn-floating waves-effect transparent black-text" data-href="{{ route('core.tickets.index') }}">
@@ -92,10 +92,13 @@
 										@endif
 									</nav>
 
-									<div class="content padding-2 mb-3">
+									<div class="content black-text padding-2 mb-3">
+
+										<style>
+										</style>
 
 										<div class="row">
-											<div class="col s12">
+											<div class="col s12 flow-text">
 												@php
 													echo $body->body;
 												@endphp
@@ -105,7 +108,7 @@
 										@if ($i === 0)
 											<div class="row">
 												<div class="col s12 mt-3">
-													<button type="button" class="btn border-round transparent black-text waves-effect" data-tooltip="Responder">
+													<button type="button" class="btn border-round blue waves-effect">
 														<span class="bold">Responder</span>
 													</button>
 												</div>

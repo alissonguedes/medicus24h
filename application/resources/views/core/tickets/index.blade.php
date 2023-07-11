@@ -1,15 +1,15 @@
 @extends('core.body')
 
 @section('main')
-	<div class="row">
+	<div class="row animated delay-1 fadeInLeft slow">
 		<div class="col s12">
-			<h3 class="mt-0 animated delay-5 fadeInUp">Meus Tickets</h3>
+			<h3 class="mt-0">Meus Tickets</h3>
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row animated delay-2 fadeInLeft slow">
 		<div class="col s12">
-			<ul class="tabs animated delay-8 fadeInUp">
+			<ul class="tabs">
 				<li class="tab">
 					<a href="#open">Abertos</a>
 				</li>
@@ -29,8 +29,8 @@
 		</div>
 	</div>
 
-	<div class="row">
-		<div class="col s12 animated delay-20 fadeIn slow">
+	<div class="row animated delay-3 fadeInLeft slow">
+		<div class="col s12">
 			<div id="open" class="card" data-url="{{ route('core.tickets.status', 'open') }}" data-target="open-results">
 				<div class="card-content">
 					<div class="card-title">Abertos</div>

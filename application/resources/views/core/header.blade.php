@@ -14,7 +14,8 @@
 				<a href="{{ route('core.index') }}" class="brand-logo ml-2">HelpDesk</a>
 
 				<ul id="nav-mobile" class="navbar-list right hide-on-med-and-down">
-
+					<li>
+					<a href="{{ route('core.tickets.index') }}">Tickets</a></li>
 					<li>
 						@if ($current_route != 'core.tickets.add' && $current_route != 'core.tickets.edit')
 							<a href="{{ route('core.tickets.add') }}">Novo Ticket</a>
