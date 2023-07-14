@@ -166,39 +166,40 @@ var Http = {
 			}
 
 			progress('in');
-			$('.animated').addClass('fadeOutRight');
+
+			$('.animated').each(function() {
+
+				var animation = $(this).data('animation') || 'fadeOutRight';
+				$(this).addClass(animation);
+			})
 
 		}
 
 		xhr.onloadend = function(e) {
 
-			// setTimeout(function() {
+			if (xhr.readyState === 4) {
 
-				if (xhr.readyState === 4) {
+				if (xhr.status === 0 || xhr.status >= 200 && xhr.status < 400) {
 
-					if (xhr.status === 0 || xhr.status >= 200 && xhr.status < 400) {
+					view(xhr);
 
-						view(xhr);
-
-					} else {
-						alert('Ocorreu algum problema na requisição.');
-					}
-
-					for (var i = 0; i < c.length; i++) {
-						for (var j = 0; j <= i; j++) {
-							if (typeof c[i][j] === 'function') {
-								c[i][j](c[i][j]);
-							}
-						}
-					}
-
+				} else {
+					alert('Ocorreu algum problema na requisição.');
 				}
 
-				constructor();
-				load_scripts();
-				progress('out');
+				for (var i = 0; i < c.length; i++) {
+					for (var j = 0; j <= i; j++) {
+						if (typeof c[i][j] === 'function') {
+							c[i][j](c[i][j]);
+						}
+					}
+				}
 
-			// }, 200);
+			}
+
+			constructor();
+			load_scripts();
+			progress('out');
 
 		}
 

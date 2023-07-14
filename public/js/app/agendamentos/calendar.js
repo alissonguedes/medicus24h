@@ -258,7 +258,7 @@ function Calendar(params, el) {
 		}
 	});
 
-	// $('.horizontal-layout').addClass('main-full').removeClass('active').find('.sidenav-main').find('.active').removeClass('active');
+	$('.horizontal-layout').addClass('main-full').removeClass('active') //.find('.sidenav-main').find('.active').removeClass('active');
 	$('.sidenav-main').removeClass('nav-expanded nav-lock').addClass('nav-collapsed').find('.collapsible-body').hide();
 	$('#main').addClass('main-full')
 

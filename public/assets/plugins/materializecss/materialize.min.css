@@ -13184,7 +13184,8 @@ span.badge.pill {
 }
 
 .navbar #notifications-dropdown {
-    width: 400px
+    width: 400px !important;
+	min-height: auto;
 }
 
 .navbar #notifications-dropdown h5 {

@@ -1564,9 +1564,9 @@ span.badge.pill {
 	outline: 1px solid #ccc;
 }
 
-.navbar #notifications-dropdown {
+/* .navbar #notifications-dropdown {
 	width: auto !important;
-}
+} */
 
 .navbar #notifications-dropdown h5 {
 	font-size: 1rem;

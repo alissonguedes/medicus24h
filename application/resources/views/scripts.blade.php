@@ -42,3 +42,4 @@
 
 <!-- scripts | Padrão -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/app/core/app-mail.js') }}"></script>

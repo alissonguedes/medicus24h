@@ -11,6 +11,19 @@ class Model extends ModelCore
 
 	protected $fields  = [];
 	protected $datamap = [];
+	protected $order   = [];
+
+	/**
+	 * The attributes that should be cast.
+	 *
+	 * @var array<string, string>
+	 */
+	protected $casts = [
+		'created_at' => 'created',
+		'updated_at' => 'updated',
+	];
+
+	public $timestamps = false;
 
 	protected function map(string $key)
 	{

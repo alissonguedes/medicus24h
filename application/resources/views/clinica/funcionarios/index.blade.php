@@ -25,7 +25,7 @@
 						<div class="table grid bordered">
 							<div class="grid-head">
 								<div class="grid grid-row">
-									<div class="grid-col" data-disabled="true" data-orderable="false" data-width="15fr">
+									<div class="grid-col" data-disabled="true" data-orderable="false" data-width="10fr">
 										<label class="grey-text text-darken-2 font-14 left">
 											<input type="checkbox" name="check-all" id="check-all" class="filled-in">
 											<span></span>

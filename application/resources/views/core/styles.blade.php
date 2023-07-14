@@ -16,11 +16,13 @@
 <!-- default -->
 <link rel="stylesheet" media="screen" href="{{ asset('css/colors.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('css/animate.css') }}">
+<link rel="stylesheet" media="screen" href="{{ asset('css/main.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('css/tables.css') }}">
+{{-- <link rel="stylesheet" media="screen" href="{{ asset('css/core/app-mail.css') }}">
+<link rel="stylesheet" media="screen" href="{{ asset('css/core/app-sidebar.css') }}"> --}}
 <link rel="stylesheet" media="screen" href="{{ asset('css/core/style.css') }}">
 {{--
 <link rel="stylesheet" media="screen" href="{{ asset('css/select.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('css/fonts.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('css/calendar.css') }}">
-<link rel="stylesheet" media="screen" href="{{ asset('css/main.css') }}">
 <link rel="stylesheet" media="screen" href="{{ asset('css/logo.css') }}"> --}}

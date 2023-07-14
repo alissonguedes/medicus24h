@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 03/07/2023 às 01:46
+-- Tempo de geração: 14/07/2023 às 09:14
 -- Versão do servidor: 10.6.12-MariaDB-0ubuntu0.22.04.1
 -- Versão do PHP: 8.1.18
 
@@ -99,7 +99,7 @@ CREATE TABLE `tb_acl_menu_descricao` (
 --
 
 INSERT INTO `tb_acl_menu_descricao` (`id_menu`, `id_idioma`, `titulo`, `descricao`, `meta_description`, `meta_title`, `meta_keywords`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Administrador - Painel Admin', 'administrador-painel-admin', NULL, NULL, NULL, '2023-04-25 18:46:34', '2023-04-25 19:08:05'),
+(1, 1, 'Administrador - Painel Admin', 'main-menu', NULL, NULL, NULL, '2023-04-25 18:46:34', '2023-04-25 19:08:05'),
 (2, 1, 'Super Administrador', 'clinica', NULL, NULL, NULL, '2023-04-25 18:46:34', '2023-04-25 19:06:50'),
 (3, 1, 'Administrador Clínica', 'administrador-clinica', NULL, NULL, NULL, '2023-04-25 18:46:34', '2023-04-25 19:07:11'),
 (4, 1, 'Menu de médicos', 'menu-de-medicos', NULL, NULL, NULL, '2023-04-25 18:46:34', '2023-04-25 19:07:19'),
@@ -400,11 +400,12 @@ INSERT INTO `tb_acl_modulo` (`id`, `modulo`, `path`, `namespace`, `permissao`, `
 (1, 'Site', '/', 'App\\Http\\Controllers\\Main\\', 1111, 'Diretório público do site', NULL, '2022-06-24 03:16:39', '2023-06-27 01:28:06', 'no', '1'),
 (2, 'Sistema de administração global', '/admin', 'App\\Http\\Controllers\\Admin\\', 1111, 'Diretório de administração do sistema', NULL, '2022-06-24 03:16:39', '2023-06-27 01:21:24', 'yes', '1'),
 (4, 'Sistema de Autenticação de usuários', '/auth', 'App\\Http\\Controllers\\', 1111, 'AuthController', NULL, '2022-06-24 03:16:39', NULL, 'no', '1'),
-(5, 'Sistema de Clínicas', '/clinica', 'App\\Http\\Controllers\\Clinica\\', 1111, 'Módulo para Clínicias', NULL, '2022-11-08 22:56:55', '2023-04-25 04:44:56', 'yes', '1'),
+(5, 'Sistema de Clínicas', '/clinica', 'App\\Http\\Controllers\\Clinica\\', 1111, 'Módulo para Clínicias', NULL, '2022-11-08 22:56:55', '2023-07-05 05:02:04', 'yes', '1'),
 (6, 'Controle de Estoque', '/estoque', 'App\\Http\\Controllers\\Estoque\\', 1111, 'Módulo para Controle de Estoque', NULL, '2022-11-08 22:56:55', NULL, 'yes', '1'),
 (7, 'Sistema de e-mails', '/mail', 'App\\Http\\Controllers\\Mail\\', 1111, 'Módulo para E-mails', NULL, '2023-03-11 05:58:06', NULL, 'yes', '1'),
 (9, 'OS Tickets', '/tickets', 'App\\Http\\Controllers\\OSTicket\\', 1111, NULL, NULL, '2023-06-01 10:36:46', '2023-06-02 17:25:37', 'yes', '1'),
-(11, 'Sistema de Administração de Site', '/site', 'App\\Http\\Controllers\\Site\\', 1111, NULL, NULL, '2023-06-08 17:38:28', '2023-06-08 18:06:10', 'yes', '1');
+(11, 'Sistema de Administração de Site', '/site', 'App\\Http\\Controllers\\Site\\', 1111, NULL, NULL, '2023-06-08 17:38:28', '2023-06-08 18:06:10', 'yes', '1'),
+(12, 'Core', '/core', 'App\\Http\\Controllers\\Core\\', 1111, NULL, NULL, '2023-07-08 14:29:09', '2023-07-09 03:53:14', 'yes', '1');
 
 -- --------------------------------------------------------
 
@@ -473,11 +474,15 @@ INSERT INTO `tb_acl_modulo_controller` (`id`, `id_modulo`, `nome`, `descricao`, 
 (47, 9, 'Dashboard', '', 'HomeController', 'App\\Http\\Controllers\\OSTickets\\HomeController.php', 'OSTickets_Home_Controller', 1111, 'inherit', '2023-06-01 10:37:48', '2023-06-20 02:11:57', '1'),
 (48, 9, 'Teste', '', 'TesteController', 'App\\Http\\Controllers\\OSTicket\\TestController.php', 'Teste', 1111, 'inherit', '2023-06-03 03:51:33', '2023-06-20 02:11:53', '1'),
 (49, 11, 'Site Admin Home Controller', '', 'HomeController', 'App\\Http\\Controllers\\Site\\HomeController.php', 'SiteHome', 1111, 'yes', '2023-06-08 17:38:47', '2023-06-08 18:02:01', '1'),
-(50, 5, 'Campos', '', 'CamposController', 'App\\Http\\Controllers\\Clinica\\CampoController.php', NULL, 1111, 'inherit', '2023-06-08 21:59:52', '2023-06-08 22:13:06', '1'),
-(51, 5, 'Teste', '', 'TesteController', 'App\\Http\\Controllers\\Clinica\\TesteController.php', 'Teste2', 1111, 'inherit', '2023-06-08 22:05:26', NULL, '1'),
+(50, 5, 'Campos', '', 'CamposController', 'App\\Http\\Controllers\\Clinica\\CampoController.php', NULL, 1111, 'inherit', '2023-06-08 21:59:52', '2023-07-05 04:51:48', '1'),
+(51, 5, 'Teste', '', 'Tickets\\TesteController', 'App\\Http\\Controllers\\Clinica\\Tickets\\TesteController.php', 'Teste2', 1111, 'inherit', '2023-06-08 22:05:26', '2023-07-05 04:55:14', '1'),
 (52, 5, 'fasdf', '', 'AsdfController', 'App\\Http\\Controllers\\Clinica\\AsdfController.php', 'asdf', 1111, 'inherit', '2023-06-08 22:08:55', NULL, '1'),
 (53, 9, 'Tickets Api', '', 'ApiController', 'App\\Http\\Controllers\\OSTicket\\ApController.php', 'Ticket_Api_Controller', 1111, 'inherit', '2023-06-20 01:35:40', NULL, '1'),
-(54, 5, 'Tickets', '', 'TicketsController', 'App\\Http\\Controllers\\OSTickets\\HomeController.php', 'Clinica_OSTickets_Home_Controller', 1111, 'inherit', '2023-06-01 10:37:48', '2023-06-20 02:11:57', '1');
+(54, 5, 'Tickets', '', 'Tickets\\TicketsController', 'App\\Http\\Controllers\\Clinica\\Tickets\\Tickets\\Controller.php', 'Clinica_OSTickets_Home_Controller', 1111, 'inherit', '2023-06-01 10:37:48', '2023-07-05 04:54:28', '1'),
+(55, 12, 'Home', '', 'HomeController', 'App\\Http\\Controllers\\Core\\HomController.php', 'Core_Home_Controller', 1111, 'inherit', '2023-07-08 14:29:36', NULL, '1'),
+(56, 2, 'Admin Login Controller', 'Admin Login', 'LoginController', '', 'Login', 1111, 'no', '2023-06-01 10:00:05', '2023-06-08 17:52:28', '1'),
+(57, 12, 'Tickets', '', 'TicketsController', 'App\\Http\\Controllers\\Core\\TicketController.php', 'Core_Tickets_Controller', 1111, 'inherit', '2023-07-09 03:46:14', NULL, '1'),
+(59, 12, 'Core Api', '', 'ApiController', 'App\\Http\\Controllers\\Core\\TicketController.php', 'Core_Api_Controller', 1111, 'inherit', '2023-06-20 01:35:40', NULL, '1');
 
 -- --------------------------------------------------------
 
@@ -577,15 +582,15 @@ INSERT INTO `tb_acl_modulo_routes` (`id`, `name`, `id_controller`, `id_parent`, 
 (4, 'main.page.embaixada', 2, NULL, 'get', '/embaixada', 'index', NULL, 1111, 'inherit', '1'),
 (5, 'main.page.embaixada', 2, 4, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
 (6, 'main.page.embaixada.show_page', 2, 4, 'get', '/{page?}', 'show', NULL, 1111, 'inherit', '1'),
-(8, 'account.auth.login', 5, NULL, 'any', '/login', 'index', NULL, 1111, 'inherit', '1'),
+(8, 'account.auth.index', 5, NULL, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
 (9, 'admin.index', 3, NULL, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
-(10, 'admin.login', 3, NULL, 'any', '/login', 'index', NULL, 1111, 'inherit', '1'),
+(10, 'admin.login', 56, NULL, 'any', '/login', 'index', NULL, 1111, 'inherit', '1'),
 (11, 'admin.menus', 4, NULL, 'any', '/menus', 'index', NULL, 1111, 'inherit', '1'),
 (12, 'admin.menus', 4, 11, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
 (13, 'admin.menus.add', 4, 11, 'get', '/add', 'form', NULL, 1111, 'inherit', '1'),
 (15, 'admin.menus.patch', 4, 11, 'patch', '/{id}', 'patch', NULL, 1111, 'inherit', '1'),
-(17, 'account.auth.login', 5, NULL, 'post', '/login', 'login_validate', NULL, 1111, 'inherit', '1'),
-(18, 'logout', 5, NULL, 'any', '/logout', 'logout', NULL, 1111, 'inherit', '1'),
+(17, 'account.auth.index', 5, 8, 'get', '/login', 'index', NULL, 1111, 'inherit', '1'),
+(18, 'account.auth.login', 5, 8, 'get', '/login/{panel}', 'login', NULL, 1111, 'inherit', '1'),
 (19, 'admin.dashboard', 3, NULL, 'any', '/dashboard', 'index', NULL, 1111, 'inherit', '1'),
 (20, 'admin.database', 3, NULL, 'any', '/database', 'index', NULL, 1111, 'inherit', '1'),
 (21, 'main.api.token', 7, NULL, 'get', '/api/token', 'token', NULL, 1111, 'inherit', '1'),
@@ -824,7 +829,7 @@ INSERT INTO `tb_acl_modulo_routes` (`id`, `name`, `id_controller`, `id_parent`, 
 (271, 'clinica.tickets.index', 54, NULL, 'any', '/tickets', 'index', NULL, 1111, 'inherit', '1'),
 (272, 'tickets.home.index', 47, NULL, 'any', '/tickets', 'index', NULL, 1111, 'inherit', '1'),
 (273, 'tickets.home.index', 47, NULL, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
-(274, 'tickets.home.add', 47, NULL, 'any', '/cadastro', 'form', NULL, 1111, 'inherit', '1'),
+(274, 'tickets.home.add', 47, NULL, 'any', '/new', 'form', NULL, 1111, 'inherit', '1'),
 (275, 'tickets.home.show', 47, 272, 'get', '/{id}', 'show', NULL, 1111, 'inherit', '1'),
 (276, 'tickets.home.autocomplete', 47, 272, 'get', '/json/autocomplete', 'autocomplete', NULL, 1111, 'inherit', '1'),
 (277, 'tickets.home.post', 47, 272, 'post', '/', 'store', NULL, 1111, 'inherit', '1'),
@@ -874,10 +879,38 @@ INSERT INTO `tb_acl_modulo_routes` (`id`, `name`, `id_controller`, `id_parent`, 
 (321, 'admin.site.home.edit', 49, 314, 'get', '/id/{id}', 'form', NULL, 1111, 'inherit', '1'),
 (322, 'admin.site.home.patch', 49, 314, 'patch', '/{id}', 'patch', NULL, 1111, 'inherit', '1'),
 (323, 'admin.site.home.delete', 49, 314, 'delete', '/', 'destroy', NULL, 1111, 'inherit', '1'),
-(515, 'tickets.api.index', 53, NULL, 'any', '/api', 'index', NULL, 1111, 'inherit', '1'),
-(517, 'tickets.config.patch', 53, NULL, 'patch', '/config', 'patch', NULL, 1111, 'inherit', '1'),
-(518, 'clinica.api.mail.check', 16, NULL, 'get', '/api/mail/check', 'check_mail', NULL, 1111, 'inherit', '1'),
-(519, 'clinica.tickets.index', 54, 271, 'any', '/', 'index', NULL, 1111, 'inherit', '1');
+(324, 'tickets.api.index', 53, NULL, 'any', '/api', 'index', NULL, 1111, 'inherit', '1'),
+(325, 'tickets.config.patch', 53, NULL, 'patch', '/config', 'patch', NULL, 1111, 'inherit', '1'),
+(326, 'clinica.api.mail.check', 16, NULL, 'get', '/api/mail/check', 'check_mail', NULL, 1111, 'inherit', '1'),
+(327, 'clinica.tickets.index', 54, 271, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
+(328, 'clinica.tickets.teste', 51, 271, 'any', '/teste', 'index', NULL, 1111, 'inherit', '1'),
+(340, 'account.auth.post', 5, 8, 'post', '/', 'login_validate', NULL, 1111, 'inherit', '1'),
+(341, 'account.auth.logout', 5, 8, 'any', '/logout', 'logout', NULL, 1111, 'inherit', '1'),
+(342, 'core.index', 55, NULL, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
+(343, 'core.home.index', 55, NULL, 'any', '/home', 'index', NULL, 1111, 'inherit', '1'),
+(344, 'core.home.index', 55, 343, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
+(345, 'core.home.add', 55, 343, 'any', '/new', 'form', NULL, 1111, 'inherit', '1'),
+(346, 'core.home.show', 55, 343, 'get', '/{id}', 'show', NULL, 1111, 'inherit', '1'),
+(347, 'core.home.autocomplete', 55, 343, 'get', '/json/autocomplete', 'autocomplete', NULL, 1111, 'inherit', '1'),
+(348, 'core.home.post', 55, 343, 'post', '/', 'store', NULL, 1111, 'inherit', '1'),
+(349, 'core.home.post', 55, 343, 'put', '/', 'update', NULL, 1111, 'inherit', '1'),
+(350, 'core.home.edit', 55, 343, 'get', '/id/{id}', 'form', NULL, 1111, 'inherit', '1'),
+(351, 'core.home.patch', 55, 343, 'patch', '/{id}', 'patch', NULL, 1111, 'inherit', '1'),
+(352, 'core.home.delete', 55, 343, 'delete', '/', 'destroy', NULL, 1111, 'inherit', '1'),
+(353, 'core.tickets.index', 57, NULL, 'any', '/tickets', 'index', NULL, 1111, 'inherit', '1'),
+(354, 'core.tickets.index', 57, 353, 'any', '/', 'index', NULL, 1111, 'inherit', '1'),
+(355, 'core.tickets.status', 57, 353, 'get', '/status/{status?}', 'index', NULL, 1111, 'inherit', '1'),
+(356, 'core.tickets.add', 57, 353, 'any', '/new', 'form', NULL, 1111, 'inherit', '1'),
+(357, 'core.tickets.autocomplete', 57, 343, 'get', '/json/autocomplete', 'autocomplete', NULL, 1111, 'inherit', '1'),
+(358, 'core.tickets.post', 57, 353, 'post', '/', 'store', NULL, 1111, 'inherit', '1'),
+(359, 'core.tickets.post', 57, 353, 'put', '/', 'update', NULL, 1111, 'inherit', '1'),
+(360, 'core.tickets.edit', 57, 353, 'get', '/id/{id}', 'show', NULL, 1111, 'inherit', '1'),
+(361, 'core.tickets.patch', 57, 353, 'patch', '/{id}', 'patch', NULL, 1111, 'inherit', '1'),
+(362, 'core.tickets.delete', 57, 353, 'delete', '/', 'destroy', NULL, 1111, 'inherit', '1'),
+(363, 'core.api.include_js', 59, NULL, 'get', '/api/js', 'include_js_app', NULL, 1111, 'no', '1'),
+(365, 'clinica.tickets.departments.autocomplete', 54, NULL, 'any', '/tickets/departments/json/autocomplete', 'getDepartments', NULL, 1111, 'inherit', '1'),
+(366, 'core.tickets.create', 57, 353, 'get', '/new/ticket/{id}', 'form', NULL, 1111, 'inherit', '1'),
+(367, 'core.tickets.create', 57, 353, 'post', '/new/ticket/{id}', 'create', NULL, 1111, 'inherit', '1');
 
 -- --------------------------------------------------------
 
@@ -953,7 +986,7 @@ CREATE TABLE `tb_acl_usuario` (
 --
 
 INSERT INTO `tb_acl_usuario` (`id`, `id_grupo`, `id_funcionario`, `id_gestor`, `nome`, `email`, `login`, `senha`, `salt`, `token`, `permissao`, `ultimo_login`, `created_at`, `updated_at`, `status`) VALUES
-(1, 1, NULL, 0, 'Alisson Guedes', 'alissonguedes87@gmail.com', 'alisson', '6b2a792a47f194d7574a86218ca5f082446d9b4198c658e66d2ec98c5f034905788848e5b38a7', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODU2MTMzNDYsImV4cGlyZXMiOjE2ODU2MjA1NDYsIm1vZHVsbyI6Mn0=', 1111, '2023-07-02 21:10:18', '2022-06-24 05:43:09', '2023-06-01 09:55:46', '1'),
+(1, 1, NULL, 0, 'Alisson Guedes', 'alissonguedes87@gmail.com', 'alisson', '6b2a792a47f194d7574a86218ca5f082446d9b4198c658e66d2ec98c5f034905788848e5b38a7', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODU2MTMzNDYsImV4cGlyZXMiOjE2ODU2MjA1NDYsIm1vZHVsbyI6Mn0=', 1111, '2023-07-14 09:12:17', '2022-06-24 05:43:09', '2023-06-01 09:55:46', '1'),
 (2, 2, NULL, 0, 'Déborah Chianca', 'deborahchianca@medicus24h.com.br', 'deborahchianca@medicus24h.com.br', '3ffbf99945de7a986ed29db1701b54a3a9973de76912a954ae45f9014059cfae97ea90ddc437d', NULL, 'eyJ0aW1lc3RhbXAiOjE2ODQ5NTQ5NzAsImV4cGlyZXMiOjE2ODQ5NjIxNzAsIm1vZHVsbyI6NX0=', 1111, '2023-05-25 14:02:07', '2023-01-28 19:12:58', '2023-05-24 19:25:19', '1'),
 (3, 2, NULL, 0, 'Tatiana', 'gestao@medicus24h.com.br', 'tatiana', '1d4aa2e76b81177494333f8c4d05b75f492faae23c3b7658231aa61b42f5bd00988ea64dcf960', NULL, NULL, 1111, '2023-07-03 01:25:47', '2023-01-28 19:52:08', NULL, '1'),
 (6, 2, NULL, 0, 'Edinilton', 'edinilton.souza@medicus24h.com.br', 'edinilton', '4b0073f96547546b699c59f16c77c603a46c28e5e0ad787fda2b8015f0e3dd232306cf076e262', NULL, NULL, 1111, '2023-07-03 01:32:16', '2023-03-04 23:19:06', '2023-03-07 01:00:22', '1'),
@@ -980,7 +1013,7 @@ CREATE TABLE `tb_acl_usuario_config` (
 --
 
 INSERT INTO `tb_acl_usuario_config` (`id_usuario`, `id_modulo`, `id_config`, `value`, `created_at`, `updated_at`) VALUES
-(1, 5, 6, 'expanded', '2023-02-13 19:48:21', '2023-07-03 02:02:44'),
+(1, 5, 6, 'expanded', '2023-02-13 19:48:21', '2023-07-13 10:36:31'),
 (3, 5, 6, 'expanded', '2023-07-03 04:26:11', '2023-07-03 04:28:08');
 
 -- --------------------------------------------------------
@@ -1101,7 +1134,40 @@ INSERT INTO `tb_acl_usuario_session` (`id`, `id_usuario`, `id_modulo`, `token`, 
 (96, 1, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 00:10:15', '2023-07-03 04:25:10'),
 (97, 6, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 04:25:14', '2023-07-03 04:25:25'),
 (98, 3, 5, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 04:25:45', '2023-07-03 04:32:08'),
-(99, 6, 5, 'e186c1143987bcfbe2cbee018a805ac764a24f4c1e499', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 04:32:12', NULL);
+(99, 6, 5, 'e186c1143987bcfbe2cbee018a805ac764a24f4c1e499', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-03 04:32:12', NULL),
+(100, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 14:24:27', '2023-07-08 14:30:56'),
+(101, 1, 4, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 14:41:55', '2023-07-08 14:42:06'),
+(102, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 16:57:20', '2023-07-08 17:09:33'),
+(103, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:13:50', '2023-07-08 17:24:33'),
+(104, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:26:27', '2023-07-08 17:26:42'),
+(105, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:27:00', '2023-07-08 17:27:10'),
+(106, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:28:10', '2023-07-08 17:28:49'),
+(107, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:29:34', '2023-07-08 17:29:49'),
+(108, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:32:37', '2023-07-08 17:38:01'),
+(109, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:38:37', '2023-07-08 17:38:44'),
+(110, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:38:48', '2023-07-08 17:38:59'),
+(111, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:39:24', '2023-07-08 17:40:58'),
+(112, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:41:46', '2023-07-08 17:41:54'),
+(113, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:43:17', '2023-07-08 17:43:29'),
+(114, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 17:44:58', '2023-07-08 17:45:34'),
+(115, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:03:15', '2023-07-08 18:03:26'),
+(116, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:05:31', '2023-07-08 18:05:44'),
+(117, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:10:17', '2023-07-08 18:10:24'),
+(118, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:16:40', '2023-07-08 18:16:51'),
+(119, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:17:27', '2023-07-08 18:17:31'),
+(120, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:17:39', '2023-07-08 18:17:48'),
+(121, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:21:19', '2023-07-08 18:21:34'),
+(122, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:35:00', '2023-07-08 18:35:12'),
+(123, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-08 18:37:25', '2023-07-08 18:38:06'),
+(124, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-09 01:25:39', '2023-07-09 01:26:41'),
+(125, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-09 01:30:21', '2023-07-09 01:32:05'),
+(126, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-09 01:32:14', '2023-07-09 01:36:52'),
+(127, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-09 01:37:00', '2023-07-09 01:39:53'),
+(128, 1, 2, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-09 01:39:56', '2023-07-09 01:42:03'),
+(129, 1, 12, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-11 10:42:27', '2023-07-11 10:44:16'),
+(130, 1, 12, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-11 10:44:26', '2023-07-11 10:44:34'),
+(131, 1, 12, NULL, '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-11 10:44:40', '2023-07-11 10:44:54'),
+(132, 1, 5, '5307300e4798242486722575b7aa748564b13b9f1ec3e', '::1', 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36', '2023-07-14 12:12:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -1124,13 +1190,13 @@ CREATE TABLE `tb_sys_config` (
 
 INSERT INTO `tb_sys_config` (`id`, `id_modulo`, `config`, `value`, `created_at`, `updated_at`) VALUES
 (1, 2, 'main-menu', '1', '2022-08-19 09:16:07', NULL),
-(2, 2, 'language', 'pt_br', '2022-08-19 09:16:07', NULL),
+(2, 2, 'language', 'pt-br', '2022-08-19 09:16:07', NULL),
 (3, 2, 'main-menu-type', 'expanded', '2022-08-19 09:16:07', '2022-08-24 21:19:16'),
 (4, 5, 'main-menu', '2', '2022-08-19 09:16:07', NULL),
-(5, 5, 'language', 'pt_br', '2022-08-19 09:16:07', NULL),
+(5, 5, 'language', 'pt-br', '2022-08-19 09:16:07', NULL),
 (6, 5, 'main-menu-type', 'expanded', '2022-08-19 09:16:07', '2022-08-24 21:19:16'),
 (7, 1, 'main-menu', '1', '2022-08-19 09:16:07', NULL),
-(8, 1, 'language', 'pt_br', '2022-08-19 09:16:07', NULL),
+(8, 1, 'language', 'pt-br', '2022-08-19 09:16:07', NULL),
 (9, 1, 'main-menu-type', 'expanded', '2022-08-19 09:16:07', '2022-08-24 21:19:16');
 
 -- --------------------------------------------------------
@@ -1167,7 +1233,7 @@ CREATE TABLE `tb_sys_idioma` (
 --
 
 INSERT INTO `tb_sys_idioma` (`id`, `descricao`, `sigla`, `label`, `imagem`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'Português', 'pt_br', 'portugues', NULL, '2022-07-01 14:26:39', NULL, '1'),
+(1, 'Português', 'pt-br', 'portugues', NULL, '2022-07-01 14:26:39', NULL, '1'),
 (2, 'Inglês', 'en', 'ingles', NULL, '2022-07-01 14:26:39', NULL, '1');
 
 -- --------------------------------------------------------
@@ -1403,13 +1469,13 @@ ALTER TABLE `tb_acl_menu_secao`
 -- AUTO_INCREMENT de tabela `tb_acl_modulo`
 --
 ALTER TABLE `tb_acl_modulo`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `tb_acl_modulo_controller`
 --
 ALTER TABLE `tb_acl_modulo_controller`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT de tabela `tb_acl_modulo_grupo`
@@ -1421,7 +1487,7 @@ ALTER TABLE `tb_acl_modulo_grupo`
 -- AUTO_INCREMENT de tabela `tb_acl_modulo_routes`
 --
 ALTER TABLE `tb_acl_modulo_routes`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=520;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=368;
 
 --
 -- AUTO_INCREMENT de tabela `tb_acl_usuario`
@@ -1445,7 +1511,7 @@ ALTER TABLE `tb_acl_usuario_imagem`
 -- AUTO_INCREMENT de tabela `tb_acl_usuario_session`
 --
 ALTER TABLE `tb_acl_usuario_session`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
 
 --
 -- AUTO_INCREMENT de tabela `tb_sys_config`

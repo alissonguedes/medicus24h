@@ -11,7 +11,6 @@ namespace App\Models {
 	{
 
 		use HasFactory;
-		private $order = [];
 
 		protected $table = 'tb_acl_modulo';
 

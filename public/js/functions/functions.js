@@ -24,17 +24,22 @@ function getDataTabs(tab) {
 
 	progress('in');
 
-	var target = '#' + (tab.data('target') || tab.children().attr('class').split(' ').join('.'));
-	tab.find(target).html('<p>Carregando...</p>')
 	var href = tab.data('url');
+	var target = tab.data('target');
+	var element = $('#' + target).length ? tab.find('#' + target) : ($('.' + target).length ? tab.find('.' + target) : (tab.children().length ? tab.children() : tab));
+	element.html('<p>Carregando...</p>');
 
 	Http.get(href, {
 		datatype: 'html'
 	}, (response) => {
-		tab.find(target).html(response);
-		progress('out');
+
+		// element.html(response);
+		Datatable.reload(href);
+		// Materialize.tooltip();
 		Request.constructor();
+
 	});
+
 }
 
 moment.locale('pt_br', {

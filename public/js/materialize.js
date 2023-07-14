@@ -191,7 +191,7 @@ var Materialize = {
 
 				if (tab.data('url')) {
 
-					getDataTabs(tab)
+					getDataTabs(tab);
 
 				}
 

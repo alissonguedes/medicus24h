@@ -10,7 +10,7 @@ var Form = {
 
 	constructor: () => {
 
-		$('body').find('form').each(function () {
+		$('body').find('form').each(function() {
 
 			var autoinitialize = typeof $(this).data('autoinitialize') === 'undefined' || $(this).data('autoinitialize') === true;
 
@@ -26,7 +26,7 @@ var Form = {
 
 		if (typeof form === 'undefined') return false;
 
-		form.on('submit', function (e) {
+		form.on('submit', function(e) {
 
 			e.preventDefault();
 
@@ -77,6 +77,7 @@ var Form = {
 
 				if (response.statusCode === 200 || response.status === 'success') {
 
+					console.log(response)
 					Form.reload(form, response);
 
 				} else {

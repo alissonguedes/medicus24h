@@ -211,4 +211,6 @@ var constructor = () => {
 
 	// });
 
+	// require([BASE_PATH + 'js/app/core/app-mail.js']);
+
 }

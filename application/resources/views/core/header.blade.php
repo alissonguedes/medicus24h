@@ -1,8 +1,8 @@
 <header>
 
-	<div class="nav-fixed">
+	<div class="navbar nav-fixed">
 
-		<nav class="teal">
+		<nav class="navbar-main navbar-color navbar-collapsible darken-2 teal">
 
 			<div class="nav-wrapper">
 
@@ -15,9 +15,10 @@
 
 				<ul id="nav-mobile" class="navbar-list right hide-on-med-and-down">
 					<li>
-					<a href="{{ route('core.tickets.index') }}">Tickets</a></li>
+						<a href="{{ route('core.tickets.index') }}">Tickets</a>
+					</li>
 					<li>
-						@if ($current_route != 'core.tickets.add' && $current_route != 'core.tickets.edit')
+						@if ($current_route != 'core.tickets.add' && $current_route != 'core.tickets.edit' && $current_route != 'core.tickets.create')
 							<a href="{{ route('core.tickets.add') }}">Novo Ticket</a>
 						@else
 							{{-- <a href="{{ route('core.tickets.index') }}">Cancelar</a> --}}
@@ -30,7 +31,7 @@
 								<i></i>
 							</span>
 						</a>
-						<ul class="dropdown-content" id="profile-dropdown" data-edge="left">
+						<ul class="dropdown-content" id="profile-dropdown" data-edge="right">
 							<li id="user-profile">
 								<a href="#" class="black-text">
 									<i class="material-icons">person_outline</i>
@@ -66,12 +67,12 @@
 				@foreach ($breadcrumb as $ind => $b)
 					@php
 						$url .= '/' . $b;
-						$limit = $current_route == 'core.tickets.edit' ? 2 : 1;
+						$limit = $current_route == 'core.tickets.edit' || $current_route == 'core.tickets.create' ? 2 : 1;
 					@endphp
 					@if ($ind < count($breadcrumb) - $limit)
 						<a href="{{ url($url) }}" class="breadcrumb">{{ $b }}</a>
 					@else
-						<span class="breadcrumb grey-text lighten-3">{{ $b }}</span>
+						<span class="breadcrumb">{{ $b }}</span>
 					@endif
 				@endforeach
 			</div>

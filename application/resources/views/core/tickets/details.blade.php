@@ -69,33 +69,28 @@
 												<small class="white-text">HapVida - plano bronze</small>
 											</li>
 										</ul>
-										@if ($i === 0)
-											<ul class="datetime right" style="font-size: 13px;">
-												<li>
-													<span class="white-text">{{ date('D, d F Y, h:i', strtotime($body->created)) }}</span>
-												</li>
-												<li>
+										<ul class="datetime right" style="font-size: 13px;">
+											<li>
+												<span class="white-text">{{ date('D, d F Y, H:i', strtotime($body->created)) }}</span>
+											</li>
+											{{-- <li>
 													<button type="button" class="btn-flat btn-floating transparent white-text waves-effect waves-light" data-tooltip="Responder">
 														<span class="material-symbols-outlined">
 															reply
 														</span>
 													</button>
-												</li>
-												{{-- <li>
+												</li> --}}
+											{{-- <li>
 													<button type="button" class="btn-flat btn-floating transparent white-text" data-tooltip="Encaminhar">
 														<span class="material-symbols-outlined">
 															forward
 														</span>
 													</button>
 												</li> --}}
-											</ul>
-										@endif
+										</ul>
 									</nav>
 
 									<div class="content black-text padding-2 mb-3">
-
-										<style>
-										</style>
 
 										<div class="row">
 											<div class="col s12 flow-text">
@@ -105,16 +100,6 @@
 											</div>
 										</div>
 
-										@if ($i === 0)
-											<div class="row">
-												<div class="col s12 mt-3">
-													<button type="button" class="btn border-round blue waves-effect">
-														<span class="bold">Responder</span>
-													</button>
-												</div>
-											</div>
-										@endif
-
 									</div>
 
 								</div>
@@ -123,7 +108,17 @@
 
 					</div>
 				</div>
-				{{-- <div class="card-action"></div> --}}
+				<div class="card-action">
+
+					{{-- <div class="row">
+						<div class="col s12">
+							<button type="button" class="btn border-round blue waves-effect">
+								<span class="bold">Responder</span>
+							</button>
+						</div>
+					</div> --}}
+
+				</div>
 			</div>
 		</div>
 	</div>

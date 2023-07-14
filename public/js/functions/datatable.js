@@ -13,6 +13,8 @@ var Datatable = {
 
 	constructor: (element) => {
 
+		var table = element ? element : $('.table.grid');
+
 		// redefinindo parâmetros
 		Datatable.query = null;
 		Datatable.url = null;
@@ -24,7 +26,7 @@ var Datatable = {
 		// Datatable.table = element ? element : $('table.dataTable');
 		// Datatable.url = Datatable.table.data('url') ? Datatable.table.data('url') : window.location.href;
 
-		$('.table.grid').each(function() {
+		table.each(function() {
 
 			Datatable.table = $(this);
 
@@ -150,7 +152,7 @@ var Datatable = {
 				.hasClass('no-results') ? w.join(' ') : '100%';
 
 			Datatable.table
-				.find('.grid-head,.grid-body')
+				.find('.grid-head')
 				.find('.grid-row')
 				.attr('style', 'grid-template-columns: ' + w.join(' ') + ' !important');
 
@@ -264,7 +266,10 @@ var Datatable = {
 				Datatable.table = $('.table.grid[data-url="' + data.url + '"]');
 
 			// $('.grid-body').find('.scroller').html(response);
-			Datatable.table.find('.scroller').html(response);
+			if (Datatable.table.find('.scroller').length)
+				Datatable.table.find('.scroller').html(response);
+			else
+				Datatable.table.find('.grid-body').html(response);
 
 			if (Datatable.selecteds.length) {
 				for (var i in Datatable.selecteds) {

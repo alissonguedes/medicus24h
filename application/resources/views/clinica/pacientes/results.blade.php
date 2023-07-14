@@ -19,10 +19,10 @@
 		</div>
 	@endif
 
-	<div class="row">
+	<div class="row animated">
 
 		@foreach ($pacientes as $i => $paciente)
-			<div class="col s12 m6 l3 grid-view animated fadeIn slow delay-{{ $i }}">
+			<div class="col s12 m6 l3 grid-view animated fadeIn slower delay-{{ $i }}">
 				<div class="pacientes card card-border border-radius-6 z-depth-3 gradient-45deg-indigo-light-blue" @if ($paciente->obito === '1') style="filter: grayscale(1)" @endif>
 					<div class="card-content white-text">
 						<div class="foto-paciente">

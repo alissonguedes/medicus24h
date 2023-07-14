@@ -9,7 +9,7 @@
 	@include('core.header')
 	{{-- @include('core.sidebar') --}}
 
-	<div id="main" class="no-padding">
+	<div id="main" class="no-padding vertical-layout">
 
 		<div class="container">
 
